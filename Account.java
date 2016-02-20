@@ -27,7 +27,7 @@ public class Account
     
     public char getAcctType()
     {
-        return (0);
+        return '\0';
     }
     
     private double getBalance()
@@ -37,7 +37,7 @@ public class Account
     
     public String getId()
     {
-        return "";
+        return null;
     }
     
     private void setBalance(double amount)
