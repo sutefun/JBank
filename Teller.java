@@ -14,8 +14,9 @@ public class Teller
        System.out.println("" +c1.getCustomerName());
        
        Account a1=new Account();
-       a1.setBalance(10000);
-       System.out.println("" +a1.getBalance());
+       c1.setAccount(a1);
+       c1.getAccount().setBalance(10000);
+       System.out.println("" +c1.getAccount().getBalance());
     }
     
 
