@@ -16,6 +16,7 @@ public class Account
        
     }
 
+    /**@param type,amount       menerima type dan amount*/
     public Account(char type,double amount)
     {
         
@@ -25,34 +26,40 @@ public class Account
     {
     }
     
+    /**@return acctType mengembalikan karakter tipe akun    */
     public char getAcctType()
     {
-        return acctType;  //mengembalikan karakter tipe akun
+        return acctType;  
     }
     
-    private double getBalance()
+    /**@return balance  mengembalikan jumlah saldo  */
+    public double getBalance()
     {
-        return balance;     //mengembalikan jumlah saldo
+        return balance;     
     }
     
+    /** @return id  mengembalikan id    */
     public String getId()
     {
-        return id;      //mengembalikan id
+        return id;      
     }
     
-    private void setBalance(double amount)
+    /**@param amount    mengatur balance*/
+    public void setBalance(double amount)
     {
-        balance=amount;     //mengatur balance
+        balance=amount;     
     }
     
+    /**@param acctId    mengatur id*/
     public void setID(String acctId)
     {
-        id=acctId;          //mengatur id
+        id=acctId;          
     }
     
+    /**@param type  mengatur tipe akun*/
     public void setAcctType(char type)
     {
-        acctType=type;      //mengatur tipe akun
+        acctType=type;      
     }
     
     private void withdraw(double amount)

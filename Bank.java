@@ -20,61 +20,85 @@ public class Bank
     public  static int    maxNumOfCustomer     =20;
     public  static String bankName             ="JBANK";
     
+    /**@return bankAddress */
     public static String getAddress()
     {
-        return null;
+        return bankAddress;
     }
     
+    /**@return creditInterestRate */
     public static double getCreditRate()
     {
-        return 0;
+        return creditInterestRate;
     }
     
+    /**@return investmentInterestRate */
     public static double getInvestmentRate()
     {
-        return 0;
+        return investmentInterestRate;
     }
     
+    /**@return closeTime */
     public static String getHoursOfOperation()
     {
-        return null;
+        return closeTime;
     }
+    
+    /**@return lastCustId */
     public static int getLastID()
     {
-        return 0;
+        return lastCustId;
     }
+    
+    /**@return maxNumOfCustomer */
     public static int getMaxCustomers()
     {
-        return 0;
+        return maxNumOfCustomer;
     }
+    
+    /**@return bankName */
     public static String getName()
     {
-        return null;
+        return bankName;
     }
+    
+    /** @return nextCustId*/
     public static int getNextID()
     {
-        return 0;
+        return nextCustId;
     }
+    
+    /**@return website */
     public static String getWebsite()
     {
-        return null;
+        return website;
     }
+    
+    /** @return premiumInterestRate*/
     public static double getPremiumRate()
     {
-        return 0;
+        return premiumInterestRate;
     }
+    
+    /** @return phone*/
     public static String getPhone()
     {
-        return null;
+        return phone;
     }
+    
+    /** rate */
     public static void setCreditRate(double rate)
     {
        
     }
+    
+    /**@param rate */
     public static void setInvestmentRate(double rate)
     {
         
     }
+    
+    /**@param rate  */
     public static void setPremium(double rate)
     {
         

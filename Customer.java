@@ -22,7 +22,7 @@ public class Customer
     {
         
     }
-
+    /** tess tss */
    public Customer(String fname, String lname, String dob)
    {
    }
@@ -30,43 +30,50 @@ public class Customer
    public Customer(String firstName, String lastName, String dateOfBirth, int custId)
    {
     }
-   
-   private String getAddress()
+    
+    /**@return alamat jalan, nama kota, dan kode pos */
+   public String getAddress()
    {
-       return streetAddress+cityAddress+zipOrPostalCode;
+       return streetAddress+cityAddress+zipOrPostalCode;   
     }
-   
-   private Account getAccount()
+   /**@return accounts */
+   public Account getAccount()
    {
        return accounts;
     }
     
-   private int getCustomerId()
+    /**@return custId , merupakan id kustomer*/
+   public int getCustomerId()
    {
        return custId;
     }
     
-   private String getEmail()
+    /**@return email    ,merupakan email kustomer*/
+   public String getEmail()
    {
        return email;
     }
     
-   private String getCustomerName()
+    /**@return lastName,firstName   ,mengembalikan nama lengkap, tapi terbalik*/
+   public String getCustomerName()
    {
        return lastName+','+firstName;
     }
     
+    /**@return numberOfCurrentAccounts  ,jumlah akun sekarang*/
    public int getNumOfAccounts()
    {
        return numberOfCurrentAccounts;
     }
     
-   private String getPhoneNumber()
+    /**@return phoneNumber      ,nomor telpon kustomer*/
+   public String getPhoneNumber()
    {
        return phoneNumber;
     }
     
-  private void setAddress(String street, String city, String code)
+    /**@param String street, String city, String code   */
+  public void setAddress(String street, String city, String code)
   {
       streetAddress=street;
       cityAddress=city;
@@ -75,24 +82,28 @@ public class Customer
       
     }
     
-  private void setEmail(String emailAddress)
+    /**@param String emailAddress   */
+  public void setEmail(String emailAddress)
   {
       email=emailAddress;
       
     }
   
-  private void setName(String lname, String fname)
+    /**@param String lname, String fname    */
+  public void setName(String lname, String fname)
   {
       lastName=lname;
       firstName=fname;
     }   
     
-  private void setPhoneNumber(String phoneNum)
+    /**@param String phoneNum   */
+  public void setPhoneNumber(String phoneNum)
   {
      phoneNumber=phoneNum; 
     }
     
-  private void setAccount(Account account)
+    /**@param Account account   */
+  public void setAccount(Account account)
   {
     accounts=account;
     }
