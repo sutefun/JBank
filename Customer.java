@@ -34,7 +34,7 @@ public class Customer
     /**@return alamat jalan, nama kota, dan kode pos */
    public String getAddress()
    {
-       return streetAddress+cityAddress+zipOrPostalCode;   
+       return streetAddress+','+cityAddress+','+zipOrPostalCode;   
     }
    /**@return accounts */
    public Account getAccount()
