@@ -27,32 +27,32 @@ public class Account
     
     public char getAcctType()
     {
-        return '\0';
+        return acctType;  //mengembalikan karakter tipe akun
     }
     
     private double getBalance()
     {
-        return 0;
+        return balance;     //mengembalikan jumlah saldo
     }
     
     public String getId()
     {
-        return null;
+        return id;      //mengembalikan id
     }
     
     private void setBalance(double amount)
     {
-    
+        balance=amount;     //mengatur balance
     }
     
     public void setID(String acctId)
     {
-    
+        id=acctId;          //mengatur id
     }
     
     public void setAcctType(char type)
     {
-    
+        acctType=type;      //mengatur tipe akun
     }
     
     private void withdraw(double amount)

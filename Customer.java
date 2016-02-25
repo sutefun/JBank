@@ -33,52 +33,67 @@ public class Customer
    
    private String getAddress()
    {
-       return null;
+       return streetAddress+cityAddress+zipOrPostalCode;
     }
    
    private Account getAccount()
    {
-       return null;
+       return accounts;
     }
     
    private int getCustomerId()
    {
-       return 0;
+       return custId;
     }
     
    private String getEmail()
    {
-       return null;
+       return email;
     }
     
    private String getCustomerName()
    {
-       return null;
+       return lastName+','+firstName;
     }
     
    public int getNumOfAccounts()
    {
-       return 0;
+       return numberOfCurrentAccounts;
     }
     
    private String getPhoneNumber()
    {
-       return null;
+       return phoneNumber;
     }
     
   private void setAddress(String street, String city, String code)
   {
+      streetAddress=street;
+      cityAddress=city;
+      zipOrPostalCode=code;
+      
+      
     }
     
   private void setEmail(String emailAddress)
   {
+      email=emailAddress;
+      
     }
   
-  private void setCustomerName(String lname, String fname)
+  private void setName(String lname, String fname)
   {
+      lastName=lname;
+      firstName=fname;
     }   
     
   private void setPhoneNumber(String phoneNum)
   {
+     phoneNumber=phoneNum; 
+    }
+    
+  private void setAccount(Account account)
+  {
+    accounts=account;
     }
 }
