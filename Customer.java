@@ -82,10 +82,24 @@ public class Customer
       
     }
     
-    /**@param String emailAddress   */
-  public void setEmail(String emailAddress)
+    /**@param String emailAddress
+     * @return true , bila email valid  */
+     
+  public boolean setEmail(String emailAddress)
   {
+      String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+      java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
+      java.util.regex.Matcher m = p.matcher(emailAddress);
+       
+      if(m.matches())
+      {
       email=emailAddress;
+      return true;
+      }
+      else
+      {
+        return false;
+        }
       
     }
   

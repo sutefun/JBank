@@ -22,8 +22,21 @@ public class Account
         
     }
     
-    private void deposit(double amount)
+    
+    
+       /** @return true,false    , true bila jumlah uang yang dideposit positif*/
+    public boolean deposit(double amount)
     {
+        if(amount < 0)
+        {
+            return false;
+        }
+        else
+        {
+            balance += amount;
+            return true;
+        }
+        
     }
     
     /**@return acctType mengembalikan karakter tipe akun    */
@@ -61,8 +74,17 @@ public class Account
     {
         acctType=type;      
     }
-    
-    private void withdraw(double amount)
+    /**@return true,false   , true bila jumlah uang yang ditarik tidak menyebabkan balance menjadi negatir  */
+    public boolean withdraw(double amount)
     {
+        if(amount>balance)
+        {
+            return false;
+        }
+        else
+        {
+            balance-=amount;
+            return true;
+        }
     }
 }

@@ -10,8 +10,8 @@ public class Bank
     private static double creditInterestRate;
     private static String closeTime;
     private static double investmentInterestRate;
-    private static int    lastCustId;
-    private static int    nextCustId;
+    private static int    lastCustId            =1000;
+    private static int    nextCustId            =1000;
     private static String phone;
     private static double premiumInterestRate;
     private static String startTime;
@@ -19,6 +19,8 @@ public class Bank
     public  static String bankAddress          ="1234 JavaStreet,AnyCity,ThisState,34567";
     public  static int    maxNumOfCustomer     =20;
     public  static String bankName             ="JBANK";
+    private static int    numOfCurrentCustomer;
+    private static int    nextID;
     
     /**@return bankAddress */
     public static String getAddress()
@@ -62,12 +64,6 @@ public class Bank
         return bankName;
     }
     
-    /** @return nextCustId*/
-    public static int getNextID()
-    {
-        return nextCustId;
-    }
-    
     /**@return website */
     public static String getWebsite()
     {
@@ -102,5 +98,18 @@ public class Bank
     public static void setPremium(double rate)
     {
         
+    }
+    
+    /**@return numOfCurrentCustomer , jumlah kustomer sekarang  */
+    public static int getNumOfCurrentCustomers()
+    {
+        return numOfCurrentCustomer;
+    }
+    
+    /**@return nextCustId   */
+    public static int getNextId()
+    {
+        nextCustId=lastCustId+1;
+        return nextCustId;
     }
 }
