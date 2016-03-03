@@ -16,15 +16,25 @@ public class Customer
     private String  streetAddress;
     private String  phoneNumber;
     private String  zipOrPostalCode;
-    
+    private static String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+            static java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
     
     public Customer()
     {
         
     }
-    /** tess tss */
+    
+   public Customer(String fname, String lname)
+   {
+       this(fname,lname,"none");
+   } 
+    
    public Customer(String fname, String lname, String dob)
    {
+       this.firstName=fname;
+       this.lastName=lname;
+       this.dateOfBirth=dob;
+       this.custId=Bank.getNextId();
    }
     
    public Customer(String firstName, String lastName, String dateOfBirth, int custId)
@@ -43,7 +53,7 @@ public class Customer
     }
     
     /**@return custId , merupakan id kustomer*/
-   public int getCustomerId()
+   public int getCustId()
    {
        return custId;
     }
@@ -87,8 +97,7 @@ public class Customer
      
   public boolean setEmail(String emailAddress)
   {
-      String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-      java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
+     
       java.util.regex.Matcher m = p.matcher(emailAddress);
        
       if(m.matches())
@@ -121,4 +130,20 @@ public class Customer
   {
     accounts=account;
     }
+    
+  public void setCustId(int id)
+  {
+    custId=id;
+    
+   }
+  
+  public boolean removeAccount(char type)
+  {
+      return false;
+  }
+   
+  public String toString()
+  {
+    return null;
+  }
 }

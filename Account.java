@@ -12,13 +12,16 @@ public class Account
 
     public Account()
     {
-        
+        acctType='S';
+        balance=10;
        
     }
 
     /**@param type,amount       menerima type dan amount*/
     public Account(char type,double amount)
     {
+        acctType=type;
+        balance=amount;
         
     }
     
