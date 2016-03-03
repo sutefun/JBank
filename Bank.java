@@ -10,8 +10,8 @@ public class Bank
     private static double creditInterestRate;
     private static String closeTime;
     private static double investmentInterestRate;
-    private static int    lastCustId            =1000;
-    private static int    nextCustId            =1000;
+    private static int    lastCustId            =0;
+    private static int    nextCustId            =0;
     private static String phone;
     private static double premiumInterestRate;
     private static String startTime;
@@ -109,7 +109,17 @@ public class Bank
     /**@return nextCustId   */
     public static int getNextId()
     {
-        nextCustId=lastCustId+1;
-        return nextCustId;
+        if(nextCustId==0)
+        {   
+            nextCustId=1000;
+            lastCustId=1000;
+            return nextCustId;
+        }
+        else
+        {
+            lastCustId=nextCustId;
+            nextCustId=lastCustId+1;
+            return nextCustId;
+        }
     }
 }
