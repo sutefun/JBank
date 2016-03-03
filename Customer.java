@@ -31,7 +31,7 @@ public class Customer
     
    public Customer(String fname, String lname, String dob)
    {
-       this.firstName=fname;
+       firstName=fname;
        this.lastName=lname;
        this.dateOfBirth=dob;
        this.custId=Bank.getNextId();

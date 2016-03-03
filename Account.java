@@ -80,14 +80,14 @@ public class Account
     /**@return true,false   , true bila jumlah uang yang ditarik tidak menyebabkan balance menjadi negatir  */
     public boolean withdraw(double amount)
     {
-        if(amount>balance)
-        {
-            return false;
-        }
-        else
+        if(amount>=0&&amount<=balance)
         {
             balance-=amount;
             return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
