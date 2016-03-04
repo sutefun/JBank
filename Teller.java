@@ -17,7 +17,11 @@ public class Teller
        Scanner in = new Scanner(System.in);
        System.out.println("apakah ingin membuat customer ? [y/n]");
        indikator = in.nextLine(); 
-       
+      if(indikator.equals("n"))
+      {
+          System.out.println("bye");
+          System.exit(0); 
+       }
       do{
           
        System.out.println("First Name : ");
@@ -40,8 +44,6 @@ public class Teller
        if(type!='n')
         {
             String id = String.valueOf(customer.getCustId()+""+type);
-            System.out.println(customer.getCustId());
-            System.out.println(id);
             Account account=new Account();
             account.setID(id);
             customer.setAccount(account);
@@ -56,8 +58,10 @@ public class Teller
         
             customer.getAccount().setBalance(balance);
         }
-       
-       
+        else
+        {
+            customer.getAccount().setBalance(0);
+        }
         
         System.out.println("Nama    " +customer.getCustomerName());
         System.out.println("phone   " +customer.getPhoneNumber());
@@ -66,7 +70,7 @@ public class Teller
         
         System.out.println("apakah ingin membuat customer ? [y/n]");
         indikator = in.nextLine(); 
-       
+        indikator = in.nextLine(); 
         }while(indikator.equals("y"));
       
       in.close();   
