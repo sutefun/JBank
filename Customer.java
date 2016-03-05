@@ -144,7 +144,7 @@ public class Customer
    
   public String toString()
   {
-    String custInfo= "\nNama    "+firstName+','+lastName+"\nID    "+custId+"\nacoount "+this.getAccount().getAcctType()+"\nbalance    "+this.getAccount().getBalance();
+    String custInfo= "\nNama    "+firstName+','+lastName+"\nID      "+custId+"\nacoount "+this.getAccount().getAcctType()+"\nbalance "+this.getAccount().getBalance();
     
     return custInfo;
   }
