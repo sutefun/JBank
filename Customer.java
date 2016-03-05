@@ -1,7 +1,7 @@
 
 /**
  * @author (steven susanto) 
- * @version (modul 1)
+ * @version (5/3/16)
  */
 public class Customer
 {

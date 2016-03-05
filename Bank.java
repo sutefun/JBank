@@ -3,7 +3,7 @@
  * Write a description of class Bank here.
  * 
  * @author (steven susanto) 
- * @version (modul1)
+ * @version (5/3/16)
  */
 public class Bank
 {

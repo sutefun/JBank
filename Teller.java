@@ -2,7 +2,7 @@
 /**
  
  * @author (steven susanto) 
- * @version (amodul1)
+ * @version (5/3/16)
  */
 import java.util.Scanner;
 
@@ -75,6 +75,7 @@ public class Teller
         i++;
         }while(indikator.equals("y"));
        
+        System.out.println("\n----------------------------------------");
        for(j=0;j<i;j++){
         System.out.println("Nama    " +customer[j].getCustomerName());
         System.out.println("phone   " +customer[j].getPhoneNumber());
@@ -83,6 +84,7 @@ public class Teller
         System.out.println("");
         }
         
+        System.out.println("----------------------------------------");
       in.close();   
     }
     
