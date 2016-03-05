@@ -77,11 +77,7 @@ public class Teller
        
         System.out.println("\n----------------------------------------");
        for(j=0;j<i;j++){
-        System.out.println("Nama    " +customer[j].getCustomerName());
-        System.out.println("phone   " +customer[j].getPhoneNumber());
-        System.out.println("akun    " +customer[j].getAccount().getId());
-        System.out.println("balance " +customer[j].getAccount().getBalance());
-        System.out.println("");
+        System.out.println(customer[j]);
         }
         
         System.out.println("----------------------------------------");
