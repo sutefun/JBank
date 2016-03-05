@@ -14,7 +14,7 @@ public class Teller
        Customer[] customer = new Customer[Bank.maxNumOfCustomers]; 
        String fname,lname,dob,telpon,indikator;
        char type;
-       int balance,i=0;
+       int balance,i=0,j=0;
        Scanner in = new Scanner(System.in);
        System.out.println("apakah ingin membuat customer ? [y/n]");
        indikator = in.nextLine(); 
@@ -74,7 +74,15 @@ public class Teller
         indikator = in.nextLine(); 
         i++;
         }while(indikator.equals("y"));
-      
+       
+       for(j=0;j<i;j++){
+        System.out.println("Nama    " +customer[j].getCustomerName());
+        System.out.println("phone   " +customer[j].getPhoneNumber());
+        System.out.println("akun    " +customer[j].getAccount().getId());
+        System.out.println("balance " +customer[j].getAccount().getBalance());
+        System.out.println("");
+        }
+        
       in.close();   
     }
     
