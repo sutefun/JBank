@@ -11,9 +11,10 @@ public class Teller
     /**@param belum ada */
     public static void main(String[] args)
     {
+       Customer[] customer = new Customer[Bank.maxNumOfCustomers]; 
        String fname,lname,dob,telpon,indikator;
        char type;
-       int balance;
+       int balance,i=0;
        Scanner in = new Scanner(System.in);
        System.out.println("apakah ingin membuat customer ? [y/n]");
        indikator = in.nextLine(); 
@@ -32,8 +33,8 @@ public class Teller
        dob=in.nextLine();
        System.out.println("No Telpon :");
        telpon=in.nextLine();
-       Customer customer = new Customer(fname,lname,dob);
-       customer.setPhoneNumber(telpon);
+       customer[i] = new Customer(fname,lname,dob);
+       customer[i].setPhoneNumber(telpon);
        System.out.println("Jenis account saving? [S/O/I/L/n-tidak membuat]");
        type=in.next().trim().charAt(0);
        while(type!='S'&&type!='O'&&type!='I'&&type!='L'&&type!='n')
@@ -43,34 +44,35 @@ public class Teller
         }
        if(type!='n')
         {
-            String id = String.valueOf(customer.getCustId()+""+type);
+            String id = String.valueOf(customer[i].getCustId()+""+type);
             Account account=new Account();
             account.setID(id);
-            customer.setAccount(account);
+            customer[i].setAccount(account);
             
             System.out.println("balance awal ?");
             balance=in.nextInt();
-            while(balance<0)
+            while(balance<10)
             {
-                System.out.println("balance tidak boleh negatif, masukkan lagi");
+                System.out.println("balance kurang, masukkan lagi");
                 balance=in.nextInt();
             }
         
-            customer.getAccount().setBalance(balance);
+            customer[i].getAccount().setBalance(balance);
         }
         else
         {
-            customer.getAccount().setBalance(0);
+            customer[i].getAccount().setBalance(0);
         }
         
-        System.out.println("Nama    " +customer.getCustomerName());
-        System.out.println("phone   " +customer.getPhoneNumber());
-        System.out.println("akun    " +customer.getAccount().getId());
-        System.out.println("balance " +customer.getAccount().getBalance());
+        System.out.println("Nama    " +customer[i].getCustomerName());
+        System.out.println("phone   " +customer[i].getPhoneNumber());
+        System.out.println("akun    " +customer[i].getAccount().getId());
+        System.out.println("balance " +customer[i].getAccount().getBalance());
         
         System.out.println("apakah ingin membuat customer ? [y/n]");
         indikator = in.nextLine(); 
         indikator = in.nextLine(); 
+        i++;
         }while(indikator.equals("y"));
       
       in.close();   
