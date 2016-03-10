@@ -1,4 +1,5 @@
-
+import java.util.GregorianCalendar;
+import java.util.Date;
 /**
  * @author (steven susanto) 
  * @version (5/3/16)
@@ -8,7 +9,7 @@ public class Customer
     private Account accounts= new Account();
     private String  cityAddress;
     private int     custId;
-    private String  dateOfBirth;
+    private Date  dateOfBirth;
     private String  email;
     private String  firstName;
     private String  lastName;
@@ -26,10 +27,10 @@ public class Customer
     
    public Customer(String fname, String lname)
    {
-       this(fname,lname,"none");
+       this(fname,lname,(new GregorianCalendar().getTime()));
    } 
     
-   public Customer(String fname, String lname, String dob)
+   public Customer(String fname, String lname, Date dob)
    {
        firstName=fname;
        this.lastName=lname;
@@ -130,7 +131,9 @@ public class Customer
   {
     accounts=account;
     }
-    
+   /**
+    * @param Id
+    */ 
   public void setCustId(int id)
   {
     custId=id;
@@ -141,10 +144,18 @@ public class Customer
   {
       return false;
   }
-   
+  
+  /**
+   * @return dateOfBirth
+   */
+  public Date getDateOfBirth()
+  {
+      return dateOfBirth;
+   }
+  
   public String toString()
   {
-    String custInfo= "\nNama    "+firstName+','+lastName+"\nID      "+custId+"\nacoount "+this.getAccount().getAcctType()+"\nbalance "+this.getAccount().getBalance();
+    String custInfo= "\nNama    "+firstName+','+lastName+"\nID      "+custId+"\nDOB     "+dateOfBirth+"\nacoount "+this.getAccount().getAcctType()+"\nbalance "+this.getAccount().getBalance();
     
     return custInfo;
   }

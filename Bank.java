@@ -1,4 +1,8 @@
-
+import java.util.Date;
+import java.text.DateFormat;
+import java.util.GregorianCalendar;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
 /**
  * Write a description of class Bank here.
  * 
@@ -7,19 +11,19 @@
  */
 public class Bank
 {
-    private static double creditInterestRate;
-    private static String closeTime;
+    private static Date startTime;
+    private static Date closeTime;
     private static double investmentInterestRate;
+    private static double creditInterestRate;
+    private static double premiumInterestRate;
     private static int    lastCustId;
     private static int    nextCustId;
     private static String phone;
-    private static double premiumInterestRate;
-    private static String startTime;
     public  static String website;
-    public  static final String Address          ="1234 JavaStreet,AnyCity,ThisState,34567";
-    public  static final int    maxNumOfAcctsPerCustomer=4;
-    public  static int    maxNumOfCustomers     =20;
-    public  static final  String Name             ="JBANK";
+    public  static final String BANK_ADDRESS          ="1234 JavaStreet,AnyCity,ThisState,34567";
+    public  static final int    MAX_NUM_OF_ACCTS_PER_CUSTOMER=4;
+    public  static final int    MAX_NUM_OF_CUSTOMERS     =20;
+    public  static final  String BANK_NAME             ="JBANK";
     private static int    numOfCurrentCustomers;
     public int tes=99;
     
@@ -48,7 +52,10 @@ public class Bank
     /**@return closeTime */
     public static String getHoursOfOperation()
     {
-        return closeTime;
+        SimpleDateFormat startTimeFormat = new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat closeTimeFormat = new SimpleDateFormat("hh:mm a");
+        return startTimeFormat.format(Bank.getStartTime())+"   TO  "+closeTimeFormat.format(Bank.getCloseTime());
+       
     }
     
     /**@return lastCustId */
@@ -60,7 +67,7 @@ public class Bank
     /**@return maxNumOfCustomer */
     public static int getMaxCustomers()
     {
-        return maxNumOfCustomers;
+        return MAX_NUM_OF_CUSTOMERS;
     }
     
     /**@return bankName 
@@ -120,7 +127,7 @@ public class Bank
     public static int getNextId()
     {
         int nextId=0;
-        if(numOfCurrentCustomers>=maxNumOfCustomers)
+        if(numOfCurrentCustomers>=MAX_NUM_OF_CUSTOMERS)
         {
            
         }
@@ -141,5 +148,35 @@ public class Bank
             
         }
         return nextId;
+    }
+    /**
+     * @param Date
+     */
+    public static void setStartTime(int hours, int minute)
+    {
+        startTime = new GregorianCalendar(1970,0,0,hours,minute).getTime();
+    }
+    
+    /**
+     * @return startTime
+     */
+    public static Date getStartTime()
+    {
+        return startTime;
+    }
+    
+    /**
+     * @param Date
+     */
+    public static void setCloseTime(int hours, int minute)
+    {
+        closeTime = new GregorianCalendar(1970,0,0,hours,minute).getTime();
+    }
+    /**
+     * @return closeTime
+     */
+    public static Date getCloseTime()
+    {
+        return closeTime;
     }
 }
