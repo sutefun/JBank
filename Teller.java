@@ -32,17 +32,20 @@ public class Teller
           System.exit(0); 
        }
       do{
-          
+         
        System.out.println("First Name : ");
        fname = in.nextLine();
        System.out.println("Last Name : ");
        lname = in.nextLine();
-       System.out.println("DOB :");
-       dob=dateFormatter.parse(in.nextLine());
+       System.out.println("Year birth :");
+       int year=in.nextInt();
+       System.out.println("month birth :");
+       int month=in.nextInt();
+       System.out.println("day birth :");
+       int day=in.nextInt();
        System.out.println("No Telpon :");
        telpon=in.nextLine();
-       Customer customer = new Customer(fname,lname,dob);
-       //Customer c = new Customer(fname,lname,(new GregorianCalendar(dob).getTime()));
+       Customer customer = new Customer(fname,lname,(new GregorianCalendar(year,month,day).getTime()));
        customer.setPhoneNumber(telpon);
        System.out.println("Jenis account saving? [S/O/I/L/n-tidak membuat]");
        type=in.next().trim().charAt(0);
