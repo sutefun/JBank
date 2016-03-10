@@ -1,6 +1,5 @@
 
 /**
- 
  * @author (steven susanto) 
  * @version (5/3/16)
  */
@@ -15,7 +14,8 @@ public class Teller
     /**@param belum ada */
     public static void main(String[] args) throws ParseException
     {
-      // Customer[] customer = new Customer[Bank.maxNumOfCustomers]; 
+       setStartTime(8,15);
+       setCloseTime(17,0);
        String fname,lname,telpon,indikator;
        char type;
        double balance;
@@ -23,7 +23,7 @@ public class Teller
        Date dob;
        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
        Scanner in = new Scanner(System.in);
-       
+       System.out.println(Bank.getHoursOfOperation());
        System.out.println("apakah ingin membuat customer ? [y/n]");
        indikator = in.nextLine(); 
       if(indikator.equals("n"))
@@ -77,18 +77,11 @@ public class Teller
         }
         
         System.out.println(customer);
-       // System.out.println(customer.getDateOfBirth());
         System.out.println("apakah ingin membuat customer ? [y/n]");
         indikator = in.nextLine(); 
         indikator = in.nextLine(); 
-        i++;
         }while(indikator.equals("y"));
        
-       /* System.out.println("\n----------------------------------------");
-       for(j=0;j<i;j++){
-        System.out.println(customer[j]);
-        }
-       */ 
         System.out.println("----------------------------------------");
       in.close();   
     }
@@ -104,10 +97,10 @@ public class Teller
     
     }
     
-    public static void setStartTime()
+    public static void setStartTime(int hour,int minute)
     {
         
-       Bank.setStartTime(8,15);
+       Bank.setStartTime(hour,minute);
     }
     
     public static Date getStartTime()
@@ -115,9 +108,9 @@ public class Teller
         return Bank.getStartTime();
     }
     
-    public static void setCloseTime()
+    public static void setCloseTime(int hour,int minute)
     {
-        Bank.setCloseTime(17,0);
+        Bank.setCloseTime(hour,minute);
     }
     
     public static Date getCloseTime()
