@@ -3,18 +3,50 @@
  * @author (steven susanto) 
  * @version (5/3/16)
  */
-import java.util.Scanner;
-import java.util.Date;
-import java.text.ParseException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+
 public class Teller
 {
     /**@param belum ada */
     public static void main(String[] args) throws ParseException
     {
-       setStartTime(8,15);
+        Account saving      = new Account('S',1000);
+        Account invest      = new Account('I',1000);
+        Account creditline  = new Account('L',500);
+        
+        BigDecimal savingBalance = new BigDecimal(saving.getBalance());
+        BigDecimal n             = new BigDecimal(360.0);
+        BigDecimal t             = new BigDecimal(1.0);
+        BigDecimal r             = new BigDecimal(.03);
+        
+        BigDecimal f1            = r.divide(n,BigDecimal.ROUND_HALF_EVEN).add(BigDecimal.ONE));
+        BigDecimal f2            = n.multiply(t); 
+        double     f3            = Math.pow(f1.doubleValue(),f2.doubleValue());
+        saving.setBalance(saving.getBalance()*f3);
+        System.out.println(saving.getBalance());
+        
+        r   = BigDecimal.valueOf(.05);
+        f1  = r.divide(n,10,BigDecimal.ROUND_UNNECESSARY).add(BigDecimal.ONE);
+        t   = BigDecimal.valueOf(0.5);
+        f2  = n.multiply(t);
+        f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
+        System.out.println(f1);
+        System.out.println(f2);
+        System.out.println(f3);
+        invest.setBalance(invest.getBalance()*f3);
+        
+        r   = BigDecimal.valueOf(.06);
+        f1  = r.divide(n,200,BigDecimal.ROUND_UNNECESSARY).add(BigDecimal.ONE);
+        t   = BigDecimal.valueOf(0.5);
+        f2  = n.multiply(t);
+        f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
+        System.out.println(n);
+        invest.setBalance(invest.getBalance()*f3);
+        System.out.println(invest.getBalance());
+        
+     /**  setStartTime(8,15);
        setCloseTime(17,0);
        String fname,lname,telpon,indikator;
        char type;
@@ -40,12 +72,12 @@ public class Teller
        System.out.println("Year birth :");
        int year=in.nextInt();
        System.out.println("month birth :");
-       int month=in.nextInt();
+       int month=in.nextInt()-1;
        System.out.println("day birth :");
        int day=in.nextInt();
+       Customer customer = new Customer(fname,lname,(new GregorianCalendar(year,month,day).getTime()));
        System.out.println("No Telpon :");
        telpon=in.nextLine();
-       Customer customer = new Customer(fname,lname,(new GregorianCalendar(year,month,day).getTime()));
        customer.setPhoneNumber(telpon);
        System.out.println("Jenis account saving? [S/O/I/L/n-tidak membuat]");
        type=in.next().trim().charAt(0);
@@ -84,6 +116,8 @@ public class Teller
        
         System.out.println("----------------------------------------");
       in.close();   
+      
+      */
     }
     
 
