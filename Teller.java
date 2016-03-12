@@ -76,6 +76,11 @@ public class Teller
             
             
         }
+        else
+        {
+            saving.withdraw(withdrawMoney);
+            System.out.println("saving\t" +saving.getBalance());
+        }
        
         
         /**  setStartTime(9,0);
