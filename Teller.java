@@ -20,10 +20,8 @@ public class Teller
         BigDecimal n             = new BigDecimal(360.0);
         BigDecimal t             = new BigDecimal(1.0);
         BigDecimal r             = new BigDecimal(.03);
-        
-
-        BigDecimal f1            = new BigDecimal(0).setScale(20000);
-        f1=r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
+       
+        BigDecimal f1            = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
         BigDecimal f2            = n.multiply(t); 
         double     f3            = Math.pow(f1.doubleValue(),f2.doubleValue());
         saving.setBalance(saving.getBalance()*f3);
@@ -54,7 +52,9 @@ public class Teller
         saving.withdraw(creditLine.getBalance());
         creditLine.setBalance(0);
         System.out.println("pembayaran hutang, saving menjadi\t" +saving.getBalance());
-     /**  setStartTime(8,15);
+   
+        
+        /**  setStartTime(8,15);
        setCloseTime(17,0);
        String fname,lname,telpon,indikator;
        char type;
