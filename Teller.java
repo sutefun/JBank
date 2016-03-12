@@ -22,7 +22,8 @@ public class Teller
         BigDecimal t             = new BigDecimal(1.0);
         BigDecimal r             = new BigDecimal(.03);
        
-        BigDecimal f1            = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
+        BigDecimal f1            = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
+        System.out.println(f1);
         BigDecimal f2            = n.multiply(t); 
         double f3                = Math.pow(f1.doubleValue(),f2.doubleValue());
         saving.setBalance(savingBalance.multiply(new BigDecimal(f3)).doubleValue());
@@ -31,7 +32,8 @@ public class Teller
         //--------------------perhitungan bunga investment <6 bulan------------------//
         BigDecimal investBalance = new BigDecimal(invest.getBalance());
         r                        = BigDecimal.valueOf(.05);
-        f1                       = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
+        f1                       = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
+        System.out.println(f1);
         t                        = BigDecimal.valueOf(0.5);
         f2                       = n.multiply(t);
         f3                       = Math.pow(f1.doubleValue(),f2.doubleValue());
@@ -40,7 +42,8 @@ public class Teller
         //-----------perhitungan bunga investment >6bulan-----------//
         investBalance = new BigDecimal(invest.getBalance());
         r             = BigDecimal.valueOf(.06);
-        f1            = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
+        f1            = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
+        System.out.println(f1);
         t             = BigDecimal.valueOf(0.5);
         f2            = n.multiply(t);
         f3            = Math.pow(f1.doubleValue(),f2.doubleValue());
@@ -50,7 +53,8 @@ public class Teller
         //-----------------------perhitungan bunga kredit----------------//
         BigDecimal creditBalance = new BigDecimal(creditLine.getBalance());
         r                        = BigDecimal.valueOf(0.18);
-        f1                       = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
+        f1                       = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
+        System.out.println(f1);
         t                        = BigDecimal.ONE;
         f2                       = n.multiply(t);
         f3                       = Math.pow(f1.doubleValue(),f2.doubleValue());
