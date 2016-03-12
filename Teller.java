@@ -28,7 +28,7 @@ public class Teller
         saving.setBalance(savingBalance.multiply(new BigDecimal(f3)).doubleValue());
         System.out.println("saving setelah 12 bulan\t" +saving.getBalance());
         
-        //--------------------perhitungan bunga investment------------------//
+        //--------------------perhitungan bunga investment <6 bulan------------------//
         BigDecimal investBalance = new BigDecimal(invest.getBalance());
         r                        = BigDecimal.valueOf(.05);
         f1                       = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
@@ -37,6 +37,7 @@ public class Teller
         f3                       = Math.pow(f1.doubleValue(),f2.doubleValue());
         invest.setBalance(investBalance.multiply(new BigDecimal(f3)).doubleValue());
         
+        //-----------perhitungan bunga investment >6bulan-----------//
         investBalance = new BigDecimal(invest.getBalance());
         r             = BigDecimal.valueOf(.06);
         f1            = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
