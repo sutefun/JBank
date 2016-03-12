@@ -48,18 +48,41 @@ public class Teller
         System.out.println("invest setelah 12 bulan\t" +invest.getBalance());
         
         //-----------------------perhitungan bunga kredit----------------//
+        double     withdrawMoney = 1500;
         BigDecimal creditBalance = new BigDecimal(creditLine.getBalance());
         r                        = BigDecimal.valueOf(0.18);
         f1                       = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
         t                        = BigDecimal.ONE;
         f2                       = n.multiply(t);
         f3                       = new BigDecimal(Math.pow(f1.doubleValue(),f2.doubleValue()));
+        
+        if(withdrawMoney>saving.getBalance())
+        {
+            System.out.println("withdraw\t" +withdrawMoney);
+            double  credit = withdrawMoney-saving.getBalance();
+            boolean tes = creditLine.withdraw(credit);
+            if(tes==true)
+            {
+                saving.setBalance(0);
+                System.out.println("saving\t 0");
+                BigDecimal creditPlusInterest = new BigDecimal(credit);
+                creditPlusInterest.multiply(f3);
+                System.out.println("kredit dan bunga setelah 1 tahun\t" +creditPlusInterest.doubleValue());
+            }
+            else
+            {
+                System.out.println("withdraw melebihi batas kredit");
+            }
+            
+            
+        }
+       /** 
         creditLine.setBalance(creditBalance.multiply(f3).doubleValue());
         System.out.println("credit setelah 12 bulan\t" +creditLine.getBalance());
         saving.withdraw(creditLine.getBalance());
         creditLine.setBalance(0);
         System.out.println("pembayaran hutang, saving menjadi\t" +saving.getBalance());
-   
+        */
         
         /**  setStartTime(9,0);
        setCloseTime(17,0);
