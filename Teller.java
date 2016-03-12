@@ -67,7 +67,7 @@ public class Teller
                 System.out.println("saving\t 0");
                 BigDecimal creditPlusInterest = new BigDecimal(credit);
                 creditPlusInterest.multiply(f3);
-                System.out.println("kredit dan bunga setelah 1 tahun\t" +creditPlusInterest.doubleValue());
+                System.out.println("utang total\t" +creditPlusInterest.doubleValue());
             }
             else
             {
@@ -76,13 +76,7 @@ public class Teller
             
             
         }
-       /** 
-        creditLine.setBalance(creditBalance.multiply(f3).doubleValue());
-        System.out.println("credit setelah 12 bulan\t" +creditLine.getBalance());
-        saving.withdraw(creditLine.getBalance());
-        creditLine.setBalance(0);
-        System.out.println("pembayaran hutang, saving menjadi\t" +saving.getBalance());
-        */
+       
         
         /**  setStartTime(9,0);
        setCloseTime(17,0);
