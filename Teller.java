@@ -14,7 +14,7 @@ public class Teller
     {
         Account saving      = new Account('S',1000);
         Account invest      = new Account('I',1000);
-        Account creditline  = new Account('L',500);
+        Account creditLine  = new Account('L',500);
         
         BigDecimal savingBalance = new BigDecimal(saving.getBalance());
         BigDecimal n             = new BigDecimal(360.0);
@@ -27,7 +27,7 @@ public class Teller
         BigDecimal f2            = n.multiply(t); 
         double     f3            = Math.pow(f1.doubleValue(),f2.doubleValue());
         saving.setBalance(saving.getBalance()*f3);
-        System.out.println("saving setelah 12 bulan" +saving.getBalance());
+        System.out.println("saving setelah 12 bulan\t" +saving.getBalance());
         
         r   = BigDecimal.valueOf(.05);
         f1  = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
@@ -42,11 +42,18 @@ public class Teller
         f2  = n.multiply(t);
         f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
         invest.setBalance(invest.getBalance()*f3);
-        System.out.println("invest setelah 12 bulan" +invest.getBalance());
+        System.out.println("invest setelah 12 bulan\t" +invest.getBalance());
         
         r   = BigDecimal.valueOf(0.18);
         f1  = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
-        
+        t   = BigDecimal.ONE;
+        f2  = n.multiply(t);
+        f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
+        creditLine.setBalance(creditLine.getBalance()*f3);
+        System.out.println("credit setelah 12 bulan\t" +creditLine.getBalance());
+        saving.withdraw(creditLine.getBalance());
+        creditLine.setBalance(0);
+        System.out.println("pembayaran hutang, saving menjadi\t" +saving.getBalance());
      /**  setStartTime(8,15);
        setCloseTime(17,0);
        String fname,lname,telpon,indikator;
