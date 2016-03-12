@@ -16,6 +16,7 @@ public class Teller
         Account invest      = new Account('I',1000);
         Account creditLine  = new Account('L',500);
         
+        //-------------------------perhitungan bunga saving-----------------------//
         BigDecimal savingBalance = new BigDecimal(saving.getBalance());
         BigDecimal n             = new BigDecimal(360.0);
         BigDecimal t             = new BigDecimal(1.0);
@@ -23,31 +24,36 @@ public class Teller
        
         BigDecimal f1            = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
         BigDecimal f2            = n.multiply(t); 
-        double     f3            = Math.pow(f1.doubleValue(),f2.doubleValue());
-        saving.setBalance(saving.getBalance()*f3);
+        double f3                = Math.pow(f1.doubleValue(),f2.doubleValue());
+        saving.setBalance(savingBalance.multiply(new BigDecimal(f3)).doubleValue());
         System.out.println("saving setelah 12 bulan\t" +saving.getBalance());
         
-        r   = BigDecimal.valueOf(.05);
-        f1  = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
-        t   = BigDecimal.valueOf(0.5);
-        f2  = n.multiply(t);
-        f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
-        invest.setBalance(invest.getBalance()*f3);
+        //--------------------perhitungan bunga investment------------------//
+        BigDecimal investBalance = new BigDecimal(invest.getBalance());
+        r                        = BigDecimal.valueOf(.05);
+        f1                       = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
+        t                        = BigDecimal.valueOf(0.5);
+        f2                       = n.multiply(t);
+        f3                       = Math.pow(f1.doubleValue(),f2.doubleValue());
+        invest.setBalance(investBalance.multiply(new BigDecimal(f3)).doubleValue());
         
-        r   = BigDecimal.valueOf(.06);
-        f1  = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
-        t   = BigDecimal.valueOf(0.5);
-        f2  = n.multiply(t);
-        f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
-        invest.setBalance(invest.getBalance()*f3);
+        investBalance = new BigDecimal(invest.getBalance());
+        r             = BigDecimal.valueOf(.06);
+        f1            = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
+        t             = BigDecimal.valueOf(0.5);
+        f2            = n.multiply(t);
+        f3            = Math.pow(f1.doubleValue(),f2.doubleValue());
+        invest.setBalance(investBalance.multiply(new BigDecimal(f3)).doubleValue());
         System.out.println("invest setelah 12 bulan\t" +invest.getBalance());
         
-        r   = BigDecimal.valueOf(0.18);
-        f1  = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
-        t   = BigDecimal.ONE;
-        f2  = n.multiply(t);
-        f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
-        creditLine.setBalance(creditLine.getBalance()*f3);
+        //-----------------------perhitungan bunga kredit----------------//
+        BigDecimal creditBalance = new BigDecimal(creditLine.getBalance());
+        r                        = BigDecimal.valueOf(0.18);
+        f1                       = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
+        t                        = BigDecimal.ONE;
+        f2                       = n.multiply(t);
+        f3                       = Math.pow(f1.doubleValue(),f2.doubleValue());
+        creditLine.setBalance(creditBalance.multiply(new BigDecimal(f3)).doubleValue());
         System.out.println("credit setelah 12 bulan\t" +creditLine.getBalance());
         saving.withdraw(creditLine.getBalance());
         creditLine.setBalance(0);
