@@ -1,7 +1,7 @@
 
 /**
  * @author (steven susanto) 
- * @version (5/3/16)
+ * @version (12/3/16)
  */
 import java.util.*;
 import java.text.*;
@@ -10,7 +10,7 @@ import java.math.*;
 public class Teller
 {
     /**@param belum ada */
-    public static void main(String[] args) throws ParseException
+    public static void main(String[] args) //throws ParseException
     {
         Account saving      = new Account('S',1000);
         Account invest      = new Account('I',1000);
@@ -21,30 +21,31 @@ public class Teller
         BigDecimal t             = new BigDecimal(1.0);
         BigDecimal r             = new BigDecimal(.03);
         
-        BigDecimal f1            = r.divide(n,BigDecimal.ROUND_HALF_EVEN).add(BigDecimal.ONE));
+
+        BigDecimal f1            = new BigDecimal(0).setScale(20000);
+        f1=r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
         BigDecimal f2            = n.multiply(t); 
         double     f3            = Math.pow(f1.doubleValue(),f2.doubleValue());
         saving.setBalance(saving.getBalance()*f3);
-        System.out.println(saving.getBalance());
+        System.out.println("saving setelah 12 bulan" +saving.getBalance());
         
         r   = BigDecimal.valueOf(.05);
-        f1  = r.divide(n,10,BigDecimal.ROUND_UNNECESSARY).add(BigDecimal.ONE);
+        f1  = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
         t   = BigDecimal.valueOf(0.5);
         f2  = n.multiply(t);
         f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
-        System.out.println(f1);
-        System.out.println(f2);
-        System.out.println(f3);
         invest.setBalance(invest.getBalance()*f3);
         
         r   = BigDecimal.valueOf(.06);
-        f1  = r.divide(n,200,BigDecimal.ROUND_UNNECESSARY).add(BigDecimal.ONE);
+        f1  = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
         t   = BigDecimal.valueOf(0.5);
         f2  = n.multiply(t);
         f3  = Math.pow(f1.doubleValue(),f2.doubleValue());
-        System.out.println(n);
         invest.setBalance(invest.getBalance()*f3);
-        System.out.println(invest.getBalance());
+        System.out.println("invest setelah 12 bulan" +invest.getBalance());
+        
+        r   = BigDecimal.valueOf(0.18);
+        f1  = r.divide(n,64,BigDecimal.ROUND_CEILING).add(BigDecimal.ONE);
         
      /**  setStartTime(8,15);
        setCloseTime(17,0);
