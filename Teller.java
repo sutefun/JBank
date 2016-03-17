@@ -14,18 +14,21 @@ public class Teller
     /**@param belum ada */
     public static void main(String[] args) //throws ParseException
     {
-        while(Bank.addCustomer(new Customer("tuyul",String.valueOf(Bank.getNumOfCurrentCustomers()))));
-        
+        while(Bank.addCustomer(new Customer("tuyul",String.valueOf(Bank.getNumOfCurrentCustomers()))))
+        {
+            System.out.println("Customer " + (Bank.getNumOfCurrentCustomers()));
+        }
         System.out.println("sudah buat customer, skearang print customer");
         
         for(int i =0;i<Bank.getMaxCustomers();i++)
         {
+            System.out.println("\nCustomer " +(i+1));
             System.out.println(Bank.getCustomer(i+1000));
         }
         
         System.out.println("\nmencari kustomer dengan id 1007");
         Customer c1=new Customer();
-        System.out.println(Bank.getCustomer(1007)!=null?" ":"tidak ketemu");
+        System.out.println(Bank.getCustomer(1007)!=null?Bank.getCustomer(1007)+"------------->ketemu":"tidak ketemu");
         
         
         /**
