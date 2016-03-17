@@ -8,7 +8,7 @@ public class Customer
 {
     private Account accounts= new Account();
     private String  cityAddress;
-    private int     custId;
+    private int     CustID;
     private Date  dateOfBirth;
     private String  email;
     private String  firstName;
@@ -35,10 +35,10 @@ public class Customer
        firstName=fname;
        this.lastName=lname;
        this.dateOfBirth=dob;
-       this.custId=Bank.getNextId();
+       this.CustID=Bank.getNextId();
    }
     
-   public Customer(String firstName, String lastName, String dateOfBirth, int custId)
+   public Customer(String firstName, String lastName, String dateOfBirth, int CustID)
    {
     }
     
@@ -53,10 +53,10 @@ public class Customer
        return accounts;
     }
     
-    /**@return custId , merupakan id kustomer*/
-   public int getCustId()
+    /**@return CustID , merupakan id kustomer*/
+   public int getCustID()
    {
-       return custId;
+       return CustID;
     }
     
     /**@return email    ,merupakan email kustomer*/
@@ -134,9 +134,9 @@ public class Customer
    /**
     * @param Id
     */ 
-  public void setCustId(int id)
+  public void setCustID(int id)
   {
-    custId=id;
+    CustID=id;
     
    }
   
@@ -155,7 +155,7 @@ public class Customer
   
   public String toString()
   {
-    String custInfo= "\nNama    "+firstName+','+lastName+"\nID      "+custId+"\nDOB     "+dateOfBirth+"\nacoount "+this.getAccount().getAcctType()+"\nbalance "+this.getAccount().getBalance();
+    String custInfo= "\nNama    "+firstName+','+lastName+"\nID      "+CustID+"\nDOB     "+dateOfBirth+"\nacoount "+this.getAccount().getAcctType()+"\nbalance "+this.getAccount().getBalance();
     
     return custInfo;
   }

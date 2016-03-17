@@ -1,8 +1,5 @@
-import java.util.Date;
-import java.text.DateFormat;
-import java.util.GregorianCalendar;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
+import java.util.*;
+import java.text.*;
 /**
  * Write a description of class Bank here.
  * 
@@ -11,21 +8,33 @@ import java.text.SimpleDateFormat;
  */
 public class Bank
 {
+  
+    
     private static Date startTime;
     private static Date closeTime;
     private static double investmentInterestRate;
     private static double creditInterestRate;
     private static double premiumInterestRate;
-    private static int    lastCustId;
-    private static int    nextCustId;
+    private static int    lastCustID;
+    private static int    nextCustID;
     private static String phone;
     public  static String website;
     public  static final String BANK_ADDRESS          ="1234 JavaStreet,AnyCity,ThisState,34567";
     public  static final int    MAX_NUM_OF_ACCTS_PER_CUSTOMER=4;
-    public  static final int    MAX_NUM_OF_CUSTOMERS     =20;
+    
     public  static final  String BANK_NAME             ="JBANK";
-    private static int    numOfCurrentCustomers;
-    public int tes=99;
+    private static int    numOfCurrentCustomers=0;
+    static int customerCounter=0;
+    
+      static{
+        System.out.println("masukkan MAX_NUM_OF_CUSTOMERS");
+        Scanner in = new Scanner(System.in);
+        MAX_NUM_OF_CUSTOMERS = in.nextInt();
+        //System.out.println(MAX_NUM_OF_CUSTOMERS);
+    }
+    private static final int    MAX_NUM_OF_CUSTOMERS;
+    private static Customer customer[] = new Customer[MAX_NUM_OF_CUSTOMERS];
+    
     
     private Bank()
     {
@@ -58,10 +67,10 @@ public class Bank
        
     }
     
-    /**@return lastCustId */
+    /**@return lastCustID */
     public static int getLastID()
     {
-        return lastCustId;
+        return lastCustID;
     }
     
     /**@return maxNumOfCustomer */
@@ -123,7 +132,7 @@ public class Bank
         return maxNumOfCustomers;
     }
     */
-    /**@return nextCustId   */
+    /**@return nextCustID   */
     public static int getNextId()
     {
         int nextId=0;
@@ -134,16 +143,16 @@ public class Bank
         else
         {
             numOfCurrentCustomers ++;
-            if(nextCustId==0)
+            if(nextCustID==0)
             {   
-                nextCustId=1000;
-                nextId=nextCustId;
+                nextCustID=1000;
+                nextId=nextCustID;
             }
             else
             {
-                lastCustId=nextCustId;
-                nextCustId++;
-                nextId=nextCustId;
+                lastCustID=nextCustID;
+                nextCustID++;
+                nextId=nextCustID;
             }
             
         }
@@ -178,5 +187,33 @@ public class Bank
     public static Date getCloseTime()
     {
         return closeTime;
+    }
+    
+    public static boolean addCustomer(Customer customer)
+    {
+        if(customerCounter<MAX_NUM_OF_CUSTOMERS)
+        {
+            Bank.customer[customerCounter] = customer;
+            customerCounter++;
+            System.out.println("customer ditambahkan");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public static Customer getCustomer(int CustID)
+    {
+        for(int i=0;i<MAX_NUM_OF_CUSTOMERS;i++)
+        {
+            if(Bank.customer[i].getCustID()== CustID)
+            {
+                return Bank.customer[i];
+            }
+        }
+        
+        return null;
     }
 }

@@ -9,9 +9,26 @@ import java.math.*;
 
 public class Teller
 {
+    
+    
     /**@param belum ada */
     public static void main(String[] args) //throws ParseException
     {
+        while(Bank.addCustomer(new Customer("tuyul",String.valueOf(Bank.getNumOfCurrentCustomers()))));
+        
+        System.out.println("sudah buat customer, skearang print customer");
+        
+        for(int i =0;i<Bank.getMaxCustomers();i++)
+        {
+            System.out.println(Bank.getCustomer(i+1000));
+        }
+        
+        System.out.println("\nmencari kustomer dengan id 1007");
+        Customer c1=new Customer();
+        System.out.println(Bank.getCustomer(1007)!=null?" ":"tidak ketemu");
+        
+        
+        /**
         Account saving      = new Account('S',1000);
         Account invest      = new Account('I',1000);
         Account creditLine  = new Account('L',500);
@@ -82,7 +99,8 @@ public class Teller
             System.out.println("saving\t" +saving.getBalance());
         }
        
-        
+        */
+       
         /**  setStartTime(9,0);
        setCloseTime(17,0);
        String fname,lname,telpon,indikator;
@@ -163,10 +181,6 @@ public class Teller
        
     }
 
-    public void tes()
-    {
-    
-    }
     
     public static void setStartTime(int hour,int minute)
     {
