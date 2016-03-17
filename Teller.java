@@ -19,7 +19,8 @@ public class Teller
             System.out.println("Customer " + (Bank.getNumOfCurrentCustomers()));
         }
         System.out.println("sudah buat customer, skearang print customer");
-        
+        System.out.println("numOfCurrentCustomers " +Bank.getNumOfCurrentCustomers());
+        System.out.println(Bank.getCustomer(1003));
         for(int i =0;i<Bank.getMaxCustomers();i++)
         {
             System.out.println("\nCustomer " +(i+1));
@@ -29,7 +30,7 @@ public class Teller
         System.out.println("\nmencari kustomer dengan id 1007");
         Customer c1=new Customer();
         System.out.println(Bank.getCustomer(1007)!=null?Bank.getCustomer(1007)+"------------->ketemu":"tidak ketemu");
-        
+        System.out.println("numOfCurrentCustomers " +Bank.getNumOfCurrentCustomers());
         
         /**
         Account saving      = new Account('S',1000);

@@ -26,15 +26,19 @@ public class Bank
     private static int    numOfCurrentCustomers=0;
     static int customerCounter=0;
     
-      static{
+      static
+      {
         System.out.println("masukkan MAX_NUM_OF_CUSTOMERS");
         Scanner in = new Scanner(System.in);
         MAX_NUM_OF_CUSTOMERS = in.nextInt();
-        //System.out.println(MAX_NUM_OF_CUSTOMERS);
-    }
+      }
     private static final int    MAX_NUM_OF_CUSTOMERS;
     private static Customer customer[] = new Customer[MAX_NUM_OF_CUSTOMERS];
     
+       static
+       {
+        System.out.println(MAX_NUM_OF_CUSTOMERS);
+        }
     
     private Bank()
     {
@@ -133,9 +137,9 @@ public class Bank
     }
     */
     /**@return nextCustID   */
-    public static int getNextId()
+    public static int getNextID()
     {
-        int nextId=0;
+        int nextID=0;
         if(numOfCurrentCustomers>=MAX_NUM_OF_CUSTOMERS)
         {
            
@@ -146,17 +150,17 @@ public class Bank
             if(nextCustID==0)
             {   
                 nextCustID=1000;
-                nextId=nextCustID;
+                nextID=nextCustID;
             }
             else
             {
                 lastCustID=nextCustID;
                 nextCustID++;
-                nextId=nextCustID;
+                nextID=nextCustID;
             }
             
         }
-        return nextId;
+        return nextID;
     }
     /**
      * @param Date
@@ -206,8 +210,9 @@ public class Bank
     
     public static Customer getCustomer(int CustID)
     {
-        for(int i=0;i<MAX_NUM_OF_CUSTOMERS;i++)
+        for(int i=0;i<numOfCurrentCustomers;i++)
         {
+            System.out.println(i);
             if(Bank.customer[i].getCustID()== CustID)
             {
                 return Bank.customer[i];

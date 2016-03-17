@@ -33,9 +33,9 @@ public class Customer
    public Customer(String fname, String lname, Date dob)
    {
        firstName=fname;
-       this.lastName=lname;
-       this.dateOfBirth=dob;
-       this.CustID=Bank.getNextId();
+       lastName=lname;
+       dateOfBirth=dob;
+       CustID=Bank.getNextID();
    }
     
    public Customer(String firstName, String lastName, String dateOfBirth, int CustID)
