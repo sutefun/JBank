@@ -212,7 +212,7 @@ public class Bank
     {
         for(int i=0;i<numOfCurrentCustomers;i++)
         {
-            System.out.println(i);
+            
             if(Bank.customer[i].getCustID()== CustID)
             {
                 return Bank.customer[i];
