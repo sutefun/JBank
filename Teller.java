@@ -14,14 +14,17 @@ public class Teller
     /**@param belum ada */
     public static void main(String[] args) //throws ParseException
     {
-        while(Bank.addCustomer(new Customer("tuyul",String.valueOf(Bank.getNumOfCurrentCustomers()))))
+        int j = Bank.getMaxCustomers();
+       for(int i=0;i<j;i++)
         {
+            Customer c = new Customer("tuyul",String.valueOf(Bank.getNumOfCurrentCustomers()));
+            Bank.addCustomer(c);
             System.out.println("Customer " + (Bank.getNumOfCurrentCustomers()));
         }
         System.out.println("sudah buat customer, skearang print customer");
         System.out.println("numOfCurrentCustomers " +Bank.getNumOfCurrentCustomers());
         
-        for(int i =0;i<Bank.getMaxCustomers();i++)
+        for(int i =0;i<Bank.getNumOfCurrentCustomers();i++)
         {
             System.out.println("\nCustomer " +(i+1));
             System.out.println(Bank.getCustomer(i+1000));
@@ -34,7 +37,7 @@ public class Teller
         System.out.println(Bank.getCustomer(1007)!=null?Bank.getCustomer(1007)+"------------->ketemu":"tidak ketemu");
         
         
-        /**
+        /*
         Account saving      = new Account('S',1000);
         Account invest      = new Account('I',1000);
         Account creditLine  = new Account('L',500);
@@ -107,7 +110,9 @@ public class Teller
        
         */
        
-        /**  setStartTime(9,0);
+       /////////////////////////////////////////////////////////////////////////////////////////////////////
+       
+        /*  setStartTime(9,0);
        setCloseTime(17,0);
        String fname,lname,telpon,indikator;
        char type;

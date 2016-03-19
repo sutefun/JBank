@@ -6,14 +6,14 @@ import java.util.Date;
  */
 public class Customer
 {
-    private Account accounts= new Account();
+    private Account[] accounts = new Account[4];
     private String  cityAddress;
     private int     CustID;
-    private Date  dateOfBirth;
+    private Date    dateOfBirth;
     private String  email;
     private String  firstName;
     private String  lastName;
-    private int     numberOfCurrentAccounts;
+    private int     numOfAccounts;
     private String  streetAddress;
     private String  phoneNumber;
     private String  zipOrPostalCode;
@@ -48,9 +48,20 @@ public class Customer
        return streetAddress+','+cityAddress+','+zipOrPostalCode;   
     }
    /**@return accounts */
-   public Account getAccount()
+   public Account getAccount(char type)
    {
-       return accounts;
+       for(int i=0;i<accounts.length;i++)
+       {
+           if(accounts[i] !=null)
+           {
+           if(accounts[i].getID().lastIndexOf(type) != -1)
+           {
+               return accounts[i];
+            }
+           } 
+        }
+       
+       return null;
     }
     
     /**@return CustID , merupakan id kustomer*/
@@ -74,7 +85,7 @@ public class Customer
     /**@return numberOfCurrentAccounts  ,jumlah akun sekarang*/
    public int getNumOfAccounts()
    {
-       return numberOfCurrentAccounts;
+       return numOfAccounts;
     }
     
     /**@return phoneNumber      ,nomor telpon kustomer*/
@@ -127,10 +138,43 @@ public class Customer
     }
     
     /**@param Account account   */
-  public void setAccount(Account account)
+  public boolean addAccount(double balance, char type)
   {
-    accounts=account;
+    boolean accountAdded=false;
+    int notUsed = -1;
+    System.out.println(accounts.length);
+    if(numOfAccounts<5)
+    {
+        for(int i=0;i<accounts.length;i++)
+        {
+            if(accounts[i]==null && notUsed==-1)
+            {
+                notUsed=i;
+            }
+            else if(accounts[i] != null)
+            {
+                if(accounts[i].getID().endsWith(Character.toString(type)))
+                {
+                    System.out.println("ketemu sama");
+                    return false;
+                }
+            }
+        }
+        
+        if(notUsed!=-1 && !accountAdded)
+        {
+            accounts[notUsed] = new Account(this,balance,type);
+            numOfAccounts++;
+            System.out.println("added");
+            accountAdded=true;
+        }
+        
     }
+    
+    return accountAdded;
+    }
+    
+    
    /**
     * @param Id
     */ 
@@ -142,6 +186,20 @@ public class Customer
   
   public boolean removeAccount(char type)
   {
+      for(int i=0;i<accounts.length;i++)
+       {
+           if(accounts[i] !=null)
+           {
+           if(accounts[i].getID().lastIndexOf(type) != -1)
+           {
+               accounts[i] = null;
+               numOfAccounts--;
+               return true;
+            }
+           } 
+        }
+       
+      
       return false;
   }
   
@@ -155,8 +213,6 @@ public class Customer
   
   public String toString()
   {
-    String custInfo= "\nNama    "+firstName+','+lastName+"\nID      "+CustID+"\nDOB     "+dateOfBirth+"\nacoount "+this.getAccount().getAcctType()+"\nbalance "+this.getAccount().getBalance();
-    
-    return custInfo;
+    return "hehe salah";
   }
 }

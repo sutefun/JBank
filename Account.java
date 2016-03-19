@@ -8,26 +8,27 @@ public class Account
     
     private char acctType;
     private double balance;
-    private String id;
-
+    private String ID;
+/*
     public Account()
     {
         acctType='S';
         balance=10;
        
     }
-
+*/
     /**@param type,amount       menerima type dan amount*/
-    public Account(char type,double amount)
+    public Account(Customer cust, double amount ,char type)
     {
-        acctType=type;
-        balance=amount;
+        ID       = Integer.toString(cust.getCustID()) + Character.toString(type);
+        acctType =type;
+        balance  =amount;
         
     }
     
     
     
-       /** @return true,false    , true bila jumlah uang yang dideposit positif*/
+       /** @return true,false    , true bila jumlah uang yang dIDeposit positif*/
     public boolean deposit(double amount)
     {
         if(amount < 0)
@@ -54,10 +55,10 @@ public class Account
         return balance;     
     }
     
-    /** @return id  mengembalikan id    */
-    public String getId()
+    /** @return ID  mengembalikan ID    */
+    public String getID()
     {
-        return id;      
+        return ID;      
     }
     
     /**@param amount    mengatur balance*/
@@ -66,18 +67,18 @@ public class Account
         balance=amount;     
     }
     
-    /**@param acctId    mengatur id*/
-    public void setID(String acctId)
+    /*@param acctID    mengatur ID
+    public void setID(String acctID)
     {
-        id=acctId;          
+        ID=acctID;          
     }
-    
+    */
     /**@param type  mengatur tipe akun*/
     public void setAcctType(char type)
     {
         acctType=type;      
     }
-    /**@return true,false   , true bila jumlah uang yang ditarik tidak menyebabkan balance menjadi negatir  */
+    /**@return true,false   , true bila jumlah uang yang ditarik tIDak menyebabkan balance menjadi negatir  */
     public boolean withdraw(double amount)
     {
         if(amount>=0&&amount<=balance)

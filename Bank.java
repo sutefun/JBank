@@ -24,7 +24,6 @@ public class Bank
     
     public  static final  String BANK_NAME             ="JBANK";
     private static int    numOfCurrentCustomers=0;
-    static int customerCounter=0;
     
       static
       {
@@ -195,10 +194,9 @@ public class Bank
     
     public static boolean addCustomer(Customer customer)
     {
-        if(customerCounter<MAX_NUM_OF_CUSTOMERS)
+        if(numOfCurrentCustomers<MAX_NUM_OF_CUSTOMERS+1)
         {
-            Bank.customer[customerCounter] = customer;
-            customerCounter++;
+            Bank.customer[numOfCurrentCustomers-1] = customer;
             System.out.println("customer ditambahkan");
             return true;
         }
@@ -212,7 +210,6 @@ public class Bank
     {
         for(int i=0;i<numOfCurrentCustomers;i++)
         {
-            
             if(Bank.customer[i].getCustID()== CustID)
             {
                 return Bank.customer[i];
