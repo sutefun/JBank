@@ -27,7 +27,7 @@ public class Teller
         for(int i =0;i<Bank.getNumOfCurrentCustomers();i++)
         {
             System.out.println("\nCustomer " +(i+1));
-            System.out.println(Bank.getCustomer(i+1000));
+            System.out.println(Bank.getCustomer(i+1000).getCustomerName());
         }
         
         System.out.println("----------------------------------------------------------------------");
