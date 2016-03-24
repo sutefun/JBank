@@ -1,8 +1,11 @@
 #BlueJ class context
 comment0.params=cust\ amount\ months
 comment0.target=Investment(Customer,\ double,\ int)
+comment0.text=\r\n\ @param\ Customer\:cust\ ,\ double\:amount,\ int\:months\r\n\ merupakan\ reference\ ke\ kustomer,\ uang\ sejumlah\ tertentu,\ dan\ waktu\ investasi\ dalam\ bulan\ integer\r\n\ \r\n
 comment1.params=days
 comment1.target=void\ addDailyInterest(int)
+comment1.text=\r\n\ @param\ int\:days\ ,\ untuk\ melakukan\ pembungaan\ dengan\ waktu\ dalam\ hari\ dengan\ bunga\ tertentu\r\n\ \r\n
 comment2.params=amount
 comment2.target=boolean\ withdraw(double)
+comment2.text=\r\n\ @param\ double\:amount\ ,\ merupakan\ jumlah\ uang\ yang\ ditarik\r\n\ @return\ true/false\ ,\ true\ bila\ jumlah\ uang\ yang\ ditarik\ tidak\ melebihi\ balance\ bila\ sudah\ melewati\ batas\ investasi\r\n\ atau\ true\ bila\ jumlah\ uang\ yang\ ditarik\ dan\ penalti\ tidak\ melebihi\ balance\ bila\ kurang\ dari\ batas\ waktu\ investasi\r\n
 numComments=3

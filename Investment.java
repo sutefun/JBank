@@ -36,7 +36,8 @@ public final class Investment extends Savings
         startDate = s.getTime();
         s.add(Calendar.MONTH , term);
         endDate = s.getTime();
-        
+        System.out.println("startDate " +startDate);
+        System.out.println("endDate " +endDate);
         if(term>12)
         {
             interestRate = 0.07;
@@ -72,16 +73,16 @@ public final class Investment extends Savings
      */
     public boolean withdraw(double amount)
     {
-        if(amount>balance)
+        if(amount>balance)      
         {
             return false;
         }
-        else if(Calendar.getInstance().after(endDate))
-        {
+        else if(Calendar.getInstance().after(endDate))  //bila pada saat penarikan waktu sudah melewati
+        {                                               // term maka tidak dikenanakan penalti
             balance -= amount;
             return true;
         }
-        else if(balance>(amount*1.2))
+        else if(balance>(amount*1.2))       //waktu penarikan sebelum endDate, maka kena penalti
         {
             balance -= (amount*1.2);
             return true;
