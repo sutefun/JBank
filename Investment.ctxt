@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=cust\ amount\ months
+comment0.target=Investment(Customer,\ double,\ int)
+comment1.params=days
+comment1.target=void\ addDailyInterest(int)
+comment2.params=amount
+comment2.target=boolean\ withdraw(double)
+numComments=3

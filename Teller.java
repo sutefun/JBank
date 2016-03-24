@@ -12,31 +12,20 @@ public class Teller
     
     
     /**@param belum ada */
-    public static void main(String[] args) //throws ParseException
+    public static void main(String[] args)
     {
-        int j = Bank.getMaxCustomers();
-       for(int i=0;i<j;i++)
-        {
-            Customer c = new Customer("tuyul",String.valueOf(Bank.getNumOfCurrentCustomers()));
-            Bank.addCustomer(c);
-            System.out.println("Customer " + (Bank.getNumOfCurrentCustomers()));
-        }
-        System.out.println("sudah buat customer, skearang print customer");
-        System.out.println("numOfCurrentCustomers " +Bank.getNumOfCurrentCustomers());
-        
-        for(int i =0;i<Bank.getNumOfCurrentCustomers();i++)
-        {
-            System.out.println("\nCustomer " +(i+1));
-            System.out.println(Bank.getCustomer(i+1000).getCustomerName());
-        }
-        
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("numOfCurrentCustomers " +Bank.getNumOfCurrentCustomers());
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("mencari kustomer dengan ID 1007");
-        System.out.println(Bank.getCustomer(1007)!=null?Bank.getCustomer(1007)+"------------->ketemu":"tidak ketemu");
-        
-        
+     /*  Customer c = new Customer ("steven","susanto");
+       Savings s  = new Savings (c,500);
+       System.out.println("nama " +c.getCustomerName());
+       s.addDailyInterest(280);
+       System.out.println("balance " +s.getBalance());
+       */
+       Customer c = new Customer ("steven","susanto");
+       Investment i  = new Investment (c,1000,12);
+       System.out.println("nama " +c.getCustomerName());
+       i.addDailyInterest(365);
+       System.out.println("balance " +i.getBalance());
+      
         /*
         Account saving      = new Account('S',1000);
         Account invest      = new Account('I',1000);
@@ -192,23 +181,34 @@ public class Teller
        
     }
 
-    
+    /**
+     * @param int:hour,int:minute , waktu mulai kerja bank dalam jam dan menit
+     */
     public static void setStartTime(int hour,int minute)
     {
         
        Bank.setStartTime(hour,minute);
     }
     
+    /**
+     * @return int:hour,int:minute , waktu mulai kerja bank dalam jam dan menit
+     */
     public static Date getStartTime()
     {
         return Bank.getStartTime();
     }
     
+    /**
+     * @param int:hour,int:minute , waktu tutup bank dalam jam dan menit
+     */
     public static void setCloseTime(int hour,int minute)
     {
         Bank.setCloseTime(hour,minute);
     }
     
+    /**
+     * @return int:hour,int:minute , waktu tutup bank dalam jam dan menit
+     */
     public static Date getCloseTime()
     {
         return Bank.getCloseTime();

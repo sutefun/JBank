@@ -1,5 +1,5 @@
-import java.util.GregorianCalendar;
-import java.util.Date;
+import java.util.*;
+import java.text.*;
 /**
  * @author (steven susanto) 
  * @version (5/3/16)
@@ -63,6 +63,25 @@ public class Customer
        
        return null;
     }
+    
+    public boolean removeAccount(char type)
+  {
+      for(int i=0;i<accounts.length;i++)
+       {
+           if(accounts[i] !=null)
+           {
+           if(accounts[i].getID().lastIndexOf(type) != -1)
+           {
+               accounts[i] = null;
+               numOfAccounts--;
+               return true;
+            }
+           } 
+        }
+       
+      
+      return false;
+  }
     
     /**@return CustID , merupakan id kustomer*/
    public int getCustID()
@@ -142,7 +161,6 @@ public class Customer
   {
     boolean accountAdded=false;
     int notUsed = -1;
-    System.out.println(accounts.length);
     if(numOfAccounts<5)
     {
         for(int i=0;i<accounts.length;i++)
@@ -163,7 +181,7 @@ public class Customer
         
         if(notUsed!=-1 && !accountAdded)
         {
-            accounts[notUsed] = new Account(this,balance,type);
+           // accounts[notUsed] = new Account(this,balance,type);
             numOfAccounts++;
             System.out.println("added");
             accountAdded=true;
@@ -184,24 +202,6 @@ public class Customer
     
    }
   
-  public boolean removeAccount(char type)
-  {
-      for(int i=0;i<accounts.length;i++)
-       {
-           if(accounts[i] !=null)
-           {
-           if(accounts[i].getID().lastIndexOf(type) != -1)
-           {
-               accounts[i] = null;
-               numOfAccounts--;
-               return true;
-            }
-           } 
-        }
-       
-      
-      return false;
-  }
   
   /**
    * @return dateOfBirth

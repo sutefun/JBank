@@ -10,17 +10,17 @@ public class Bank
 {
   
     
-    private static Date startTime;
-    private static Date closeTime;
+    private static Date   startTime;
+    private static Date   closeTime;
     private static double investmentInterestRate;
     private static double creditInterestRate;
-    private static double premiumInterestRate;
+    private static double premiumInterestRate   = 0.03;
     private static int    lastCustID;
     private static int    nextCustID;
     private static String phone;
     public  static String website;
-    public  static final String BANK_ADDRESS          ="1234 JavaStreet,AnyCity,ThisState,34567";
-    public  static final int    MAX_NUM_OF_ACCTS_PER_CUSTOMER=4;
+    public  static final  String BANK_ADDRESS          ="1234 JavaStreet,AnyCity,ThisState,34567";
+    public  static final  int    MAX_NUM_OF_ACCTS_PER_CUSTOMER=4;
     
     public  static final  String BANK_NAME             ="JBANK";
     private static int    numOfCurrentCustomers=0;

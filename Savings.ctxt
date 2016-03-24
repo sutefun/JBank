@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=cust\ amount
+comment0.target=Savings(Customer,\ double)
+comment1.params=amount
+comment1.target=boolean\ withdraw(double)
+comment2.params=
+comment2.target=double\ getInterestEarned()
+comment3.params=days
+comment3.target=void\ addDailyInterest(int)
+numComments=4

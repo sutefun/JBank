@@ -3,32 +3,12 @@
  * @author (steven susanto) 
  * @version (5/3/16)
  */
-public class Account
+public  abstract class Account
 {
-    
-    private char acctType;
-    private double balance;
-    private String ID;
-/*
-    public Account()
-    {
-        acctType='S';
-        balance=10;
-       
-    }
-*/
-    /**@param type,amount       menerima type dan amount*/
-    public Account(Customer cust, double amount ,char type)
-    {
-        ID       = Integer.toString(cust.getCustID()) + Character.toString(type);
-        acctType =type;
-        balance  =amount;
-        
-    }
-    
-    
-    
-       /** @return true,false    , true bila jumlah uang yang dIDeposit positif*/
+    protected double balance;
+    protected String ID;
+
+       /** @return true,false    , true bila jumlah uang yang dideposit positif*/
     public boolean deposit(double amount)
     {
         if(amount < 0)
@@ -43,11 +23,6 @@ public class Account
         
     }
     
-    /**@return acctType mengembalikan karakter tipe akun    */
-    public char getAcctType()
-    {
-        return acctType;  
-    }
     
     /**@return balance  mengembalikan jumlah saldo  */
     public double getBalance()
@@ -66,21 +41,10 @@ public class Account
     {
         balance=amount;     
     }
-    
-    /*@param acctID    mengatur ID
-    public void setID(String acctID)
-    {
-        ID=acctID;          
-    }
-    */
-    /**@param type  mengatur tipe akun*/
-    public void setAcctType(char type)
-    {
-        acctType=type;      
-    }
+  
     /**@return true,false   , true bila jumlah uang yang ditarik tIDak menyebabkan balance menjadi negatir  */
-    public boolean withdraw(double amount)
-    {
+    public abstract boolean withdraw(double amount);
+    /*{
         if(amount>=0&&amount<=balance)
         {
             balance-=amount;
@@ -90,5 +54,14 @@ public class Account
         {
             return false;
         }
+    }*/
+    
+    /**
+     * @return String:ID , merupakan override dari toString yang default terdapat pada setiap objek (dalam hal ini acocunt)
+     * diatur agar mengembalikan ID dari suatu akun yang sama dengan nilai pemilik/kustomernya.
+     */
+    public String toString()
+    {
+        return ID;
     }
 }
