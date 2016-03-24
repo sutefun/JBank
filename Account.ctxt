@@ -1,19 +1,19 @@
 #BlueJ class context
 comment0.params=amount
 comment0.target=boolean\ deposit(double)
-comment0.text=@return\ true,false\ \ \ \ ,\ true\ bila\ jumlah\ uang\ yang\ dideposit\ positif
+comment0.text=\ \r\n\ @return\ true,false\ ,\ true\ bila\ jumlah\ uang\ yang\ deposit\ positif*\r\n\ \r\n
 comment1.params=
 comment1.target=double\ getBalance()
-comment1.text=@return\ balance\ \ mengembalikan\ jumlah\ saldo
+comment1.text=\r\n\ @return\ double\:balance\ \ ,mengembalikan\ jumlah\ saldo\r\n
 comment2.params=
 comment2.target=java.lang.String\ getID()
-comment2.text=@return\ ID\ \ mengembalikan\ ID
+comment2.text=\ \r\n\ @return\ String\:ID,\ mengembalikan\ ID\ \ dari\ akun\ \ \r\n
 comment3.params=amount
 comment3.target=void\ setBalance(double)
-comment3.text=@param\ amount\ \ \ \ mengatur\ balance
+comment3.text=\r\n\ @param\ amount\ ,\ mengatur\ balance\r\n
 comment4.params=amount
 comment4.target=boolean\ withdraw(double)
-comment4.text=@return\ true,false\ \ \ ,\ true\ bila\ jumlah\ uang\ yang\ ditarik\ tIDak\ menyebabkan\ balance\ menjadi\ negatir
+comment4.text=@return\ true,false\ \ \ ,\ true\ bila\ jumlah\ uang\ yang\ ditarik\ tidak\ \r\n\ menyebabkan\ balance\ menjadi\ negatir\ \ \r\n
 comment5.params=
 comment5.target=java.lang.String\ toString()
 comment5.text=\r\n\ @return\ String\:ID\ ,\ merupakan\ override\ dari\ toString\ yang\ default\ terdapat\ pada\ setiap\ objek\ (dalam\ hal\ ini\ acocunt)\r\n\ diatur\ agar\ mengembalikan\ ID\ dari\ suatu\ akun\ yang\ sama\ dengan\ nilai\ pemilik/kustomernya.\r\n
