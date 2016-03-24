@@ -59,10 +59,11 @@ public final class Investment extends Savings
     public void addDailyInterest(int days)
     {
            System.out.println(interestRate);
-           double f            = Math.pow( (1 + (interestRate/365)), days);
-           System.out.println(f);
-           interestEarned      = balance * (f-1);
-           balance            *= f;
+           double f            = Math.pow( (1 + (interestRate/365)), days); //hasilnya merupakan koefisien pengali balance 
+           System.out.println(f);                                           //yang menghasilkan balance+interest
+           interestEarned      = balance * (f-1);             //untuk mendapatkan bunga maka dikurangi 1
+           balance            *= f;                        //balance dikali dengan koefisien f yang merupakan
+                                                          //koefisien hasil pembungaan
     }
     
     
