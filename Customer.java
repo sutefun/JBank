@@ -7,6 +7,7 @@ import java.text.*;
 public class Customer
 {
     private Account[] accounts = new Account[4];
+    private Savings savings;
     private String  cityAddress;
     private int     CustID;
     private Date    dateOfBirth;
@@ -85,6 +86,7 @@ public class Customer
                if(type =='S' && accounts[i] instanceof Savings)
                {
                    accounts[i] = null;
+                   savings     = null;
                    numOfAccounts--;
                    return true;
                 }
@@ -126,7 +128,7 @@ public class Customer
     }
     
     /**@return lastName,firstName   ,mengembalikan nama lengkap, tapi terbalik*/
-   public String getCustomerName()
+   public String getCustName()
    {
        return lastName+','+firstName;
     }
@@ -224,7 +226,8 @@ public class Customer
         {
             if(type=='S')
             {
-                accounts[notUsed] = new Savings(this,balance);
+                savings           = new Savings(this,balance);
+                accounts[notUsed] = savings;
             }
             if(type=='I')
             {
@@ -236,10 +239,9 @@ public class Customer
             }
             if(type=='O')
             {
-                accounts[notUsed] = new OverDraftProtection(this,balance,new Savings(this,1000));
+                accounts[notUsed] = new OverDraftProtection(this,balance,savings);
             }
             numOfAccounts++;
-            System.out.println("added");
             accountAdded=true;
         }
         

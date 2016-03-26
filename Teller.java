@@ -14,6 +14,17 @@ public class Teller
     /**@param belum ada */
     public static void main(String[] args)
     {
+        Customer c = new Customer ("steven","susanto");
+        c.addAccount(500,'S');
+        c.addAccount(1000,'I');
+        c.addAccount(1500,'L');
+        c.addAccount(2000,'O');
+        System.out.println("nama\t" +c.getCustName());
+        System.out.println("saldo saving\t" +c.getAccount('S').getBalance());
+        System.out.println("saldo investment\t" +c.getAccount('I').getBalance());
+        System.out.println("saldo Line of credit\t" +c.getAccount('L').getBalance());
+        System.out.println("saldo Overdraft protection\t" +c.getAccount('O').getBalance());
+        
      /*  Customer c = new Customer ("steven","susanto");
        Savings s  = new Savings (c,500);
        System.out.println("nama " +c.getCustomerName());
@@ -38,7 +49,7 @@ public class Teller
         System.out.println("Saldo ODP setelah penarikan 800 " + o.getBalance());
         System.out.println("Saldo savings " +s.getBalance());
      */
-    
+    /*
         Customer c = new Customer ("steven" , "susanto");
         LineOfCredit l = new LineOfCredit(c,3000,1000);
         System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
@@ -60,7 +71,9 @@ public class Teller
         l.withdraw(1000);
         l.feeAssessment();
         System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
-         /*
+        */
+        
+        /*
         Account saving      = new Account('S',1000);
         Account invest      = new Account('I',1000);
         Account creditLine  = new Account('L',500);

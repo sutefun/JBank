@@ -36,8 +36,6 @@ public final class Investment extends Savings
         startDate = s.getTime();
         s.add(Calendar.MONTH , term);
         endDate = s.getTime();
-        System.out.println("startDate " +startDate);
-        System.out.println("endDate " +endDate);
         if(term>12)
         {
             interestRate = 0.07;

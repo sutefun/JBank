@@ -51,6 +51,6 @@ comment8.params=
 comment8.target=java.lang.String\ getEmail()
 comment8.text=@return\ email\ \ \ \ ,merupakan\ email\ kustomer
 comment9.params=
-comment9.target=java.lang.String\ getCustomerName()
+comment9.target=java.lang.String\ getCustName()
 comment9.text=@return\ lastName,firstName\ \ \ ,mengembalikan\ nama\ lengkap,\ tapi\ terbalik
 numComments=20
