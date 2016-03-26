@@ -54,10 +54,22 @@ public class Customer
        {
            if(accounts[i] !=null)
            {
-           if(accounts[i].getID().lastIndexOf(type) != -1)
-           {
-               return accounts[i];
-            }
+               if(type =='S' && accounts[i] instanceof Savings)
+               {
+                   return accounts[i];
+                }
+               if(type =='I' && accounts[i] instanceof Investment)
+               {
+                   return accounts[i];
+                }
+               if(type =='L' && accounts[i] instanceof LineOfCredit)
+               {
+                   return accounts[i];
+                }
+               if(type =='O' && accounts[i] instanceof OverDraftProtection)
+               {
+                   return accounts[i];
+                }
            } 
         }
        
@@ -70,12 +82,30 @@ public class Customer
        {
            if(accounts[i] !=null)
            {
-           if(accounts[i].getID().lastIndexOf(type) != -1)
-           {
-               accounts[i] = null;
-               numOfAccounts--;
-               return true;
-            }
+               if(type =='S' && accounts[i] instanceof Savings)
+               {
+                   accounts[i] = null;
+                   numOfAccounts--;
+                   return true;
+                }
+               if(type =='I' && accounts[i] instanceof Investment)
+               {
+                   accounts[i] = null;
+                   numOfAccounts--;
+                   return true;
+                }
+               if(type =='L' && accounts[i] instanceof LineOfCredit)
+               {
+                   accounts[i] = null;
+                   numOfAccounts--;
+                   return true;
+                }
+               if(type =='O' && accounts[i] instanceof OverDraftProtection)
+               {
+                   accounts[i] = null;
+                   numOfAccounts--;
+                   return true;
+                }
            } 
         }
        
@@ -171,17 +201,43 @@ public class Customer
             }
             else if(accounts[i] != null)
             {
-                if(accounts[i].getID().endsWith(Character.toString(type)))
-                {
-                    System.out.println("ketemu sama");
-                    return false;
+                if(type =='S' && accounts[i] instanceof Savings)
+               {
+                   return false;
+                }
+               if(type =='I' && accounts[i] instanceof Investment)
+               {
+                   return false;
+                }
+               if(type =='L' && accounts[i] instanceof LineOfCredit)
+               {
+                   return false;
+                }
+               if(type =='O' && accounts[i] instanceof OverDraftProtection)
+               {
+                  return false;
                 }
             }
         }
         
         if(notUsed!=-1 && !accountAdded)
         {
-           // accounts[notUsed] = new Account(this,balance,type);
+            if(type=='S')
+            {
+                accounts[notUsed] = new Savings(this,balance);
+            }
+            if(type=='I')
+            {
+                accounts[notUsed] = new Investment(this,balance,6);
+            }
+            if(type=='L')
+            {
+                accounts[notUsed] = new LineOfCredit(this,balance,1000);
+            }
+            if(type=='O')
+            {
+                accounts[notUsed] = new OverDraftProtection(this,balance,new Savings(this,1000));
+            }
             numOfAccounts++;
             System.out.println("added");
             accountAdded=true;
