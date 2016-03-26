@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ feeAssessment()
+comment1.params=
+comment1.target=void\ resetMonthlyFee()
+comment1.text=\r\n\ mereset\ monthly\ Fee\ menjadi\ 0\r\n\ @param\ none\r\n\ @return\ none\r\n\ \r\n
+comment2.params=
+comment2.target=double\ getMonthlyFee()
+comment2.text=\r\n\ @return\ double\:monthlyFee\r\n
+numComments=3

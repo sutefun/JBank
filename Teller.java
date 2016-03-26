@@ -20,13 +20,47 @@ public class Teller
        s.addDailyInterest(280);
        System.out.println("balance " +s.getBalance());
        */
-       Customer c = new Customer ("steven","susanto");
+      
+     /*  Customer c = new Customer ("steven","susanto");
        Investment i  = new Investment (c,1000,12);
        System.out.println("nama " +c.getCustomerName());
        i.addDailyInterest(365);
        System.out.println("balance " +i.getBalance());
-      
-        /*
+      */
+     
+      /*  Customer c = new Customer ("steven" , "susanto");
+        Savings s  = new Savings (c,500);
+        OverDraftProtection o = new OverDraftProtection (c,1500,s);
+        System.out.println("Saldo awal ODP " + o.getBalance());
+        o.withdraw(1000);
+        System.out.println("Saldo ODP setelah penarikan 1000 " + o.getBalance());
+        o.withdraw(800);
+        System.out.println("Saldo ODP setelah penarikan 800 " + o.getBalance());
+        System.out.println("Saldo savings " +s.getBalance());
+     */
+    
+        Customer c = new Customer ("steven" , "susanto");
+        LineOfCredit l = new LineOfCredit(c,3000,1000);
+        System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
+        l.withdraw(1000);
+        l.feeAssessment();
+         System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
+         l.withdraw(1000);
+        l.feeAssessment();
+         System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
+        l.withdraw(1000);
+        l.feeAssessment();
+        System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
+         l.withdraw(1000);
+        l.feeAssessment();
+        System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
+         l.withdraw(1000);
+        l.feeAssessment();
+         System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + "monthlyFee " +l.getMonthlyFee());
+        l.withdraw(1000);
+        l.feeAssessment();
+        System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
+         /*
         Account saving      = new Account('S',1000);
         Account invest      = new Account('I',1000);
         Account creditLine  = new Account('L',500);
