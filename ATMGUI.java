@@ -19,7 +19,6 @@ public class ATMGUI extends JPanel
    private Panel infoPanel;
    private Panel textPanelOne;
    private Panel textPanelTwo;
-   private int  count;
    private Label     enterCustIDLabel;
    private TextField enterCustIDTextField;
    private Label     enterAmountHereLabel;
@@ -50,10 +49,13 @@ public class ATMGUI extends JPanel
      */
     private void buildGUI()
     {
+        //-------------membuat frame baru dan mengaturnya dengan ukuran sekian-------//
         mainFrame = new JFrame("ATMGUI Layout");
         mainFrame.setSize(700,300);
         mainFrame.setResizable(false);
         mainFrame.setLayout(new GridLayout(2,1));
+        
+        
         mainFrame.addWindowListener(new WindowHandler() {
          public void windowClosing(WindowEvent windowEvent){
             try{
@@ -63,20 +65,21 @@ public class ATMGUI extends JPanel
             {
              
             }
-            System.exit(0);
+            System.exit(0);     //keluar dari program
         }        
         });  
         
-        makeTopPanel();
-        makeBottomPanel();
+        makeTopPanel();         //membuat panel bagian atas
+        makeBottomPanel();      //membuat panel bagian bawah
       
-        mainFrame.add(topPanel);
+        mainFrame.add(topPanel);    //memasukkan panel ke mainFrame
         mainFrame.add(bottomPanel);
-        mainFrame.setVisible(true);
+        mainFrame.setVisible(true);  //menampilkan frame keseluruhan
     }
     
    private void makeTopPanel()
-   {
+   {    
+       //----------membuat tombol radio satu persatu-------------//
         JRadioButtonPanel = new Panel(new GridLayout(4,1));
         savingsButton = new JRadioButton("Savings");
         savingsButton.setBackground(Color.WHITE);
@@ -87,16 +90,19 @@ public class ATMGUI extends JPanel
         OverdraftButton = new JRadioButton("Overdraft");
         OverdraftButton.setBackground(Color.WHITE);
         
+        //------------membuat label "enter customer id"" dan textfieldnya----------//
         enterCustIDLabel      = new Label("Enter Customer ID");
         enterCustIDTextField  = new TextField("",20);
         enterAmountHereLabel    = new Label("Enter amount here");
         enterAmountHereTextField = new TextField("",20);
         
+        //-------menambahkan setiap radio button ke buttonPanel------//
         JRadioButtonPanel.add(savingsButton);
         JRadioButtonPanel.add(InvestmentButton);
         JRadioButtonPanel.add(LOCButton);
         JRadioButtonPanel.add(OverdraftButton);
         
+        //---------memasukkan panel dan setiap komponen ke topPanel-----------//
         topPanel = new Panel(new FlowLayout());
         topPanel.setBackground(Color.WHITE);
         topPanel.add(enterCustIDLabel);
@@ -106,19 +112,27 @@ public class ATMGUI extends JPanel
         topPanel.add(enterAmountHereTextField);
     }
     
+    /**
+     * untuk membuat bottom panel, yaitu tampilan bagian stengah ke bawah
+     */
    private void makeBottomPanel()
    {
+       //----------membuat setiap button----------//
        depositButton = new Button("Deposit");
         withdrawButton = new Button("Withdraw");
         exitButton     = new Button("Exit");
         
+        //----------membuat buttonPanel dan memasukkan setiap button ke panel----------//
         buttonPanel   = new Panel(new GridLayout(3,1));
         buttonPanel.add(depositButton);
         buttonPanel.add(withdrawButton);
         buttonPanel.add(exitButton);
         
+        //-----------membuat textArea dan mengatur agar warnanya menjadi abu-abu------//
         welcomeTextArea = new TextArea("Welcome");
         welcomeTextArea.setBackground(Color.GRAY);
+        
+        //----------membuat bottomPanel dan memasukkan panel dan komponen bagian bawah-------//
         bottomPanel = new Panel(new BorderLayout());
         bottomPanel.setBackground(Color.GRAY);
         bottomPanel.add(welcomeTextArea,BorderLayout.CENTER);

@@ -22,21 +22,14 @@ public class WindowHandler extends  WindowAdapter
     public static void showExit() throws InterruptedException
     {
          
-          Button okButton = new Button("OK");
-    
-          final Frame aboutFrame = new Frame();
-          aboutFrame.setSize(300,200);;
-          aboutFrame.setTitle("ATMGUI");
-          aboutFrame.addWindowListener(new WindowAdapter() {
-                public void windowClosing(WindowEvent windowEvent){
-                   aboutFrame.dispose();
-             }        
-          });    
+          Frame closingMessageFrame = new Frame();
+          closingMessageFrame.setSize(300,200);;
+          closingMessageFrame.setTitle("ATMGUI");    
           Label msgLabel = new Label("You're exitting, goodbye!!");
           msgLabel.setAlignment(Label.CENTER);
           msgLabel.setSize(100,100);
-          aboutFrame.add(msgLabel);
-          aboutFrame.setVisible(true);
+          closingMessageFrame.add(msgLabel);
+          closingMessageFrame.setVisible(true);
           Thread.sleep(1000);
     }
 }
