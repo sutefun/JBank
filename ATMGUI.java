@@ -9,13 +9,13 @@ import java.awt.event.*;
  * @author steven susanto 
  * @version 7 April 2016
  */
-public class ATMGUI extends JPanel implements ActionListener
+public class ATMGUI extends JPanel
 {
    private Frame mainFrame;
    private Panel topPanel;
    private Panel bottomPanel;
    private Panel buttonPanel;
-   private Panel checkboxPanel;
+   private Panel JRadioButtonPanel;
    private Panel infoPanel;
    private Panel textPanelOne;
    private Panel textPanelTwo;
@@ -24,11 +24,10 @@ public class ATMGUI extends JPanel implements ActionListener
    private TextField enterCustIDTextField;
    private Label     enterAmountHereLabel;
    private TextField enterAmountHereTextField;
-   private CheckboxGroup group1;
-   private Checkbox savingsButton;
-   private Checkbox InvestmentButton;
-   private Checkbox LOCButton;
-   private Checkbox OverdraftButton;
+   private JRadioButton savingsButton;
+   private JRadioButton InvestmentButton;
+   private JRadioButton LOCButton;
+   private JRadioButton OverdraftButton;
    private Button depositButton;
    private Button withdrawButton;
    private Button exitButton;
@@ -41,12 +40,16 @@ public class ATMGUI extends JPanel implements ActionListener
      */
     public ATMGUI()
     {
+       
        buildGUI();
     }
 
+    /**
+     * fungsi untuk membuat GUI
+     * 
+     */
     private void buildGUI()
     {
-        
         mainFrame = new JFrame("ATMGUI Layout");
         mainFrame.setSize(700,300);
         mainFrame.setResizable(false);
@@ -54,7 +57,7 @@ public class ATMGUI extends JPanel implements ActionListener
         mainFrame.addWindowListener(new WindowHandler() {
          public void windowClosing(WindowEvent windowEvent){
             try{
-             WindowHandler.showExit();
+             WindowHandler.showExit();                             //akan memanggil method showExit yang throws InterruptedException, harus di catch
             }
             catch(InterruptedException e)
             {
@@ -64,32 +67,48 @@ public class ATMGUI extends JPanel implements ActionListener
         }        
         });  
         
-        
-        checkboxPanel = new Panel(new GridLayout(4,1));
-        savingsButton = new Checkbox("Savings");
-        InvestmentButton = new Checkbox("Investment");
-        LOCButton     = new Checkbox("Line Of Credit");
-        OverdraftButton = new Checkbox("Overdraft");
+        makeTopPanel();
+        makeBottomPanel();
+      
+        mainFrame.add(topPanel);
+        mainFrame.add(bottomPanel);
+        mainFrame.setVisible(true);
+    }
+    
+   private void makeTopPanel()
+   {
+        JRadioButtonPanel = new Panel(new GridLayout(4,1));
+        savingsButton = new JRadioButton("Savings");
+        savingsButton.setBackground(Color.WHITE);
+        InvestmentButton = new JRadioButton("Investment");
+        InvestmentButton.setBackground(Color.WHITE);
+        LOCButton     = new JRadioButton("Line Of Credit");
+        LOCButton.setBackground(Color.WHITE);
+        OverdraftButton = new JRadioButton("Overdraft");
+        OverdraftButton.setBackground(Color.WHITE);
         
         enterCustIDLabel      = new Label("Enter Customer ID");
         enterCustIDTextField  = new TextField("",20);
         enterAmountHereLabel    = new Label("Enter amount here");
         enterAmountHereTextField = new TextField("",20);
         
-        checkboxPanel.add(savingsButton);
-        checkboxPanel.add(InvestmentButton);
-        checkboxPanel.add(LOCButton);
-        checkboxPanel.add(OverdraftButton);
+        JRadioButtonPanel.add(savingsButton);
+        JRadioButtonPanel.add(InvestmentButton);
+        JRadioButtonPanel.add(LOCButton);
+        JRadioButtonPanel.add(OverdraftButton);
         
         topPanel = new Panel(new FlowLayout());
         topPanel.setBackground(Color.WHITE);
         topPanel.add(enterCustIDLabel);
         topPanel.add(enterCustIDTextField);
-        topPanel.add(checkboxPanel);
+        topPanel.add(JRadioButtonPanel);
         topPanel.add(enterAmountHereLabel);
         topPanel.add(enterAmountHereTextField);
-        
-        depositButton = new Button("Deposit");
+    }
+    
+   private void makeBottomPanel()
+   {
+       depositButton = new Button("Deposit");
         withdrawButton = new Button("Withdraw");
         exitButton     = new Button("Exit");
         
@@ -104,15 +123,6 @@ public class ATMGUI extends JPanel implements ActionListener
         bottomPanel.setBackground(Color.GRAY);
         bottomPanel.add(welcomeTextArea,BorderLayout.CENTER);
         bottomPanel.add(buttonPanel,BorderLayout.LINE_END);
-   
-      
-        mainFrame.add(topPanel);
-        mainFrame.add(bottomPanel);
-        mainFrame.setVisible(true);
-    }
     
-    public void actionPerformed(ActionEvent e)
-    {
-        count = 0;
     }
 }

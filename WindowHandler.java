@@ -37,6 +37,6 @@ public class WindowHandler extends  WindowAdapter
           msgLabel.setSize(100,100);
           aboutFrame.add(msgLabel);
           aboutFrame.setVisible(true);
-          Thread.sleep(10000);
+          Thread.sleep(1000);
     }
 }
