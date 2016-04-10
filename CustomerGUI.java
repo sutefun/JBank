@@ -42,6 +42,9 @@ public class CustomerGUI
        buildGUI();
     }
 
+    /**
+     * membangun tampilan GUI
+     */
     private void buildGUI()
     {
         mainFrame = new JFrame("Customer GUi");
@@ -75,6 +78,9 @@ public class CustomerGUI
         mainFrame.setVisible(true);
     }
     
+    /**
+     * membuat panel pertama
+     */
     private void makeFirstPanel()
     {
         firstPanel = new Panel(new FlowLayout());
@@ -99,6 +105,9 @@ public class CustomerGUI
         
     }
     
+    /**
+     * membuat panel kedua
+     */
      private void makeSecondPanel()
     {
         secondPanel = new Panel(new FlowLayout());
@@ -126,6 +135,9 @@ public class CustomerGUI
          secondPanel.add(addressField);
     }
     
+    /**
+     * membuat panel ketiga
+     */
      private void makeThirdPanel()
     {
     
@@ -177,6 +189,9 @@ public class CustomerGUI
         
     }
     
+    /**
+     * membuat panel keempat
+     */
      private void makeFourthPanel()
     {
         fourthPanel = new Panel(new FlowLayout());

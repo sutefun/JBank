@@ -16,11 +16,17 @@ public class ButtonHandler implements ActionListener
 {
    private ATMGUI atmgui;
    
+   /**
+    * @param ATMGUI - konstruktor buttonhandler yang menerima ATMGUI
+    */
    public ButtonHandler(ATMGUI a)
    {
        atmgui = a;
    }
     
+   /**
+    * action listener bila ada button yang dipencet
+    */
    public void actionPerformed(ActionEvent e)
     {
         String command = e.getActionCommand();
@@ -74,16 +80,25 @@ public class ButtonHandler implements ActionListener
         }
     }
     
+   /**
+    * untuk menyimpan dana
+    */
    private void deposit(Customer cust, char accType, double amount)
    {
        cust.getAccount(accType).deposit(amount);
    }
    
+   /**
+    * @return boolean - true bila withdraw tidak melebihi balance pada akun tertentu
+    */
    private boolean withdraw(Customer cust, char accType, double amount)
    {
        return cust.getAccount(accType).withdraw(amount);
    }
    
+   /**
+    * @return char:accType - melihat tombol untuk tipe akun mana yang dipilih
+    */
    public char getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
@@ -112,6 +127,9 @@ public class ButtonHandler implements ActionListener
         return '\0';
     }
     
+   /**
+    * menampilkan dialog warning exceed balance
+    */
    private void warning()
    {
        JOptionPane.showMessageDialog(atmgui.getMainFrame(), "Penarikan melebihi balance saldo","Error !!",JOptionPane.ERROR_MESSAGE);

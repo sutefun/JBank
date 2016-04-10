@@ -80,6 +80,9 @@ public class ATMGUI extends JPanel
         mainFrame.setVisible(true);  //menampilkan frame keseluruhan
     }
     
+   /**
+    * membuat top panel
+    */
    private void makeTopPanel()
    {    
        //----------membuat tombol radio satu persatu-------------//
@@ -168,27 +171,43 @@ public class ATMGUI extends JPanel
         bottomPanel.add(buttonPanel,BorderLayout.LINE_END);
     
     }
-   
+    
+   /**
+    * @return TextArea - aksesor text area informasi
+    */
    public TextArea getTextArea()
    {
        return infoTextArea;
    }
    
+   /**
+    * @return TextField:custIDtextField - aksesor text field cust ID
+    */
    public TextField getCustIDTextField()
    {
        return enterCustIDTextField;
    }
    
+   
+   /**
+    * @return TextField:amountTextField - aksesor text field amount
+    */
    public TextField getAmountTextField()
    {
        return enterAmountHereTextField;
    }
    
+   /**
+    * @return ButtonGroup:group - aksesor button group pada class ini
+    */
    public ButtonGroup getButtonGroup()
    {
        return group;
    }
    
+   /**
+    * @return Frame:mainFrame - aksesor untuk mainFrame
+    */
    public Frame getMainFrame()
    {
        return mainFrame;

@@ -18,7 +18,10 @@ public class WindowHandler extends  WindowAdapter
     {
         
     }
-
+    
+    /**
+     * menampilkan pesan exit lalu tidur 1 detik
+     */
     public static void showExit() throws InterruptedException
     {
          
