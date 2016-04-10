@@ -121,9 +121,9 @@ public class ButtonHandler implements ActionListener
    private void warning() throws InterruptedException
    {
        Frame warningFrame = new Frame();
-       warningFrame.setSize(100,100);
+       warningFrame.setSize(300,100);
        warningFrame.setTitle("Melebihi saldo balance atau limit");
-       Label msgLabel = new Label("You're exitting, goodbye!!");
+       Label msgLabel = new Label("Melebihi saldo balance atau limit!!");
        msgLabel.setAlignment(Label.CENTER);
        msgLabel.setSize(100,100);
        warningFrame.add(msgLabel);
