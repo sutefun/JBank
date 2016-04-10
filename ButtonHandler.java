@@ -61,6 +61,21 @@ public class ButtonHandler implements ActionListener
                 atmgui.getTextArea().setBackground(Color.WHITE);
                 atmgui.getTextArea().setText("sudah exit"  + accType);
             }   
+            if(command.equals("total"))
+            {
+                double balance=0;
+                Account account;
+                atmgui.getTextArea().setBackground(Color.WHITE);
+                account = cust.getAccount('S');
+                if(account !=null){balance += account.getBalance();}
+                account = cust.getAccount('I');
+                if(account !=null){balance += account.getBalance();}
+                account = cust.getAccount('L');
+                if(account !=null){balance += account.getBalance();}
+                account = cust.getAccount('O');
+                if(account !=null){balance += account.getBalance();}
+                atmgui.getTextArea().setText("Total balance customer"  + balance);
+            }  
         }
     }
     
@@ -95,6 +110,7 @@ public class ButtonHandler implements ActionListener
                 {
                     return 'O';
                 }
+                
             }
         }
 
