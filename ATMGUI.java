@@ -23,6 +23,7 @@ public class ATMGUI extends JPanel
    private TextField enterCustIDTextField;
    private Label     enterAmountHereLabel;
    private TextField enterAmountHereTextField;
+   private ButtonGroup group;
    private JRadioButton savingsButton;
    private JRadioButton InvestmentButton;
    private JRadioButton LOCButton;
@@ -82,15 +83,27 @@ public class ATMGUI extends JPanel
    {    
        //----------membuat tombol radio satu persatu-------------//
         JRadioButtonPanel = new Panel(new GridLayout(4,1));
+        
         savingsButton = new JRadioButton("Savings");
         savingsButton.setBackground(Color.WHITE);
+        
         InvestmentButton = new JRadioButton("Investment");
         InvestmentButton.setBackground(Color.WHITE);
+        
+        
         LOCButton     = new JRadioButton("Line Of Credit");
         LOCButton.setBackground(Color.WHITE);
+        
+        
         OverdraftButton = new JRadioButton("Overdraft");
         OverdraftButton.setBackground(Color.WHITE);
         
+        
+        group = new ButtonGroup();
+        group.add(savingsButton);
+        group.add(InvestmentButton);
+        group.add(LOCButton);
+        group.add(OverdraftButton);
         //------------membuat label "enter customer id"" dan textfieldnya----------//
         enterCustIDLabel      = new Label("Enter Customer ID");
         enterCustIDTextField  = new TextField("",20);
@@ -163,5 +176,10 @@ public class ATMGUI extends JPanel
    public TextField getAmountTextField()
    {
        return enterAmountHereTextField;
+   }
+   
+   public ButtonGroup getButtonGroup()
+   {
+       return group;
    }
 }

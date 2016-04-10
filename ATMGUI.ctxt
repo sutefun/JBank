@@ -18,4 +18,6 @@ comment6.params=
 comment6.target=java.awt.TextField\ getCustIDTextField()
 comment7.params=
 comment7.target=java.awt.TextField\ getAmountTextField()
-numComments=8
+comment8.params=
+comment8.target=javax.swing.ButtonGroup\ getButtonGroup()
+numComments=9
