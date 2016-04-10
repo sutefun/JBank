@@ -27,6 +27,7 @@ public class ButtonHandler implements ActionListener
         String custID  = atmgui.getCustIDTextField().getText();
         double amount  = Double.parseDouble(atmgui.getAmountTextField().getText());
         Customer cust  = Bank.getCustomer(Integer.parseInt(custID));
+        String custName = cust.getCustName();
         char accType = getSelectedButtonText(atmgui.getButtonGroup());
         if(cust != null)
         {
@@ -34,18 +35,18 @@ public class ButtonHandler implements ActionListener
             {
                 atmgui.getTextArea().setBackground(Color.WHITE);
                 deposit(cust,accType,amount);
-                atmgui.getTextArea().setText(custID +" saves an amount of money " +amount + accType);
+                atmgui.getTextArea().setText(custName +" " +custID +" saves an amount of money " +amount);
             }
             if(command.equals("withdraw"))
             {
                 atmgui.getTextArea().setBackground(Color.WHITE);
                 if(withdraw(cust,accType,amount))
                 {
-                atmgui.getTextArea().setText(custID +" withdraws an amount of money " +amount + accType);
+                atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount);
                 }
                 else
                 {
-                 atmgui.getTextArea().setText(custID +" withdraws exceed balance " + accType);
+                 atmgui.getTextArea().setText(custName +" " +custID +" withdraws exceed balance " + accType);
                  
                  try{
                      warning();
@@ -59,7 +60,7 @@ public class ButtonHandler implements ActionListener
             if(command.equals("exit"))
             {
                 atmgui.getTextArea().setBackground(Color.WHITE);
-                atmgui.getTextArea().setText("sudah exit"  + accType);
+                atmgui.getTextArea().setText("sudah exit "  + accType);
             }   
             if(command.equals("total"))
             {
@@ -74,7 +75,7 @@ public class ButtonHandler implements ActionListener
                 if(account !=null){balance += account.getBalance();}
                 account = cust.getAccount('O');
                 if(account !=null){balance += account.getBalance();}
-                atmgui.getTextArea().setText("Total balance customer"  + balance);
+                atmgui.getTextArea().setText(custName +" " +"Total balance customer "  + balance);
             }  
         }
     }
