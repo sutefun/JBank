@@ -33,12 +33,17 @@ public class CustomerGUI implements ActionListener
    private TextField phoneField;
    
    private Panel fourthPanel;
-   private TextField emailField;
+   private JTextField emailField;
    private DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
    private JFormattedTextField dobField;
    private java.awt.List accTypeList;
    private String[] acc = {"Checking/Overdraft","Line of Credit","Savings","Investment","Other"};
    
+   
+    private static String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+    private static java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
+    
+    
     /**
      * Constructor for objects of class CustomerGUI
      */
@@ -225,7 +230,10 @@ public class CustomerGUI implements ActionListener
      private void makeFourthPanel()
     {
         fourthPanel = new Panel(new FlowLayout());
-        emailField = new TextField("Email Address");
+        emailField = new JTextField("Email Address");
+        emailField.setActionCommand("email");
+        emailField.addActionListener(this);
+        
         emailField.setColumns(25);
         emailField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
@@ -255,10 +263,19 @@ public class CustomerGUI implements ActionListener
     {
         String command = e.getActionCommand();
         Date date = new Date();
+        
         if(command.equals("cancel"))
         {
             exitting();
             System.exit(0);
+        }
+        else if(command.equals("email"))
+        {
+            if(!emailValidator(emailField.getText()))
+            {
+                JOptionPane.showMessageDialog(mainFrame, "Email tidak valid!!","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        
         }
         else
         {
@@ -271,6 +288,8 @@ public class CustomerGUI implements ActionListener
           }
           Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),date);
           c.setPhoneNumber(phoneField.getText());
+          c.setAddress(addressField.getText(),cityField.getText(),zipField.getText());
+          c.setEmail(emailField.getText());
           //System.out.println(acc[accTypeList.getSelectedIndex()]);
           Bank.addCustomer(c);
         }
@@ -279,5 +298,19 @@ public class CustomerGUI implements ActionListener
    private void exitting()
    {
        JOptionPane.showMessageDialog(mainFrame, "You're exitting, goodbye !!","goodbye",JOptionPane.WARNING_MESSAGE);
+   }
+   
+   private boolean emailValidator(String email)
+   {
+       java.util.regex.Matcher m = p.matcher(email);
+       
+          if(m.matches())
+          {
+          return true;
+          }
+          else
+          {
+            return false;
+            }
    }
 }
