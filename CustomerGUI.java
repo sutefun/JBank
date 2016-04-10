@@ -2,6 +2,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+import java.text.*;
 
 /**
  * Write a description of class CustomerGUI here.
@@ -9,7 +11,7 @@ import java.awt.event.*;
  * @author steven susanto
  * @version 10 April 2016
  */
-public class CustomerGUI
+public class CustomerGUI implements ActionListener
 {
    private JFrame mainFrame;
    private Panel topPanel;
@@ -32,8 +34,10 @@ public class CustomerGUI
    
    private Panel fourthPanel;
    private TextField emailField;
-   private TextField dobField;
-   private List accTypeList;
+   private DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+   private JFormattedTextField dobField;
+   private java.awt.List accTypeList;
+   private String[] acc = {"Checking/Overdraft","Line of Credit","Savings","Investment","Other"};
    
     /**
      * Constructor for objects of class CustomerGUI
@@ -69,7 +73,6 @@ public class CustomerGUI
         
         makeTopPanel();
         makeBottomPanel();
-        
         mainFrame.setVisible(true);
     }
     
@@ -90,12 +93,12 @@ public class CustomerGUI
         bottomPanel = new Panel(new BorderLayout());
         makeFourthPanel();
         bottomPanel.add(fourthPanel);
-        accTypeList = new List(5,false);
-        accTypeList.add("Checking/Overdraft");
-        accTypeList.add("Line Of Credit");
-        accTypeList.add("Savings");
-        accTypeList.add("Investment");
-        accTypeList.add("Other");
+        accTypeList = new java.awt.List(5,false);
+        for (int i=0; i <acc.length; i++) 
+        {
+        accTypeList.add(acc[i]);
+        }
+        
         bottomPanel.add(accTypeList,BorderLayout.LINE_END);
         mainFrame.add(bottomPanel);
     }
@@ -106,9 +109,15 @@ public class CustomerGUI
     {
         firstPanel = new Panel(new FlowLayout());
         cancel = new Button("Cancel");
+        cancel.setActionCommand("cancel");
+        cancel.addActionListener(this);
+        
         saveAndReturn = new Button("Save & Return");
-        custIDField = new TextField(""+Bank.getNextID());
-        custIDField.setEditable(false);
+        saveAndReturn.setActionCommand("save");
+        saveAndReturn.addActionListener(this);
+        
+        custIDField = new TextField("");
+        
         lastNameField = new TextField("Last Name");
         lastNameField.setColumns(20);
         lastNameField.addFocusListener(new FocusListener() {
@@ -226,7 +235,9 @@ public class CustomerGUI
         
          });
          
-        dobField = new TextField("DOB");
+        
+        dobField = new JFormattedTextField(format);
+        dobField.setText("DOB - yyyy/mm/dd");
         dobField.setColumns(20);
         dobField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
@@ -239,4 +250,33 @@ public class CustomerGUI
         fourthPanel.add(emailField);
         fourthPanel.add(dobField);
     }
+    
+    public void actionPerformed(ActionEvent e)
+    {
+        String command = e.getActionCommand();
+        Date date = new Date();
+        if(command.equals("cancel"))
+        {
+            exitting();
+            System.exit(0);
+        }
+        else
+        {
+          try{
+          date = format.parse(dobField.getText());
+          }
+          catch(ParseException pe)
+          {
+              
+          }
+          Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),date);
+          System.out.println(acc[accTypeList.getSelectedIndex()]);
+          Bank.addCustomer(c);
+        }
+    }
+    
+   private void exitting()
+   {
+       JOptionPane.showMessageDialog(mainFrame, "You're exitting, goodbye !!","goodbye",JOptionPane.WARNING_MESSAGE);
+   }
 }
