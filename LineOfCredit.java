@@ -64,7 +64,7 @@ public class LineOfCredit extends Checking
         else
         {
             System.out.println("limit");
-            return true;
+            return false;
         }
     }
 }

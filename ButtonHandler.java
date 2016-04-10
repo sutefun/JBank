@@ -27,7 +27,7 @@ public class ButtonHandler implements ActionListener
         String custID  = atmgui.getCustIDTextField().getText();
         double amount  = Double.parseDouble(atmgui.getAmountTextField().getText());
         Customer cust  = Bank.getCustomer(Integer.parseInt(custID));
-        String accType = getSelectedButtonText(atmgui.getButtonGroup());
+        char accType = getSelectedButtonText(atmgui.getButtonGroup());
         if(cust != null)
         {
             if(command.equals("deposit"))
@@ -45,7 +45,7 @@ public class ButtonHandler implements ActionListener
                 }
                 else
                 {
-                 atmgui.getTextArea().setText(custID +" withdraws exceed balance + accType");
+                 atmgui.getTextArea().setText(custID +" withdraws exceed balance " + accType);
                 }
             }
             if(command.equals("exit"))
@@ -56,26 +56,40 @@ public class ButtonHandler implements ActionListener
         }
     }
     
-   private void deposit(Customer cust, String accType, double amount)
+   private void deposit(Customer cust, char accType, double amount)
    {
-       
+       cust.getAccount(accType).deposit(amount);
    }
    
-   private boolean withdraw(Customer cust, String accType, double amount)
+   private boolean withdraw(Customer cust, char accType, double amount)
    {
-       
-       return false;
+       return cust.getAccount(accType).withdraw(amount);
    }
    
-   public String getSelectedButtonText(ButtonGroup buttonGroup) {
+   public char getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
 
             if (button.isSelected()) {
-                return button.getText();
+                if(button.getText().equals("Savings"))
+                {
+                    return 'S';
+                }
+                else if(button.getText().equals("Investment"))
+                {
+                    return 'I';
+                }
+                else if(button.getText().equals("Line Of Credit"))
+                {
+                    return 'L';
+                }
+                else if(button.getText().equals("Overdraft"))
+                {
+                    return 'O';
+                }
             }
         }
 
-        return null;
+        return '\0';
     }
 }
