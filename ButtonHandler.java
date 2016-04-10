@@ -48,12 +48,8 @@ public class ButtonHandler implements ActionListener
                 {
                  atmgui.getTextArea().setText(custName +" " +custID +" withdraws exceed balance " + accType);
                  
-                 try{
                      warning();
-                    }
-                 catch(InterruptedException ie)
-                    {
-                     }
+                    
                      
                 }
             }
@@ -118,7 +114,7 @@ public class ButtonHandler implements ActionListener
         return '\0';
     }
     
-   private void warning() throws InterruptedException
+   private void warning()
    {
        Frame warningFrame = new Frame();
        warningFrame.setSize(300,100);
@@ -127,7 +123,12 @@ public class ButtonHandler implements ActionListener
        msgLabel.setAlignment(Label.CENTER);
        msgLabel.setSize(100,100);
        warningFrame.add(msgLabel);
+        warningFrame.addWindowListener(new WindowHandler() {
+         public void windowClosing(WindowEvent windowEvent){
+            
+            System.exit(0);     //keluar dari program
+        }        
+        });  
        warningFrame.setVisible(true);
-       Thread.sleep(2000);
    }
 }
