@@ -1,3 +1,5 @@
+import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -9,6 +11,7 @@ import java.awt.event.*;
  */
 public class CustomerGUI
 {
+   private JFrame mainFrame;
    private Panel firstPanel;
    private Button cancel;
    private Button saveAndReturn;
@@ -28,7 +31,7 @@ public class CustomerGUI
    private Panel fourthPanel;
    private TextField emailField;
    private TextField dobField;
-   private TextArea accTypeField;
+   private List accTypeList;
    
     /**
      * Constructor for objects of class CustomerGUI
@@ -40,17 +43,44 @@ public class CustomerGUI
 
     private void buildGUI()
     {
-    
+        mainFrame = new JFrame("Customer GUi");
+        mainFrame.setLayout(new GridLayout(4,1));
+        mainFrame.setSize(700,400);
+        mainFrame.setResizable(false);
+        mainFrame.addWindowListener(new WindowHandler() {
+         public void windowClosing(WindowEvent windowEvent){
+            try{
+             WindowHandler.showExit();                             //akan memanggil method showExit yang throws InterruptedException, harus di catch
+            }
+            catch(InterruptedException e)
+            {
+             
+            }
+            System.exit(0);     //keluar dari program
+        }        
+        });  
+        
+        makeFirstPanel();
+        makeSecondPanel();
+        makeThirdPanel();
+        makeFourthPanel();
+        
+        mainFrame.add(firstPanel);
+        mainFrame.add(secondPanel);
+        mainFrame.add(thirdPanel);
+        mainFrame.add(fourthPanel);
+        mainFrame.setVisible(true);
     }
     
     private void makeFirstPanel()
     {
-        firstPanel = new Panel();
+        firstPanel = new Panel(new FlowLayout());
         cancel = new Button("Cancel");
         saveAndReturn = new Button("Save & Return");
-        custIDField = new TextField(Bank.getNextID());
+        custIDField = new TextField(""+Bank.getNextID());
         custIDField.setEditable(false);
         lastNameField = new TextField("Last Name");
+        lastNameField.setColumns(20);
         lastNameField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
             lastNameField.setText("");
@@ -68,8 +98,9 @@ public class CustomerGUI
     
      private void makeSecondPanel()
     {
-        secondPanel = new Panel();
+        secondPanel = new Panel(new FlowLayout());
         firstNameField = new TextField("First Name");
+        firstNameField.setColumns(20);
         firstNameField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
             firstNameField.setText("");
@@ -79,6 +110,7 @@ public class CustomerGUI
          });
          
         addressField = new TextField("Address");
+        addressField.setColumns(30);
         addressField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
             addressField.setText("");
@@ -94,8 +126,9 @@ public class CustomerGUI
      private void makeThirdPanel()
     {
     
-        thirdPanel = new Panel();
+        thirdPanel = new Panel(new FlowLayout());
         cityField = new TextField("City");
+        cityField.setColumns(30);
         cityField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
             cityField.setText("");
@@ -105,6 +138,7 @@ public class CustomerGUI
          });
          
         stateField = new TextField("State");
+        stateField.setColumns(10);
         stateField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
             stateField.setText("");
@@ -114,6 +148,7 @@ public class CustomerGUI
          });
          
         zipField = new TextField("Zip Code");
+        zipField.setColumns(15);
         zipField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
             zipField.setText("");
@@ -123,6 +158,7 @@ public class CustomerGUI
          }); 
         
         phoneField = new TextField("Phone");
+        phoneField.setColumns(25);
         phoneField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
             phoneField.setText("");
@@ -140,9 +176,37 @@ public class CustomerGUI
     
      private void makeFourthPanel()
     {
-        fourthPanel = new Panel();
+        fourthPanel = new Panel(new FlowLayout());
+        emailField = new TextField("Email Address");
+        emailField.setColumns(40);
+        emailField.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+            emailField.setText("");
+            }
+            public void focusLost(FocusEvent e){}
         
+         });
+         
+        dobField = new TextField("DOB");
+        dobField.setColumns(20);
+        dobField.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+            dobField.setText("");
+            }
+            public void focusLost(FocusEvent e){}
         
+         });
+         
+        accTypeList = new List(5,false);
+        accTypeList.setSize(20,8);
+        accTypeList.add("Checking/Overdraft");
+        accTypeList.add("Line Of Credit");
+        accTypeList.add("Savings");
+        accTypeList.add("Investment");
+        accTypeList.add("Other");
         
+        fourthPanel.add(emailField);
+        fourthPanel.add(dobField);
+        fourthPanel.add(accTypeList);
     }
 }

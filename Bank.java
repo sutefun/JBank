@@ -25,19 +25,17 @@ public class Bank
     public  static final  String BANK_NAME             ="JBANK";
     private static int    numOfCurrentCustomers=0;
     
-      static
+  /*    static
       {
         System.out.println("masukkan MAX_NUM_OF_CUSTOMERS");
         Scanner in = new Scanner(System.in);
         MAX_NUM_OF_CUSTOMERS = in.nextInt();
       }
-    private static final int    MAX_NUM_OF_CUSTOMERS;
+      
+   */
+    private static final int    MAX_NUM_OF_CUSTOMERS=20;
     private static Customer customer[] = new Customer[MAX_NUM_OF_CUSTOMERS];
     
-       static
-       {
-        System.out.println(MAX_NUM_OF_CUSTOMERS);
-        }
     
     private Bank()
     {
