@@ -121,7 +121,16 @@ public class CustomerGUI implements ActionListener
         saveAndReturn.setActionCommand("save");
         saveAndReturn.addActionListener(this);
         
-        custIDField = new TextField("");
+        custIDField = new TextField("Cust ID");
+        custIDField.setColumns(10);
+        custIDField.addFocusListener(new FocusListener() {
+            public void focusGained(FocusEvent e) {
+            custIDField.setText("");
+            }
+            public void focusLost(FocusEvent e){}
+        
+         });
+        
         
         lastNameField = new TextField("Last Name");
         lastNameField.setColumns(20);
