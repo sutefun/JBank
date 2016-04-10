@@ -30,18 +30,21 @@ public class ButtonHandler implements ActionListener
    public void actionPerformed(ActionEvent e)
     {
         String command = e.getActionCommand();
+        
+        if(command.equals("exit"))
+            {
+                atmgui.getTextArea().setBackground(Color.WHITE);
+                atmgui.getTextArea().setText("exit ");
+                exitting();
+                System.exit(0);
+            } 
+        
         String custID  = atmgui.getCustIDTextField().getText();
         double amount  = Double.parseDouble(atmgui.getAmountTextField().getText());
         Customer cust  = Bank.getCustomer(Integer.parseInt(custID));
         String custName = cust.getCustName();
         char accType = getSelectedButtonText(atmgui.getButtonGroup());
-        if(command.equals("exit"))
-            {
-                atmgui.getTextArea().setBackground(Color.WHITE);
-                atmgui.getTextArea().setText("exit "  + accType);
-                exitting();
-                System.exit(0);
-            } 
+        
         if(cust != null)
         {
             if(command.equals("deposit"))
