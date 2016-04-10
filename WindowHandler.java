@@ -23,7 +23,7 @@ public class WindowHandler extends  WindowAdapter
     {
          
           Frame closingMessageFrame = new Frame();
-          closingMessageFrame.setSize(300,200);;
+          closingMessageFrame.setSize(300,200);
           closingMessageFrame.setTitle("ATMGUI");    
           Label msgLabel = new Label("You're exitting, goodbye!!");
           msgLabel.setAlignment(Label.CENTER);

@@ -9,4 +9,6 @@ comment3.params=cust\ accType\ amount
 comment3.target=boolean\ withdraw(Customer,\ char,\ double)
 comment4.params=buttonGroup
 comment4.target=char\ getSelectedButtonText(javax.swing.ButtonGroup)
-numComments=5
+comment5.params=
+comment5.target=void\ warning()
+numComments=6

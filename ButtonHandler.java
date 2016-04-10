@@ -46,6 +46,14 @@ public class ButtonHandler implements ActionListener
                 else
                 {
                  atmgui.getTextArea().setText(custID +" withdraws exceed balance " + accType);
+                 
+                 try{
+                     warning();
+                    }
+                 catch(InterruptedException ie)
+                    {
+                     }
+                     
                 }
             }
             if(command.equals("exit"))
@@ -92,4 +100,17 @@ public class ButtonHandler implements ActionListener
 
         return '\0';
     }
+    
+   private void warning() throws InterruptedException
+   {
+       Frame warningFrame = new Frame();
+       warningFrame.setSize(100,100);
+       warningFrame.setTitle("Melebihi saldo balance atau limit");
+       Label msgLabel = new Label("You're exitting, goodbye!!");
+       msgLabel.setAlignment(Label.CENTER);
+       msgLabel.setSize(100,100);
+       warningFrame.add(msgLabel);
+       warningFrame.setVisible(true);
+       Thread.sleep(2000);
+   }
 }
