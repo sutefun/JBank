@@ -13,6 +13,7 @@ public class CustomerGUI
 {
    private JFrame mainFrame;
    private Panel topPanel;
+   private Panel bottomPanel;
    private Panel firstPanel;
    private Button cancel;
    private Button saveAndReturn;
@@ -48,7 +49,7 @@ public class CustomerGUI
     private void buildGUI()
     {
         mainFrame = new JFrame("Customer GUi");
-        mainFrame.setLayout(new GridLayout(4,1));
+        mainFrame.setLayout(new GridLayout(2,1));
         mainFrame.setSize(700,400);
         mainFrame.setResizable(false);
         mainFrame.addWindowListener(new WindowHandler() {
@@ -64,20 +65,40 @@ public class CustomerGUI
         }        
         });  
         
+       
+        
+        makeTopPanel();
+        makeBottomPanel();
+        
+        mainFrame.setVisible(true);
+    }
+    
+    private void makeTopPanel()
+    {
         makeFirstPanel();
         makeSecondPanel();
         makeThirdPanel();
-        makeFourthPanel();
-        
         topPanel = new Panel(new GridLayout(3,1));
         topPanel.add(firstPanel);
         topPanel.add(secondPanel);
         topPanel.add(thirdPanel);
-        mainFrame.add(topPanel);
-        mainFrame.add(fourthPanel);
-        mainFrame.setVisible(true);
+        mainFrame.add(topPanel,BorderLayout.PAGE_START);
     }
     
+    private void makeBottomPanel()
+    {
+        bottomPanel = new Panel(new BorderLayout());
+        makeFourthPanel();
+        bottomPanel.add(fourthPanel);
+        accTypeList = new List(5,false);
+        accTypeList.add("Checking/Overdraft");
+        accTypeList.add("Line Of Credit");
+        accTypeList.add("Savings");
+        accTypeList.add("Investment");
+        accTypeList.add("Other");
+        bottomPanel.add(accTypeList,BorderLayout.LINE_END);
+        mainFrame.add(bottomPanel);
+    }
     /**
      * membuat panel pertama
      */
@@ -214,16 +235,8 @@ public class CustomerGUI
             public void focusLost(FocusEvent e){}
         
          });
-         
-        accTypeList = new List(5,false);
-        accTypeList.add("Checking/Overdraft");
-        accTypeList.add("Line Of Credit");
-        accTypeList.add("Savings");
-        accTypeList.add("Investment");
-        accTypeList.add("Other");
         
         fourthPanel.add(emailField);
         fourthPanel.add(dobField);
-        fourthPanel.add(accTypeList);
     }
 }
