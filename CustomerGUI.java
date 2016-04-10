@@ -270,7 +270,8 @@ public class CustomerGUI implements ActionListener
               
           }
           Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),date);
-          System.out.println(acc[accTypeList.getSelectedIndex()]);
+          c.setPhoneNumber(phoneField.getText());
+          //System.out.println(acc[accTypeList.getSelectedIndex()]);
           Bank.addCustomer(c);
         }
     }
