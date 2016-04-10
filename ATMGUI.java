@@ -188,4 +188,9 @@ public class ATMGUI extends JPanel
    {
        return group;
    }
+   
+   public Frame getMainFrame()
+   {
+       return mainFrame;
+   }
 }

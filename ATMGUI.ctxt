@@ -20,4 +20,6 @@ comment7.params=
 comment7.target=java.awt.TextField\ getAmountTextField()
 comment8.params=
 comment8.target=javax.swing.ButtonGroup\ getButtonGroup()
-numComments=9
+comment9.params=
+comment9.target=java.awt.Frame\ getMainFrame()
+numComments=10

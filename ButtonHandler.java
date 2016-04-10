@@ -49,8 +49,6 @@ public class ButtonHandler implements ActionListener
                  atmgui.getTextArea().setText(custName +" " +custID +" withdraws exceed balance " + accType);
                  
                      warning();
-                    
-                     
                 }
             }
             if(command.equals("exit"))
@@ -116,19 +114,6 @@ public class ButtonHandler implements ActionListener
     
    private void warning()
    {
-       Frame warningFrame = new Frame();
-       warningFrame.setSize(300,100);
-       warningFrame.setTitle("Melebihi saldo balance atau limit");
-       Label msgLabel = new Label("Melebihi saldo balance atau limit!!");
-       msgLabel.setAlignment(Label.CENTER);
-       msgLabel.setSize(100,100);
-       warningFrame.add(msgLabel);
-        warningFrame.addWindowListener(new WindowHandler() {
-         public void windowClosing(WindowEvent windowEvent){
-            
-            System.exit(0);     //keluar dari program
-        }        
-        });  
-       warningFrame.setVisible(true);
+       JOptionPane.showMessageDialog(atmgui.getMainFrame(), "Penarikan melebihi balance saldo","Error !!",JOptionPane.ERROR_MESSAGE);
    }
 }

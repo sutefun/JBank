@@ -11,6 +11,4 @@ comment4.params=buttonGroup
 comment4.target=char\ getSelectedButtonText(javax.swing.ButtonGroup)
 comment5.params=
 comment5.target=void\ warning()
-comment6.params=windowEvent
-comment6.target=void\ windowClosing(java.awt.event.WindowEvent)
-numComments=7
+numComments=6
