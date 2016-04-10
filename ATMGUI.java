@@ -135,7 +135,7 @@ public class ATMGUI extends JPanel
      */
    private void makeBottomPanel()
    {
-       buttonHandler = new ButtonHandler(this);
+        buttonHandler = new ButtonHandler(this);
        //----------membuat setiap button----------//
         depositButton = new Button("Deposit");
         depositButton.setActionCommand("deposit");
@@ -154,11 +154,11 @@ public class ATMGUI extends JPanel
         totalButton.addActionListener(buttonHandler);
         
         //----------membuat buttonPanel dan memasukkan setiap button ke panel----------//
-        buttonPanel   = new Panel(new GridLayout(3,1));
+        buttonPanel   = new Panel(new GridLayout(4,1));
         buttonPanel.add(depositButton);
         buttonPanel.add(withdrawButton);
-        buttonPanel.add(exitButton);
         buttonPanel.add(totalButton);
+        buttonPanel.add(exitButton);
         
         //-----------membuat textArea dan mengatur agar warnanya menjadi abu-abu------//
         infoTextArea = new TextArea("Welcome");

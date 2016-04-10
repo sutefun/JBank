@@ -35,6 +35,13 @@ public class ButtonHandler implements ActionListener
         Customer cust  = Bank.getCustomer(Integer.parseInt(custID));
         String custName = cust.getCustName();
         char accType = getSelectedButtonText(atmgui.getButtonGroup());
+        if(command.equals("exit"))
+            {
+                atmgui.getTextArea().setBackground(Color.WHITE);
+                atmgui.getTextArea().setText("exit "  + accType);
+                exitting();
+                System.exit(0);
+            } 
         if(cust != null)
         {
             if(command.equals("deposit"))
@@ -57,11 +64,7 @@ public class ButtonHandler implements ActionListener
                      warning();
                 }
             }
-            if(command.equals("exit"))
-            {
-                atmgui.getTextArea().setBackground(Color.WHITE);
-                atmgui.getTextArea().setText("sudah exit "  + accType);
-            }   
+              
             if(command.equals("total"))
             {
                 double balance=0;
@@ -133,5 +136,10 @@ public class ButtonHandler implements ActionListener
    private void warning()
    {
        JOptionPane.showMessageDialog(atmgui.getMainFrame(), "Penarikan melebihi balance saldo","Error !!",JOptionPane.ERROR_MESSAGE);
+   }
+   
+   private void exitting()
+   {
+       JOptionPane.showMessageDialog(atmgui.getMainFrame(), "You're exitting, goodbye !!","goodbye",JOptionPane.WARNING_MESSAGE);
    }
 }

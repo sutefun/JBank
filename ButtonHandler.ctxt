@@ -17,4 +17,6 @@ comment4.text=\r\n\ @return\ char\:accType\ -\ melihat\ tombol\ untuk\ tipe\ aku
 comment5.params=
 comment5.target=void\ warning()
 comment5.text=\r\n\ menampilkan\ dialog\ warning\ exceed\ balance\r\n
-numComments=6
+comment6.params=
+comment6.target=void\ exitting()
+numComments=7
