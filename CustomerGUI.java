@@ -12,6 +12,7 @@ import java.awt.event.*;
 public class CustomerGUI
 {
    private JFrame mainFrame;
+   private Panel topPanel;
    private Panel firstPanel;
    private Button cancel;
    private Button saveAndReturn;
@@ -65,9 +66,11 @@ public class CustomerGUI
         makeThirdPanel();
         makeFourthPanel();
         
-        mainFrame.add(firstPanel);
-        mainFrame.add(secondPanel);
-        mainFrame.add(thirdPanel);
+        topPanel = new Panel(new GridLayout(3,1));
+        topPanel.add(firstPanel);
+        topPanel.add(secondPanel);
+        topPanel.add(thirdPanel);
+        mainFrame.add(topPanel);
         mainFrame.add(fourthPanel);
         mainFrame.setVisible(true);
     }
@@ -178,7 +181,7 @@ public class CustomerGUI
     {
         fourthPanel = new Panel(new FlowLayout());
         emailField = new TextField("Email Address");
-        emailField.setColumns(40);
+        emailField.setColumns(25);
         emailField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
             emailField.setText("");
@@ -198,7 +201,6 @@ public class CustomerGUI
          });
          
         accTypeList = new List(5,false);
-        accTypeList.setSize(20,8);
         accTypeList.add("Checking/Overdraft");
         accTypeList.add("Line Of Credit");
         accTypeList.add("Savings");
