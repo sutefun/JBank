@@ -14,7 +14,10 @@ public class Teller
     /**@param belum ada */
     public static void main(String[] args)
     {
-        Customer c = new Customer ("steven","susanto");
+        
+        
+        
+        /*Customer c = new Customer ("steven","susanto");
         c.addAccount(500,'S');
         c.addAccount(1000,'I');
         c.addAccount(1500,'L');
@@ -25,6 +28,10 @@ public class Teller
         System.out.println("saldo Line of credit\t" +c.getAccount('L').getBalance());
         System.out.println("saldo Overdraft protection\t" +c.getAccount('O').getBalance());
         
+        c.getAccount('L').withdraw(1000);
+        System.out.println("saldo Line of credit\t" +c.getAccount('L').getBalance());
+        */
+       
      /*  Customer c = new Customer ("steven","susanto");
        Savings s  = new Savings (c,500);
        System.out.println("nama " +c.getCustomerName());

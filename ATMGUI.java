@@ -30,9 +30,10 @@ public class ATMGUI extends JPanel
    private Button depositButton;
    private Button withdrawButton;
    private Button exitButton;
-   private TextArea welcomeTextArea;
+   private TextArea infoTextArea;
    private ScrollPane vScroll;
    private ScrollPane hScroll;
+   private ButtonHandler buttonHandler;
    
     /**
      * Constructor for objects of class ATMGUI
@@ -117,10 +118,19 @@ public class ATMGUI extends JPanel
      */
    private void makeBottomPanel()
    {
+       buttonHandler = new ButtonHandler(this);
        //----------membuat setiap button----------//
-       depositButton = new Button("Deposit");
+        depositButton = new Button("Deposit");
+        depositButton.setActionCommand("deposit");
+        depositButton.addActionListener(buttonHandler);
+        
         withdrawButton = new Button("Withdraw");
+        withdrawButton.setActionCommand("withdraw");
+        withdrawButton.addActionListener(buttonHandler);
+        
         exitButton     = new Button("Exit");
+        exitButton.setActionCommand("exit");
+        exitButton.addActionListener(buttonHandler);
         
         //----------membuat buttonPanel dan memasukkan setiap button ke panel----------//
         buttonPanel   = new Panel(new GridLayout(3,1));
@@ -129,14 +139,29 @@ public class ATMGUI extends JPanel
         buttonPanel.add(exitButton);
         
         //-----------membuat textArea dan mengatur agar warnanya menjadi abu-abu------//
-        welcomeTextArea = new TextArea("Welcome");
-        welcomeTextArea.setBackground(Color.GRAY);
+        infoTextArea = new TextArea("Welcome");
+        infoTextArea.setBackground(Color.GRAY);
         
         //----------membuat bottomPanel dan memasukkan panel dan komponen bagian bawah-------//
         bottomPanel = new Panel(new BorderLayout());
         bottomPanel.setBackground(Color.GRAY);
-        bottomPanel.add(welcomeTextArea,BorderLayout.CENTER);
+        bottomPanel.add(infoTextArea,BorderLayout.CENTER);
         bottomPanel.add(buttonPanel,BorderLayout.LINE_END);
     
     }
+   
+   public TextArea getTextArea()
+   {
+       return infoTextArea;
+   }
+   
+   public TextField getCustIDTextField()
+   {
+       return enterCustIDTextField;
+   }
+   
+   public TextField getAmountTextField()
+   {
+       return enterAmountHereTextField;
+   }
 }
