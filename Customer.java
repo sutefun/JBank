@@ -7,7 +7,6 @@ import java.text.*;
 public class Customer
 {
     private Account[] accounts = new Account[4];
-    private Savings savings;
     private String  cityAddress;
     private int     CustID;
     private Date    dateOfBirth;
@@ -87,7 +86,6 @@ public class Customer
                if(type =='S' && accounts[i] instanceof Savings && accounts[i] instanceof Investment == false )
                {
                    accounts[i] = null;
-                   savings     = null;
                    numOfAccounts--;
                    return true;
                 }
@@ -227,8 +225,8 @@ public class Customer
         {
             if(type=='S')
             {
-                savings           = new Savings(this,balance);
-                accounts[notUsed] = savings;
+               
+                accounts[notUsed] = new Savings(this,balance);
             }
             if(type=='I')
             {

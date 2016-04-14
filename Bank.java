@@ -195,7 +195,7 @@ public class Bank
         if(numOfCurrentCustomers<MAX_NUM_OF_CUSTOMERS+1)
         {
             Bank.customer[numOfCurrentCustomers-1] = customer;
-            System.out.println("customer ditambahkan");
+            System.out.println("-------BANK : customer ditambahkan----------");
             return true;
         }
         else
@@ -204,16 +204,16 @@ public class Bank
         }
     }
     
-    public static Customer getCustomer(int CustID)
+    public static Customer getCustomer(int custID) throws CustomerNotFound
     {
         for(int i=0;i<numOfCurrentCustomers;i++)
         {
-            if(Bank.customer[i].getCustID()== CustID)
+            if(Bank.customer[i].getCustID()== custID)
             {
                 return Bank.customer[i];
             }
         }
         
-        return null;
+        throw new CustomerNotFound(custID);
     }
 }

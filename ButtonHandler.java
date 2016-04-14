@@ -30,7 +30,7 @@ public class ButtonHandler implements ActionListener
    public void actionPerformed(ActionEvent e)
     {
         String command = e.getActionCommand();
-        
+        Customer cust = null;
         if(command.equals("exit"))
             {
                 atmgui.getTextArea().setBackground(Color.WHITE);
@@ -39,9 +39,15 @@ public class ButtonHandler implements ActionListener
                 System.exit(0);
             } 
         
-        int custID      = Integer.parseInt( atmgui.getCustIDTextField().getText() );
-        double amount   = Double.parseDouble(0+atmgui.getAmountTextField().getText());
-        Customer cust   = Bank.getCustomer(custID);
+        int custID      = Integer.parseInt( atmgui.getCustIDText() );
+        double amount   = Double.parseDouble(0 + atmgui.getAmountText());
+        try{
+            cust   = Bank.getCustomer(custID);
+        }
+        catch(CustomerNotFound cnf)
+        {
+           warning(cnf.getMessage());
+        }
         String custName = cust.getCustName();
         char accType    = getSelectedButtonText(atmgui.getButtonGroup());
         
@@ -54,7 +60,7 @@ public class ButtonHandler implements ActionListener
                     atmgui.getTextArea().setBackground(Color.WHITE);
                     try{
                         deposit(cust,accType,amount);
-                        double bl = Bank.getCustomer(custID).getAccount(accType).getBalance();
+                        double bl = cust.getAccount(accType).getBalance();
                         atmgui.getTextArea().setText(custName +" " +custID +" saves an amount of money " +amount + "\nbalance " + bl );
                     }
                     catch(AccountTypeNotFoundException ee)
@@ -73,7 +79,7 @@ public class ButtonHandler implements ActionListener
                     withdraw(cust,accType,amount);
                         if(accType == 'L')
                         {
-                             LineOfCredit l = (LineOfCredit)Bank.getCustomer(custID).getAccount(accType);
+                             LineOfCredit l = (LineOfCredit)cust.getAccount(accType);
                              double cr      = l.getBalance();
                              double cl      = l.getCreditLeft();
                              atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount +"\nbalance left " + cr + "\ncredit allowable left " + cl);
@@ -81,7 +87,7 @@ public class ButtonHandler implements ActionListener
                         }
                         else
                         {
-                            atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount +"\nbalance left " + Bank.getCustomer(custID).getAccount(accType).getBalance());
+                            atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount +"\nbalance left " + cust.getAccount(accType).getBalance());
                         }
                     }
                     catch(AmountOverDrawnException ee)
@@ -103,37 +109,49 @@ public class ButtonHandler implements ActionListener
             if(command.equals("total"))
             {
                 
-                double balance=0;
+                double balance=0, bl=0;
                 Account account=null;
                 atmgui.getTextArea().setBackground(Color.WHITE);
+                String s = "" , s2;
                
                 try{
                     
-                    balance += cust.getAccount('S').getBalance();
+                    bl = cust.getAccount('S').getBalance();
+                    balance += bl;
+                    s = "\n-balance Savings " + "\t"+ bl;
                     
                 }catch(Exception ee){}
                 
                 try{
                     
-                    balance += cust.getAccount('I').getBalance();
+                    bl = cust.getAccount('I').getBalance();
+                    balance += bl;
+                    s += "\n-balance Investment " + "\t"+ bl;
                     
                 }catch(Exception ee){}
                 
                 try{
                     
-                    balance += cust.getAccount('L').getBalance();
+                    bl = cust.getAccount('L').getBalance();
+                    LineOfCredit l = (LineOfCredit)Bank.getCustomer(custID).getAccount('L');
+                    double cl = l.getCreditLeft();
+                    balance += bl;
+                    s += "\n-balance Line Of Credit " +"\t"+ bl + "\t-|- credit allowable left " + cl;
                     
                 }catch(Exception ee){}
                 
                 try{
                     
-                    balance += cust.getAccount('O').getBalance();
+                    bl = cust.getAccount('O').getBalance();
+                    balance += bl;
+                    s += "\n-balance Overdraft " +"\t"+ bl;
                     
                 }catch(Exception ee){}
                 
                 finally
                 {
-                    atmgui.getTextArea().setText(custName +" " +"Total balance customer "  + balance);
+                    s2 = custName +" " +"Total balance customer "  + balance;
+                    atmgui.getTextArea().setText( s2 + s );
                 }
             }
         }

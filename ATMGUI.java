@@ -181,6 +181,14 @@ public class ATMGUI extends JPanel
    }
    
    /**
+    * @param String:s - untuk set teks area
+    */
+   public void setTextArea(String s)
+   {
+       infoTextArea.setText(s);
+   }
+   
+   /**
     * @return TextField:custIDtextField - aksesor text field cust ID
     */
    public TextField getCustIDTextField()
@@ -188,6 +196,10 @@ public class ATMGUI extends JPanel
        return enterCustIDTextField;
    }
    
+   public String getCustIDText()
+   {
+       return enterCustIDTextField.getText();
+   }
    
    /**
     * @return TextField:amountTextField - aksesor text field amount
@@ -196,6 +208,11 @@ public class ATMGUI extends JPanel
    {
        return enterAmountHereTextField;
    }
+   
+   public String getAmountText()
+   {
+       return enterAmountHereTextField.getText();
+    }
    
    /**
     * @return ButtonGroup:group - aksesor button group pada class ini
