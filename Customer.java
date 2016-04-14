@@ -59,7 +59,7 @@ public class Customer
                {
                    return accounts[i];
                 }
-               if(type =='S' && accounts[i] instanceof Savings && accounts[i] instanceof Investment==false)
+               if(type =='S' && accounts[i] instanceof Savings && accounts[i] instanceof Investment == false )
                {
                    return accounts[i];
                 }
@@ -84,7 +84,7 @@ public class Customer
        {
            if(accounts[i] !=null)
            {
-               if(type =='S' && accounts[i] instanceof Savings)
+               if(type =='S' && accounts[i] instanceof Savings && accounts[i] instanceof Investment == false )
                {
                    accounts[i] = null;
                    savings     = null;
@@ -204,7 +204,7 @@ public class Customer
             }
             else if(accounts[i] != null)
             {
-                if(type =='S' && accounts[i] instanceof Savings)
+                if(type =='S' && accounts[i] instanceof Savings && accounts[i] instanceof Investment == false )
                {
                    throw new AccountTypeAlreadyExistsException('S');
                 }
@@ -244,7 +244,7 @@ public class Customer
                     accounts[notUsed] = new OverDraftProtection(this,balance,(Savings)getAccount('S'));
                 }
             }
-            catch(Exception e)
+            catch(AccountTypeNotFoundException e)
             {
                 System.out.println(e.getMessage() + ", can't create OverDraft Protect !!");
             }

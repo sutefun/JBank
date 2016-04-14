@@ -1,6 +1,8 @@
 #BlueJ class context
 comment0.params=acc
 comment0.target=AmountOverDrawnException(Account)
-comment1.params=
-comment1.target=java.lang.String\ getMessage()
-numComments=2
+comment1.params=acc\ i
+comment1.target=AmountOverDrawnException(Account,\ double)
+comment2.params=
+comment2.target=java.lang.String\ getMessage()
+numComments=3

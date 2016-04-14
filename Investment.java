@@ -84,7 +84,10 @@ public final class Investment extends Savings
         {
             balance -= (amount*1.2);
         }
-        
+        else
+        {
+            throw new AmountOverDrawnException(this, amount*1.2);
+        }
     }
 
 }

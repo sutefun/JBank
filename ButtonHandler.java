@@ -54,13 +54,15 @@ public class ButtonHandler implements ActionListener
                     atmgui.getTextArea().setBackground(Color.WHITE);
                     try{
                         deposit(cust,accType,amount);
+                        double bl = Bank.getCustomer(custID).getAccount(accType).getBalance();
+                        atmgui.getTextArea().setText(custName +" " +custID +" saves an amount of money " +amount + "\nbalance " + bl );
                     }
                     catch(AccountTypeNotFoundException ee)
                     {
                         atmgui.getTextArea().setText(custName +" " +custID +" does not have " + accType);
                         warning(ee.getMessage());
                     }
-                    atmgui.getTextArea().setText(custName +" " +custID +" saves an amount of money " +amount);
+                    
                 }
               
                 if(command.equals("withdraw"))
@@ -69,8 +71,18 @@ public class ButtonHandler implements ActionListener
                     
                     try{
                     withdraw(cust,accType,amount);
-                    
-                    atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount);
+                        if(accType == 'L')
+                        {
+                             LineOfCredit l = (LineOfCredit)Bank.getCustomer(custID).getAccount(accType);
+                             double cr      = l.getBalance();
+                             double cl      = l.getCreditLeft();
+                             atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount +"\nbalance left " + cr + "\ncredit allowable left " + cl);
+                        
+                        }
+                        else
+                        {
+                            atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount +"\nbalance left " + Bank.getCustomer(custID).getAccount(accType).getBalance());
+                        }
                     }
                     catch(AmountOverDrawnException ee)
                     {

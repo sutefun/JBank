@@ -55,7 +55,7 @@ public  abstract class Account
     /**@return true,false   , true bila jumlah uang yang ditarik tidak 
      * menyebabkan balance menjadi negatir  
      */
-    public abstract void withdraw(double amount)  throws AmountOverDrawnException;
+    public abstract void withdraw(double amount) throws AmountOverDrawnException;
     
     
     /**

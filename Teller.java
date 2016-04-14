@@ -21,130 +21,7 @@ public class Teller
         print4akun(c);
         Bank.addCustomer(c);
         ATMGUI atmgui = new ATMGUI();
-       
-     /*  Customer c = new Customer ("steven","susanto");
-       Savings s  = new Savings (c,500);
-       System.out.println("nama " +c.getCustomerName());
-       s.addDailyInterest(280);
-       System.out.println("balance " +s.getBalance());
-       */
       
-     /*  Customer c = new Customer ("steven","susanto");
-       Investment i  = new Investment (c,1000,12);
-       System.out.println("nama " +c.getCustomerName());
-       i.addDailyInterest(365);
-       System.out.println("balance " +i.getBalance());
-      */
-     
-      /*  Customer c = new Customer ("steven" , "susanto");
-        Savings s  = new Savings (c,500);
-        OverDraftProtection o = new OverDraftProtection (c,1500,s);
-        System.out.println("Saldo awal ODP " + o.getBalance());
-        o.withdraw(1000);
-        System.out.println("Saldo ODP setelah penarikan 1000 " + o.getBalance());
-        o.withdraw(800);
-        System.out.println("Saldo ODP setelah penarikan 800 " + o.getBalance());
-        System.out.println("Saldo savings " +s.getBalance());
-     */
-    /*
-        Customer c = new Customer ("steven" , "susanto");
-        LineOfCredit l = new LineOfCredit(c,3000,1000);
-        System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
-        l.withdraw(1000);
-        l.feeAssessment();
-         System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
-         l.withdraw(1000);
-        l.feeAssessment();
-         System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
-        l.withdraw(1000);
-        l.feeAssessment();
-        System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
-         l.withdraw(1000);
-        l.feeAssessment();
-        System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
-         l.withdraw(1000);
-        l.feeAssessment();
-         System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + "monthlyFee " +l.getMonthlyFee());
-        l.withdraw(1000);
-        l.feeAssessment();
-        System.out.println("balance " +l.getBalance() +" creditBalance " +l.getCreditBalance() + " monthlyFee " +l.getMonthlyFee());
-        */
-        
-        /*
-        Account saving      = new Account('S',1000);
-        Account invest      = new Account('I',1000);
-        Account creditLine  = new Account('L',500);
-        
-        //-------------------------perhitungan bunga saving-----------------------//
-        BigDecimal savingBalance = new BigDecimal(saving.getBalance());
-        BigDecimal n             = new BigDecimal(360.0);
-        BigDecimal t             = new BigDecimal(1.0);
-        BigDecimal r             = new BigDecimal(.03);
-       
-        BigDecimal f1            = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
-        BigDecimal f2            = n.multiply(t); 
-        BigDecimal f3            = new BigDecimal(Math.pow(f1.doubleValue(),f2.doubleValue()));
-        saving.setBalance(savingBalance.multiply(f3).doubleValue());
-        System.out.println("saving setelah 12 bulan\t" +saving.getBalance());
-        
-        //--------------------perhitungan bunga investment <6 bulan------------------//
-        BigDecimal investBalance = new BigDecimal(invest.getBalance());
-        r                        = BigDecimal.valueOf(.05);
-        f1                       = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
-        t                        = BigDecimal.valueOf(0.5);
-        f2                       = n.multiply(t);
-        f3                       = new BigDecimal(Math.pow(f1.doubleValue(),f2.doubleValue()));
-        invest.setBalance(investBalance.multiply(f3).doubleValue());
-        
-        //-----------perhitungan bunga investment >6bulan-----------//
-        investBalance = new BigDecimal(invest.getBalance());
-        r             = BigDecimal.valueOf(.06);
-        f1            = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
-        t             = BigDecimal.valueOf(0.5);
-        f2            = n.multiply(t);
-        f3            = new BigDecimal(Math.pow(f1.doubleValue(),f2.doubleValue()));
-        invest.setBalance(investBalance.multiply(f3).doubleValue());
-        System.out.println("invest setelah 12 bulan\t" +invest.getBalance());
-        
-        //-----------------------perhitungan bunga kredit----------------//
-        double     withdrawMoney = 1500;
-        BigDecimal creditBalance = new BigDecimal(creditLine.getBalance());
-        r                        = BigDecimal.valueOf(0.18);
-        f1                       = r.divide(n,20,BigDecimal.ROUND_HALF_UP).add(BigDecimal.ONE);
-        t                        = BigDecimal.ONE;
-        f2                       = n.multiply(t);
-        f3                       = new BigDecimal(Math.pow(f1.doubleValue(),f2.doubleValue()));
-        
-        if(withdrawMoney>saving.getBalance())
-        {
-            System.out.println("withdraw\t" +withdrawMoney);
-            double  credit = withdrawMoney-saving.getBalance();
-            boolean tes = creditLine.withdraw(credit);
-            if(tes==true)
-            {
-                saving.setBalance(0);
-                System.out.println("saving\t 0");
-                BigDecimal creditPlusInterest = new BigDecimal(credit);
-                creditPlusInterest.multiply(f3);
-                System.out.println("utang total\t" +creditPlusInterest.doubleValue());
-            }
-            else
-            {
-                System.out.println("withdraw melebihi batas kredit");
-            }
-            
-            
-        }
-        else
-        {
-            saving.withdraw(withdrawMoney);
-            System.out.println("saving\t" +saving.getBalance());
-        }
-       
-        */
-       
-       /////////////////////////////////////////////////////////////////////////////////////////////////////
-       
         /*  setStartTime(9,0);
        setCloseTime(17,0);
        String fname,lname,telpon,indikator;
@@ -260,13 +137,13 @@ public class Teller
     
     static private void buat4akun(Customer c)
     {
-        try{
+       /* try{
             c.addAccount(500,'S');
         }
         catch(AccountTypeAlreadyExistsException e)
         {
             System.out.println(e.getMessage());
-        }
+        }*/
         
         try{
             c.addAccount(1000,'I');

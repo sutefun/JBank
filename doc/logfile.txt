@@ -23,10 +23,13 @@ UTF-8
 C:\Program Files (x86)\BlueJ\lib\bjdoclet.jar
 -doclet
 bluej.doclet.doclets.formats.html.HtmlDoclet
-C:\Users\wow\Documents\GitHub\JBank\CustomerGUI.java
+C:\Users\wow\Documents\GitHub\JBank\AmountOverDrawnException.java
 <---- end of javadoc command ---->
-Loading source file C:\Users\wow\Documents\GitHub\JBank\CustomerGUI.java...
-C:\Users\wow\Documents\GitHub\JBank\CustomerGUI.java:17: error: ';' expected
-   private Button save&return;
-                      ^
-1 error
+Loading source file C:\Users\wow\Documents\GitHub\JBank\AmountOverDrawnException.java...
+C:\Users\wow\Documents\GitHub\JBank\AmountOverDrawnException.java:10: error: ';' expected
+    int j-0;
+         ^
+C:\Users\wow\Documents\GitHub\JBank\AmountOverDrawnException.java:38: error: 'else' without 'if'
+        else if(account instanceof Savings)
+        ^
+2 errors

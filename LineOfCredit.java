@@ -30,6 +30,11 @@ public class LineOfCredit extends Checking
         return creditLimit;
     }
     
+    public double getCreditLeft()
+    {
+        return creditBalance + creditLimit;
+    }
+    
     public void setCreditBalance(double amount)
     {
         creditBalance = amount;
@@ -51,13 +56,15 @@ public class LineOfCredit extends Checking
     
     public void withdraw(double amount) throws AmountOverDrawnException
     {
-        if(amount <= balance)
+        if(amount <= balance) //bila amount di bawah balance, langsung tarik
         {
             balance -= amount;
         }
-        else if(creditLimit + creditBalance >0)
-        {
-            creditBalance -= amount;
+        else if(amount > balance && amount-balance <= creditLimit + creditBalance)
+        {  // bila amount melebihi balance, tetapi selisihnya tidak melebihi credit limit dikurangi credit balance
+            creditBalance -= (amount - balance);
+            balance = 0;
+            
         }
         else
         {
