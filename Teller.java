@@ -9,8 +9,6 @@ import java.math.*;
 
 public class Teller
 {
-    
-    
     /**@param belum ada */
     public static void main(String[] args)
     {
@@ -18,144 +16,10 @@ public class Teller
         
         
         Customer c = new Customer ("steven","susanto");
-       /* try{
-            c.addAccount(500,'S');
-        }
-        catch(AccountTypeAlreadyExistsException e)
-        {
-            System.out.println(e.getMessage());
-        }*/
-        
-        try{
-            c.addAccount(1000,'I');
-        }
-        catch(AccountTypeAlreadyExistsException e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        try{
-            c.addAccount(1500,'L');
-        }
-        catch(AccountTypeAlreadyExistsException e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        try{
-            c.addAccount(2000,'O');
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
+        buat4akun(c);
         System.out.println("nama\t" +c.getCustName());
-        
-        try{
-            System.out.println("saldo saving\t" +c.getAccount('S').getBalance());
-        
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        try{
-            System.out.println("saldo investment\t" +c.getAccount('I').getBalance());
-        
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        try{
-            System.out.println("saldo Line of credit\t" +c.getAccount('L').getBalance());
-        
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
-       /* try{
-            System.out.println("saldo Overdraft protection\t" +c.getAccount('O').getBalance());
-       
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        */
-        
-         Bank.addCustomer(c);
-         
-        try
-        {
-        System.out.println("percobaan penarikan saving 1000");
-        c.getAccount('S').withdraw(1000);
-        
-        }
-        catch(Exception e)
-        {
-            
-            System.out.println(e.getMessage());
-        }
-        try
-        {
-        System.out.println("percobaan penarikan Investment 2000");
-        c.getAccount('I').withdraw(2000);
-        
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        try
-        {
-             System.out.println("percobaan penarikan Overdraft 2000");
-        c.getAccount('O').withdraw(2000);
-        
-        }
-        catch(Exception e)
-        {
-             System.out.println("percobaan penarikan Overdraft 2000");
-            System.out.println(e.getMessage());
-        }
-        
-        
-        
-        try{
-            System.out.println("saldo saving\t" +c.getAccount('S').getBalance());
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        try{
-            c.addAccount(1000,'I');
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        try{
-            c.addAccount(1500,'L');
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        
-        try{
-            c.addAccount(2000,'O');
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
+        print4akun(c);
+        Bank.addCustomer(c);
         ATMGUI atmgui = new ATMGUI();
        
      /*  Customer c = new Customer ("steven","susanto");
@@ -394,5 +258,78 @@ public class Teller
         return Bank.getCloseTime();
     }
     
+    static private void buat4akun(Customer c)
+    {
+        try{
+            c.addAccount(500,'S');
+        }
+        catch(AccountTypeAlreadyExistsException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(1000,'I');
+        }
+        catch(AccountTypeAlreadyExistsException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(1500,'L');
+        }
+        catch(AccountTypeAlreadyExistsException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(2000,'O');
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
     
+    static private void print4akun(Customer c)
+    {
+        
+        try{
+            System.out.println("saldo saving\t" +c.getAccount('S').getBalance());
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            System.out.println("saldo investment\t" +c.getAccount('I').getBalance());
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            System.out.println("saldo Line of credit\t" +c.getAccount('L').getBalance());
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+       try{
+            System.out.println("saldo Overdraft protection\t" +c.getAccount('O').getBalance());
+       
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
 }

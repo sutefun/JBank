@@ -40,58 +40,53 @@ public class ButtonHandler implements ActionListener
             } 
         
         int custID      = Integer.parseInt( atmgui.getCustIDTextField().getText() );
-        double amount   = Double.parseDouble(atmgui.getAmountTextField().getText());
+        double amount   = Double.parseDouble(0+atmgui.getAmountTextField().getText());
         Customer cust   = Bank.getCustomer(custID);
         String custName = cust.getCustName();
         char accType    = getSelectedButtonText(atmgui.getButtonGroup());
         
         if(cust != null)
         {
-            if(command.equals("deposit"))
+            if(accType != '\0')
             {
-                atmgui.getTextArea().setBackground(Color.WHITE);
-                deposit(cust,accType,amount);
-                atmgui.getTextArea().setText(custName +" " +custID +" saves an amount of money " +amount);
+                if(command.equals("deposit"))
+                {
+                    atmgui.getTextArea().setBackground(Color.WHITE);
+                    try{
+                        deposit(cust,accType,amount);
+                    }
+                    catch(AccountTypeNotFoundException ee)
+                    {
+                        atmgui.getTextArea().setText(custName +" " +custID +" does not have " + accType);
+                        warning(ee.getMessage());
+                    }
+                    atmgui.getTextArea().setText(custName +" " +custID +" saves an amount of money " +amount);
+                }
+              
+                if(command.equals("withdraw"))
+                {
+                    atmgui.getTextArea().setBackground(Color.WHITE);
+                    
+                    try{
+                    withdraw(cust,accType,amount);
+                    
+                    atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount);
+                    }
+                    catch(AmountOverDrawnException ee)
+                    {
+                     atmgui.getTextArea().setText(custName +" " +custID +" withdraws exceed balance " + accType);
+                     
+                         warning(ee.getMessage());
+                    }
+                    catch(AccountTypeNotFoundException ae)
+                    {
+                        atmgui.getTextArea().setText(custName +" " +custID +" does not have " + accType);
+                     
+                        warning(ae.getMessage());
+                    }
+                      
+                }
             }
-           /* if(command.equals("withdraw"))
-            {
-                atmgui.getTextArea().setBackground(Color.WHITE);
-                if(withdraw(cust,accType,amount))
-                {
-                atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount);
-                }
-                else
-                {
-                 atmgui.getTextArea().setText(custName +" " +custID +" withdraws exceed balance " + accType);
-                 
-                     warning();
-                }
-            }*/
-            
-            if(command.equals("withdraw"))
-            {
-                atmgui.getTextArea().setBackground(Color.WHITE);
-                
-                try{
-                withdraw(cust,accType,amount);
-                
-                atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount);
-                }
-                catch(AmountOverDrawnException ee)
-                {
-                 atmgui.getTextArea().setText(custName +" " +custID +" withdraws exceed balance " + accType);
-                 
-                     warning(ee.getMessage());
-                }
-                catch(AccountTypeNotFoundException ae)
-                {
-                    atmgui.getTextArea().setText(custName +" " +custID +" does not have " + accType);
-                 
-                    warning(ae.getMessage());
-                }
-                  
-            }
-            
               
             if(command.equals("total"))
             {
@@ -102,18 +97,31 @@ public class ButtonHandler implements ActionListener
                
                 try{
                     
-                account = cust.getAccount('S');
-                if(account !=null){balance += account.getBalance();}
-                account = cust.getAccount('I');
-                if(account !=null){balance += account.getBalance();}
-                account = cust.getAccount('L');
-                if(account !=null){balance += account.getBalance();}
-                account = cust.getAccount('O');
-                if(account !=null){balance += account.getBalance();}
-                atmgui.getTextArea().setText(custName +" " +"Total balance customer "  + balance);
-                } 
-                catch(Exception ee)
+                    balance += cust.getAccount('S').getBalance();
+                    
+                }catch(Exception ee){}
+                
+                try{
+                    
+                    balance += cust.getAccount('I').getBalance();
+                    
+                }catch(Exception ee){}
+                
+                try{
+                    
+                    balance += cust.getAccount('L').getBalance();
+                    
+                }catch(Exception ee){}
+                
+                try{
+                    
+                    balance += cust.getAccount('O').getBalance();
+                    
+                }catch(Exception ee){}
+                
+                finally
                 {
+                    atmgui.getTextArea().setText(custName +" " +"Total balance customer "  + balance);
                 }
             }
         }
@@ -122,15 +130,11 @@ public class ButtonHandler implements ActionListener
    /**
     * untuk menyimpan dana
     */
-   private void deposit(Customer cust, char accType, double amount)
+   private void deposit(Customer cust, char accType, double amount) throws AccountTypeNotFoundException
    {
-       try{
+       
        cust.getAccount(accType).deposit(amount);
-        }
-        catch(Exception e)
-        {
-            
-        }
+        
    }
    
    /**
