@@ -39,11 +39,11 @@ public class ButtonHandler implements ActionListener
                 System.exit(0);
             } 
         
-        String custID  = atmgui.getCustIDTextField().getText();
-        double amount  = Double.parseDouble(atmgui.getAmountTextField().getText());
-        Customer cust  = Bank.getCustomer(Integer.parseInt(custID));
+        int custID      = Integer.parseInt( atmgui.getCustIDTextField().getText() );
+        double amount   = Double.parseDouble(atmgui.getAmountTextField().getText());
+        Customer cust   = Bank.getCustomer(custID);
         String custName = cust.getCustName();
-        char accType = getSelectedButtonText(atmgui.getButtonGroup());
+        char accType    = getSelectedButtonText(atmgui.getButtonGroup());
         
         if(cust != null)
         {
@@ -53,7 +53,7 @@ public class ButtonHandler implements ActionListener
                 deposit(cust,accType,amount);
                 atmgui.getTextArea().setText(custName +" " +custID +" saves an amount of money " +amount);
             }
-            if(command.equals("withdraw"))
+           /* if(command.equals("withdraw"))
             {
                 atmgui.getTextArea().setBackground(Color.WHITE);
                 if(withdraw(cust,accType,amount))
@@ -66,7 +66,32 @@ public class ButtonHandler implements ActionListener
                  
                      warning();
                 }
+            }*/
+            
+            if(command.equals("withdraw"))
+            {
+                atmgui.getTextArea().setBackground(Color.WHITE);
+                
+                try{
+                withdraw(cust,accType,amount);
+                
+                atmgui.getTextArea().setText(custName +" " +custID +" withdraws an amount of money " +amount);
+                }
+                catch(AmountOverDrawnException ee)
+                {
+                 atmgui.getTextArea().setText(custName +" " +custID +" withdraws exceed balance " + accType);
+                 
+                     warning(ee.getMessage());
+                }
+                catch(AccountTypeNotFoundException ae)
+                {
+                    atmgui.getTextArea().setText(custName +" " +custID +" does not have " + accType);
+                 
+                    warning(ae.getMessage());
+                }
+                  
             }
+            
               
             if(command.equals("total"))
             {
@@ -103,12 +128,14 @@ public class ButtonHandler implements ActionListener
        cust.getAccount(accType).deposit(amount);
         }
         catch(Exception e)
-        {}
+        {
+            
+        }
    }
    
    /**
     * @return boolean - true bila withdraw tidak melebihi balance pada akun tertentu
-    */
+    *
    private boolean withdraw(Customer cust, char accType, double amount)
    {
        try
@@ -121,7 +148,15 @@ public class ButtonHandler implements ActionListener
            return false;
        }
    }
+   */
    
+  private void withdraw(Customer cust, char accType, double amount) throws AmountOverDrawnException , AccountTypeNotFoundException
+   {
+       
+           cust.getAccount(accType).withdraw(amount);
+        
+   }
+  
    /**
     * @return char:accType - melihat tombol untuk tipe akun mana yang dipilih
     */
@@ -156,9 +191,9 @@ public class ButtonHandler implements ActionListener
    /**
     * menampilkan dialog warning exceed balance
     */
-   private void warning()
+   private void warning(String s)
    {
-       JOptionPane.showMessageDialog(atmgui.getMainFrame(), "Penarikan melebihi balance saldo","Error !!",JOptionPane.ERROR_MESSAGE);
+       JOptionPane.showMessageDialog(atmgui.getMainFrame(),s,"Error !!",JOptionPane.ERROR_MESSAGE);
    }
    
    private void exitting()

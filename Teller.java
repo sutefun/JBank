@@ -18,13 +18,13 @@ public class Teller
         
         
         Customer c = new Customer ("steven","susanto");
-        try{
+       /* try{
             c.addAccount(500,'S');
         }
         catch(AccountTypeAlreadyExistsException e)
         {
             System.out.println(e.getMessage());
-        }
+        }*/
         
         try{
             c.addAccount(1000,'I');
@@ -78,7 +78,7 @@ public class Teller
             System.out.println(e.getMessage());
         }
         
-        try{
+       /* try{
             System.out.println("saldo Overdraft protection\t" +c.getAccount('O').getBalance());
        
         }
@@ -86,6 +86,8 @@ public class Teller
         {
             System.out.println(e.getMessage());
         }
+        */
+        
          Bank.addCustomer(c);
          
         try
@@ -154,7 +156,7 @@ public class Teller
         {
             System.out.println(e.getMessage());
         }
-       // ATMGUI atmgui = new ATMGUI();
+        ATMGUI atmgui = new ATMGUI();
        
      /*  Customer c = new Customer ("steven","susanto");
        Savings s  = new Savings (c,500);

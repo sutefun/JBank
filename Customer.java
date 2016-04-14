@@ -55,14 +55,15 @@ public class Customer
        {
            if(accounts[i] !=null)
            {
-               if(type =='S' && accounts[i] instanceof Savings)
-               {
-                   return accounts[i];
-                }
                if(type =='I' && accounts[i] instanceof Investment)
                {
                    return accounts[i];
                 }
+               if(type =='S' && accounts[i] instanceof Savings && accounts[i] instanceof Investment==false)
+               {
+                   return accounts[i];
+                }
+               
                if(type =='L' && accounts[i] instanceof LineOfCredit)
                {
                    return accounts[i];
