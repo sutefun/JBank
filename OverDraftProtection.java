@@ -24,23 +24,21 @@ public class OverDraftProtection extends Checking
         
     }
     
-    public boolean withdraw(double amount)
+    public void withdraw(double amount)  throws AmountOverDrawnException
     {
         if(amount > balance + savingsAccount.getBalance() - 10)
         {
-            return false;
+             throw new AmountOverDrawnException(this);
         }
         else if(amount > balance)
         { 
             savingsAccount.withdraw(amount - balance);
             balance = 0;
             feeAssessment();
-            return true;
         }
         else
         {
             balance -= amount;
-            return true;
         }
     }
 }

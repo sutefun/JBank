@@ -49,22 +49,19 @@ public class LineOfCredit extends Checking
         monthlyFee     = amt - deficit;
     }
     
-    public boolean withdraw(double amount)
+    public void withdraw(double amount) throws AmountOverDrawnException
     {
         if(amount <= balance)
         {
             balance -= amount;
-            return true;
         }
         else if(creditLimit + creditBalance >0)
         {
             creditBalance -= amount;
-            return true;
         }
         else
         {
-            System.out.println("limit");
-            return false;
+            throw new AmountOverDrawnException(this);
         }
     }
 }

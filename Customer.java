@@ -49,7 +49,7 @@ public class Customer
        return streetAddress+','+cityAddress+','+zipOrPostalCode;   
     }
    /**@return accounts */
-   public Account getAccount(char type)
+   public Account getAccount(char type)  throws AccountTypeNotFoundException
    {
        for(int i=0;i<accounts.length;i++)
        {
@@ -74,10 +74,10 @@ public class Customer
            } 
         }
        
-       return null;
+        throw new AccountTypeNotFoundException(type);
     }
     
-    public boolean removeAccount(char type)
+    public boolean removeAccount(char type) throws AccountTypeNotFoundException
   {
       for(int i=0;i<accounts.length;i++)
        {
@@ -112,7 +112,7 @@ public class Customer
         }
        
       
-      return false;
+      throw new AccountTypeNotFoundException(type);
   }
     
     /**@return CustID , merupakan id kustomer*/
@@ -189,7 +189,7 @@ public class Customer
     }
     
     /**@param Account account   */
-  public boolean addAccount(double balance, char type)
+  public boolean addAccount(double balance, char type) throws AccountTypeAlreadyExistsException
   {
     boolean accountAdded=false;
     int notUsed = -1;
@@ -205,19 +205,19 @@ public class Customer
             {
                 if(type =='S' && accounts[i] instanceof Savings)
                {
-                   return false;
+                   throw new AccountTypeAlreadyExistsException('S');
                 }
                if(type =='I' && accounts[i] instanceof Investment)
                {
-                   return false;
+                   throw new AccountTypeAlreadyExistsException('I');
                 }
                if(type =='L' && accounts[i] instanceof LineOfCredit)
                {
-                   return false;
+                   throw new AccountTypeAlreadyExistsException('L');
                 }
                if(type =='O' && accounts[i] instanceof OverDraftProtection)
                {
-                  return false;
+                  throw new AccountTypeAlreadyExistsException('O');
                 }
             }
         }
@@ -237,9 +237,15 @@ public class Customer
             {
                 accounts[notUsed] = new LineOfCredit(this,balance,1000);
             }
-            if(type=='O')
+            try{
+                if(type=='O')
+                {
+                    accounts[notUsed] = new OverDraftProtection(this,balance,(Savings)getAccount('S'));
+                }
+            }
+            catch(Exception e)
             {
-                accounts[notUsed] = new OverDraftProtection(this,balance,savings);
+                System.out.println(e.getMessage() + ", can't create OverDraft Protect !!");
             }
             numOfAccounts++;
             accountAdded=true;

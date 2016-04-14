@@ -70,9 +70,13 @@ public class ButtonHandler implements ActionListener
               
             if(command.equals("total"))
             {
+                
                 double balance=0;
-                Account account;
+                Account account=null;
                 atmgui.getTextArea().setBackground(Color.WHITE);
+               
+                try{
+                    
                 account = cust.getAccount('S');
                 if(account !=null){balance += account.getBalance();}
                 account = cust.getAccount('I');
@@ -82,7 +86,11 @@ public class ButtonHandler implements ActionListener
                 account = cust.getAccount('O');
                 if(account !=null){balance += account.getBalance();}
                 atmgui.getTextArea().setText(custName +" " +"Total balance customer "  + balance);
-            }  
+                } 
+                catch(Exception ee)
+                {
+                }
+            }
         }
     }
     
@@ -91,7 +99,11 @@ public class ButtonHandler implements ActionListener
     */
    private void deposit(Customer cust, char accType, double amount)
    {
+       try{
        cust.getAccount(accType).deposit(amount);
+        }
+        catch(Exception e)
+        {}
    }
    
    /**
@@ -99,7 +111,15 @@ public class ButtonHandler implements ActionListener
     */
    private boolean withdraw(Customer cust, char accType, double amount)
    {
-       return cust.getAccount(accType).withdraw(amount);
+       try
+       {
+           cust.getAccount(accType).withdraw(amount);
+           return true;
+        }
+       catch(Exception e)
+       {
+           return false;
+       }
    }
    
    /**

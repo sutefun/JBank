@@ -21,16 +21,16 @@ public class Savings extends Account
    * @param double:amount , merupakan jumlah uang yang akan ditarik
    * @return true/false , true bila jumlah amount tidak melebihi balance
    */
-  public boolean withdraw(double amount)
+  public void withdraw(double amount) throws AmountOverDrawnException
   {
     if(amount>=0&&amount<=balance)
         {
             balance-=amount;
-            return true;
         }
         else
         {
-            return false;
+            throw new AmountOverDrawnException(this);
+           
         }
   }
   

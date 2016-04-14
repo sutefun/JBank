@@ -18,17 +18,143 @@ public class Teller
         
         
         Customer c = new Customer ("steven","susanto");
-        c.addAccount(500,'S');
-        c.addAccount(1000,'I');
-        c.addAccount(1500,'L');
-        c.addAccount(2000,'O');
+        try{
+            c.addAccount(500,'S');
+        }
+        catch(AccountTypeAlreadyExistsException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(1000,'I');
+        }
+        catch(AccountTypeAlreadyExistsException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(1500,'L');
+        }
+        catch(AccountTypeAlreadyExistsException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(2000,'O');
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
         System.out.println("nama\t" +c.getCustName());
-        System.out.println("saldo saving\t" +c.getAccount('S').getBalance());
-        System.out.println("saldo investment\t" +c.getAccount('I').getBalance());
-        System.out.println("saldo Line of credit\t" +c.getAccount('L').getBalance());
-        System.out.println("saldo Overdraft protection\t" +c.getAccount('O').getBalance());
-        Bank.addCustomer(c);
-        ATMGUI atmgui = new ATMGUI();
+        
+        try{
+            System.out.println("saldo saving\t" +c.getAccount('S').getBalance());
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            System.out.println("saldo investment\t" +c.getAccount('I').getBalance());
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            System.out.println("saldo Line of credit\t" +c.getAccount('L').getBalance());
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            System.out.println("saldo Overdraft protection\t" +c.getAccount('O').getBalance());
+       
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+         Bank.addCustomer(c);
+         
+        try
+        {
+        System.out.println("percobaan penarikan saving 1000");
+        c.getAccount('S').withdraw(1000);
+        
+        }
+        catch(Exception e)
+        {
+            
+            System.out.println(e.getMessage());
+        }
+        try
+        {
+        System.out.println("percobaan penarikan Investment 2000");
+        c.getAccount('I').withdraw(2000);
+        
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        try
+        {
+             System.out.println("percobaan penarikan Overdraft 2000");
+        c.getAccount('O').withdraw(2000);
+        
+        }
+        catch(Exception e)
+        {
+             System.out.println("percobaan penarikan Overdraft 2000");
+            System.out.println(e.getMessage());
+        }
+        
+        
+        
+        try{
+            System.out.println("saldo saving\t" +c.getAccount('S').getBalance());
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(1000,'I');
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(1500,'L');
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        
+        try{
+            c.addAccount(2000,'O');
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+       // ATMGUI atmgui = new ATMGUI();
        
      /*  Customer c = new Customer ("steven","susanto");
        Savings s  = new Savings (c,500);

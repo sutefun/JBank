@@ -70,23 +70,20 @@ public final class Investment extends Savings
      * @return true/false , true bila jumlah uang yang ditarik tidak melebihi balance bila sudah melewati batas investasi
      * atau true bila jumlah uang yang ditarik dan penalti tidak melebihi balance bila kurang dari batas waktu investasi
      */
-    public boolean withdraw(double amount)
+    public void withdraw(double amount)  throws AmountOverDrawnException
     {
         if(amount>balance)      
         {
-            return false;
+             throw new AmountOverDrawnException(this);
         }
         else if(Calendar.getInstance().after(endDate))  //bila pada saat penarikan waktu sudah melewati
         {                                               // term maka tidak dikenanakan penalti
             balance -= amount;
-            return true;
         }
         else if(balance>(amount*1.2))       //waktu penarikan sebelum endDate, maka kena penalti
         {
             balance -= (amount*1.2);
-            return true;
         }
-        return false;
         
     }
 

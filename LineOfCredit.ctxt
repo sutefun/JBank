@@ -12,5 +12,5 @@ comment4.target=void\ setCreditLimit(double)
 comment5.params=
 comment5.target=void\ feeAssessment()
 comment6.params=amount
-comment6.target=boolean\ withdraw(double)
+comment6.target=void\ withdraw(double)
 numComments=7
