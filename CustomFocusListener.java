@@ -1,6 +1,7 @@
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.*;
+import java.awt.*;
 import java.util.*;
 import java.text.*;
 /**
@@ -13,6 +14,7 @@ public class CustomFocusListener implements FocusListener {
     private JTextField          txtField;
     private JFormattedTextField fmtField = null;
     private String              string;
+    private JFrame              frame;
 
     public CustomFocusListener(JTextField txt, String s)
     {
@@ -25,6 +27,13 @@ public class CustomFocusListener implements FocusListener {
         fmtField = txt;
         string     = s;
         
+    }
+    
+    public CustomFocusListener(JFrame fr,JTextField txt, String s)
+    {
+        txtField = txt;
+        string   = s;
+        frame    = fr;
     }
 
     public void focusGained(FocusEvent e)
@@ -51,6 +60,14 @@ public class CustomFocusListener implements FocusListener {
             {
                 txtField.setText(string);
             }
+            else if(txtField.getName().equals("Email Address"))
+            {
+                if( !CustomerGUI.emailValidator(txtField.getText()) )
+                {
+                    CustomerGUI.warning("format email salah !!");
+                    txtField.setText(string);
+                }
+            }
         }
         else
         {
@@ -68,5 +85,5 @@ public class CustomFocusListener implements FocusListener {
         return date.format(now);
     }
 
-
+    
 }

@@ -11,30 +11,30 @@ import java.awt.event.*;
  */
 public class ATMGUI extends JFrame
 {
-   private Frame mainFrame;
-   private Panel topPanel;
-   private Panel bottomPanel;
-   private Panel buttonPanel;
-   private Panel JRadioButtonPanel;
-   private Panel infoPanel;
-   private Panel textPanelOne;
-   private Panel textPanelTwo;
-   private Label     enterCustIDLabel;
-   private TextField enterCustIDTextField;
-   private Label     enterAmountHereLabel;
-   private TextField enterAmountHereTextField;
+   private JFrame mainFrame;
+   private JPanel topPanel;
+   private JPanel bottomPanel;
+   private JPanel buttonPanel;
+   private JPanel JRadioButtonPanel;
+   private JPanel infoPanel;
+   private JPanel textPanelOne;
+   private JPanel textPanelTwo;
+   private JLabel     enterCustIDLabel;
+   private JTextField enterCustIDTextField;
+   private JLabel     enterAmountHereLabel;
+   private JTextField enterAmountHereTextField;
    private ButtonGroup group;
    private JRadioButton savingsButton;
    private JRadioButton InvestmentButton;
    private JRadioButton LOCButton;
    private JRadioButton OverdraftButton;
-   private Button depositButton;
-   private Button withdrawButton;
-   private Button exitButton;
-   private Button totalButton;
-   private TextArea infoTextArea;
-   private ScrollPane vScroll;
-   private ScrollPane hScroll;
+   private JButton depositButton;
+   private JButton withdrawButton;
+   private JButton exitButton;
+   private JButton totalButton;
+   private JTextArea infoTextArea;
+   private JScrollPane vScroll;
+   private JScrollPane hScroll;
    private ButtonHandler buttonHandler;
    
     /**
@@ -86,7 +86,7 @@ public class ATMGUI extends JFrame
    private void makeTopPanel()
    {    
        //----------membuat tombol radio satu persatu-------------//
-        JRadioButtonPanel = new Panel(new GridLayout(4,1));
+        JRadioButtonPanel = new JPanel(new GridLayout(4,1));
         
         savingsButton = new JRadioButton("Savings");
         savingsButton.setBackground(Color.WHITE);
@@ -109,10 +109,12 @@ public class ATMGUI extends JFrame
         group.add(LOCButton);
         group.add(OverdraftButton);
         //------------membuat label "enter customer id"" dan textfieldnya----------//
-        enterCustIDLabel      = new Label("Enter Customer ID");
-        enterCustIDTextField  = new TextField("",20);
-        enterAmountHereLabel    = new Label("Enter amount here");
-        enterAmountHereTextField = new TextField("",20);
+        enterCustIDLabel      = new JLabel("Enter Customer ID");
+        enterCustIDTextField  = new JTextField("",10);
+        enterCustIDTextField.setToolTipText("Enter Customer ID");
+        enterAmountHereLabel    = new JLabel("Enter amount here");
+        enterAmountHereTextField = new JTextField("",10);
+        enterAmountHereTextField.setToolTipText("Enter amount here");
         
         //-------menambahkan setiap radio button ke buttonPanel------//
         JRadioButtonPanel.add(savingsButton);
@@ -121,7 +123,7 @@ public class ATMGUI extends JFrame
         JRadioButtonPanel.add(OverdraftButton);
         
         //---------memasukkan panel dan setiap komponen ke topPanel-----------//
-        topPanel = new Panel(new FlowLayout());
+        topPanel = new JPanel(new FlowLayout());
         topPanel.setBackground(Color.WHITE);
         topPanel.add(enterCustIDLabel);
         topPanel.add(enterCustIDTextField);
@@ -137,35 +139,35 @@ public class ATMGUI extends JFrame
    {
         buttonHandler = new ButtonHandler(this);
        //----------membuat setiap button----------//
-        depositButton = new Button("Deposit");
+        depositButton = new JButton("Deposit");
         depositButton.setActionCommand("deposit");
         depositButton.addActionListener(buttonHandler);
         
-        withdrawButton = new Button("Withdraw");
+        withdrawButton = new JButton("Withdraw");
         withdrawButton.setActionCommand("withdraw");
         withdrawButton.addActionListener(buttonHandler);
         
-        exitButton     = new Button("Exit");
+        exitButton     = new JButton("Exit");
         exitButton.setActionCommand("exit");
         exitButton.addActionListener(buttonHandler);
         
-        totalButton     = new Button("Total");
+        totalButton     = new JButton("Total");
         totalButton.setActionCommand("total");
         totalButton.addActionListener(buttonHandler);
         
         //----------membuat buttonPanel dan memasukkan setiap button ke panel----------//
-        buttonPanel   = new Panel(new GridLayout(4,1));
+        buttonPanel   = new JPanel(new GridLayout(4,1));
         buttonPanel.add(depositButton);
         buttonPanel.add(withdrawButton);
         buttonPanel.add(totalButton);
         buttonPanel.add(exitButton);
         
         //-----------membuat textArea dan mengatur agar warnanya menjadi abu-abu------//
-        infoTextArea = new TextArea("Welcome");
+        infoTextArea = new JTextArea("Welcome");
         infoTextArea.setBackground(Color.GRAY);
         
         //----------membuat bottomPanel dan memasukkan panel dan komponen bagian bawah-------//
-        bottomPanel = new Panel(new BorderLayout());
+        bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.setBackground(Color.GRAY);
         bottomPanel.add(infoTextArea,BorderLayout.CENTER);
         bottomPanel.add(buttonPanel,BorderLayout.LINE_END);
@@ -175,7 +177,7 @@ public class ATMGUI extends JFrame
    /**
     * @return TextArea - aksesor text area informasi
     */
-   public TextArea getTextArea()
+   public JTextArea getTextArea()
    {
        return infoTextArea;
    }
@@ -191,7 +193,7 @@ public class ATMGUI extends JFrame
    /**
     * @return TextField:custIDtextField - aksesor text field cust ID
     */
-   public TextField getCustIDTextField()
+   public JTextField getCustIDTextField()
    {
        return enterCustIDTextField;
    }
@@ -204,7 +206,7 @@ public class ATMGUI extends JFrame
    /**
     * @return TextField:amountTextField - aksesor text field amount
     */
-   public TextField getAmountTextField()
+   public JTextField getAmountTextField()
    {
        return enterAmountHereTextField;
    }

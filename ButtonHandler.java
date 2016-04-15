@@ -31,6 +31,10 @@ public class ButtonHandler implements ActionListener
     {
         String command = e.getActionCommand();
         Customer cust = null;
+        int custID=0;
+        double amount=0;
+        String custName = null;
+        char accType = '\0';
         if(command.equals("exit"))
             {
                 atmgui.getTextArea().setBackground(Color.WHITE);
@@ -38,9 +42,15 @@ public class ButtonHandler implements ActionListener
                 exitting();
                 System.exit(0);
             } 
+            
+        try{
+            custID      = Integer.parseInt( atmgui.getCustIDText() );
+            amount      = Double.parseDouble(0 + atmgui.getAmountText());
+            custName    = cust.getCustName();
+            accType     = getSelectedButtonText(atmgui.getButtonGroup());
+        }
+        catch(Throwable t){}
         
-        int custID      = Integer.parseInt( atmgui.getCustIDText() );
-        double amount   = Double.parseDouble(0 + atmgui.getAmountText());
         try{
             cust   = Bank.getCustomer(custID);
         }
@@ -48,8 +58,7 @@ public class ButtonHandler implements ActionListener
         {
            warning(cnf.getMessage());
         }
-        String custName = cust.getCustName();
-        char accType    = getSelectedButtonText(atmgui.getButtonGroup());
+       
         
         if(cust != null)
         {

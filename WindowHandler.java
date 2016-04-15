@@ -20,7 +20,7 @@ public class WindowHandler extends  WindowAdapter
     }
     
     /**
-     * menampilkan pesan exit lalu tidur 1 detik
+     * menampilkan pesan exit lalu tidur 1/2 detik
      */
     public static void showExit() throws InterruptedException
     {
@@ -33,6 +33,6 @@ public class WindowHandler extends  WindowAdapter
           msgLabel.setSize(100,100);
           closingMessageFrame.add(msgLabel);
           closingMessageFrame.setVisible(true);
-          Thread.sleep(1000);
+          Thread.sleep(500);
     }
 }

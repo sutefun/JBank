@@ -4,5 +4,5 @@ comment0.target=WindowHandler()
 comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ WindowHandler\r\n
 comment1.params=
 comment1.target=void\ showExit()
-comment1.text=\r\n\ menampilkan\ pesan\ exit\ lalu\ tidur\ 1\ detik\r\n
+comment1.text=\r\n\ menampilkan\ pesan\ exit\ lalu\ tidur\ 1/2\ detik\r\n
 numComments=2

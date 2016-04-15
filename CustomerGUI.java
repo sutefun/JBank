@@ -13,35 +13,35 @@ import java.text.*;
  */
 public class CustomerGUI implements ActionListener
 {
-   private JFrame mainFrame;
-   private Panel topPanel;
-   private Panel bottomPanel;
-   private Panel firstPanel;
-   private Button cancel;
-   private Button saveAndReturn;
-   private JTextField custIDField;
-   private JTextField lastNameField;
+   static private JFrame mainFrame;
+   static private JPanel topPanel;
+   static private JPanel bottomPanel;
+   static private JPanel firstPanel;
+   static private JButton cancel;
+   static private JButton saveAndReturn;
+   static private JTextField custIDField;
+   static private JTextField lastNameField;
    
-   private Panel secondPanel;
-   private JTextField firstNameField;
-   private JTextField addressField;
+   static private JPanel secondPanel;
+   static private JTextField firstNameField;
+   static private JTextField addressField;
    
-   private Panel thirdPanel;
-   private JTextField cityField;
-   private JTextField stateField;
-   private JTextField zipField;
-   private JTextField phoneField;
+   static private JPanel thirdPanel;
+   static private JTextField cityField;
+   static private JTextField stateField;
+   static private JTextField zipField;
+   static private JTextField phoneField;
    
-   private Panel fourthPanel;
-   private JTextField emailField;
-   private DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
-   private JFormattedTextField dobField;
-   private java.awt.List accTypeList;
-   private String[] acc = {"Checking/Overdraft","Line of Credit","Savings","Investment","Other"};
+   static private JPanel fourthPanel;
+   static private JTextField emailField;
+   static private DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
+   static private JFormattedTextField dobField;
+   static private JList accTypeList;
    
+   static private String[] acc = {"Checking/Overdraft","Line of Credit","Savings","Investment","Other"};
    
-    private static String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-    private static java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
+   static private String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+   static private java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
     
     
     /**
@@ -63,19 +63,11 @@ public class CustomerGUI implements ActionListener
         mainFrame.setResizable(false);
         mainFrame.addWindowListener(new WindowHandler() {
          public void windowClosing(WindowEvent windowEvent){
-            /*try{
-             WindowHandler.showExit();                             //akan memanggil method showExit yang throws InterruptedException, harus di catch
-            }
-            catch(InterruptedException e)
-            {
-             
-            }*/
+           
             exitting();
             System.exit(0);     //keluar dari program
         }        
         });  
-        
-       
         
         makeTopPanel();
         makeBottomPanel();
@@ -87,7 +79,7 @@ public class CustomerGUI implements ActionListener
         makeFirstPanel();
         makeSecondPanel();
         makeThirdPanel();
-        topPanel = new Panel(new GridLayout(3,1));
+        topPanel = new JPanel(new GridLayout(3,1));
         topPanel.add(firstPanel);
         topPanel.add(secondPanel);
         topPanel.add(thirdPanel);
@@ -96,17 +88,10 @@ public class CustomerGUI implements ActionListener
     
     private void makeBottomPanel()
     {
-        bottomPanel = new Panel(new BorderLayout());
+        bottomPanel = new JPanel(new BorderLayout());
         makeFourthPanel();
         bottomPanel.add(fourthPanel);
-        accTypeList = new java.awt.List(5,false);
-        for (int i=0; i <acc.length-1; i++) 
-        {
-        accTypeList.add(acc[i]);
-        }
-        accTypeList.add(acc[acc.length-1]);
-        accTypeList.select(5);
-        accTypeList.addActionListener(this);
+        accTypeList = new JList(acc);
         
         bottomPanel.add(accTypeList,BorderLayout.LINE_END);
         mainFrame.add(bottomPanel);
@@ -116,21 +101,25 @@ public class CustomerGUI implements ActionListener
      */
     private void makeFirstPanel()
     {
-        firstPanel = new Panel(new FlowLayout());
-        cancel = new Button("Cancel");
+        firstPanel = new JPanel(new FlowLayout());
+        cancel = new JButton("Cancel");
         cancel.setActionCommand("cancel");
         cancel.addActionListener(this);
         
-        saveAndReturn = new Button("Save & Return");
+        saveAndReturn = new JButton("Save & Return");
         saveAndReturn.setActionCommand("save");
         saveAndReturn.addActionListener(this);
         
         custIDField = new JTextField("Cust ID");
+        custIDField.setName("Cust ID");
+        custIDField.setToolTipText("Cust ID");
         custIDField.setColumns(10);
         custIDField.addFocusListener(new CustomFocusListener(custIDField,"Cust ID") );
         
         
         lastNameField = new JTextField("Last Name");
+        lastNameField.setName("Last Name");
+        lastNameField.setToolTipText("Last Name");
         lastNameField.setColumns(20);
         lastNameField.addFocusListener(new CustomFocusListener(lastNameField,"Last Name") );
          
@@ -146,17 +135,21 @@ public class CustomerGUI implements ActionListener
      */
      private void makeSecondPanel()
     {
-        secondPanel = new Panel(new FlowLayout());
+        secondPanel = new JPanel(new FlowLayout());
         firstNameField = new JTextField("First Name");
+        firstNameField.setName("First Name");
+        firstNameField.setToolTipText("First Name");
         firstNameField.setColumns(20);
         firstNameField.addFocusListener(new CustomFocusListener(firstNameField,"First Name") );
          
         addressField = new JTextField("Address");
+        addressField.setName("Address");
+        addressField.setToolTipText("Address");
         addressField.setColumns(30);
         addressField.addFocusListener(new CustomFocusListener(addressField , "Address") );
          
-         secondPanel.add(firstNameField);
-         secondPanel.add(addressField);
+        secondPanel.add(firstNameField);
+        secondPanel.add(addressField);
     }
     
     /**
@@ -165,20 +158,29 @@ public class CustomerGUI implements ActionListener
      private void makeThirdPanel()
     {
     
-        thirdPanel = new Panel(new FlowLayout());
+        thirdPanel = new JPanel(new FlowLayout());
+        
         cityField = new JTextField("City");
+        cityField.setName("City");
+        cityField.setToolTipText("City");
         cityField.setColumns(30);
         cityField.addFocusListener(new CustomFocusListener(cityField , "City") );
          
         stateField = new JTextField("State");
+        stateField.setName("State");
+        stateField.setToolTipText("State");
         stateField.setColumns(10);
         stateField.addFocusListener(new CustomFocusListener(stateField , "State") );
          
         zipField = new JTextField("Zip Code");
+        zipField.setName("Zip Code");
+        zipField.setToolTipText("Zip Code");
         zipField.setColumns(15);
         zipField.addFocusListener(new CustomFocusListener(zipField, "Zip Code") );
         
         phoneField = new JTextField("Phone");
+        phoneField.setName("Phone");
+        phoneField.setToolTipText("Phone");
         phoneField.setColumns(25);
         phoneField.addFocusListener(new CustomFocusListener(phoneField , "Phone") );
          
@@ -194,8 +196,10 @@ public class CustomerGUI implements ActionListener
      */
      private void makeFourthPanel()
     {
-        fourthPanel = new Panel(new FlowLayout());
+        fourthPanel = new JPanel(new FlowLayout());
         emailField = new JTextField("Email Address");
+        emailField.setName("Email Address");
+        emailField.setToolTipText("example@example.com");
         emailField.setActionCommand("email");
         emailField.addActionListener(this);
         
@@ -204,6 +208,8 @@ public class CustomerGUI implements ActionListener
         
         dobField = new JFormattedTextField(format);
         dobField.setText("DOB - yyyy/mm/dd");
+        dobField.setName("DOB");
+        dobField.setToolTipText("DOB - yyyy/mm/dd");
         dobField.setColumns(20);
         dobField.addFocusListener(new CustomFocusListener(dobField,"DOB - yyyy/mm/dd") );
         
@@ -233,25 +239,30 @@ public class CustomerGUI implements ActionListener
         {
             if(!emailValidator(emailField.getText()))
             {
-                warning("Email tidak valid!!");
+                warning("format email salah !");
             }
         
         }
         else if(command.equals("save"))
         {
-          try{
-          date = format.parse(dobField.getText());
-          }
-          catch(ParseException pe)
+          if(cekDefaultField())
           {
+              try{
+              date = format.parse(dobField.getText());
+              }
+              catch(ParseException pe){}
               
-          }
-          Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),date);
-          c.setPhoneNumber(phoneField.getText());
-          c.setAddress(addressField.getText(),cityField.getText(),zipField.getText());
-          c.setEmail(emailField.getText());
-          //System.out.println(acc[accTypeList.getSelectedIndex()]);
-          Bank.addCustomer(c);
+              Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),date);
+              c.setPhoneNumber(phoneField.getText());
+              c.setAddress(addressField.getText(),cityField.getText(),zipField.getText());
+              c.setEmail(emailField.getText());
+              System.out.println("selected index "+acc[accTypeList.getSelectedIndex()]);
+              Bank.addCustomer(c);
+         }
+         else
+         {
+             System.out.println("default");
+         }
         }
     }
     
@@ -260,7 +271,16 @@ public class CustomerGUI implements ActionListener
        JOptionPane.showMessageDialog(mainFrame, "You're exitting, goodbye !!","goodbye",JOptionPane.WARNING_MESSAGE);
    }
    
-   private boolean emailValidator(String email)
+   private boolean cekDefaultField()
+   {
+       if(custIDField.getText().equals("Cust ID") || lastNameField.getText().equals("Last Name") || firstNameField.getText().equals("First Name") || addressField.getText().equals("Address") || cityField.getText().equals("City") || stateField.getText().equals("State") || zipField.getText().equals("Zip Code") || phoneField.getText().equals("Phone") || emailField.getText().equals("Email Address") || dobField.getText().equals("DOB - yyyy/mm/dd") )
+       {
+          return false;
+       }
+       return true;
+   }
+   
+   static public boolean emailValidator(String email)
    {
        java.util.regex.Matcher m = p.matcher(email);
        
@@ -274,7 +294,7 @@ public class CustomerGUI implements ActionListener
             }
    }
    
-   private void warning(String s)
+   static public void warning(String s)
    {
        JOptionPane.showMessageDialog(mainFrame, s,"Error",JOptionPane.ERROR_MESSAGE);
     }
