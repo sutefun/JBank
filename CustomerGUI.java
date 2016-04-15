@@ -19,18 +19,18 @@ public class CustomerGUI implements ActionListener
    private Panel firstPanel;
    private Button cancel;
    private Button saveAndReturn;
-   private TextField custIDField;
-   private TextField lastNameField;
+   private JTextField custIDField;
+   private JTextField lastNameField;
    
    private Panel secondPanel;
-   private TextField firstNameField;
-   private TextField addressField;
+   private JTextField firstNameField;
+   private JTextField addressField;
    
    private Panel thirdPanel;
-   private TextField cityField;
-   private TextField stateField;
-   private TextField zipField;
-   private TextField phoneField;
+   private JTextField cityField;
+   private JTextField stateField;
+   private JTextField zipField;
+   private JTextField phoneField;
    
    private Panel fourthPanel;
    private JTextField emailField;
@@ -63,13 +63,14 @@ public class CustomerGUI implements ActionListener
         mainFrame.setResizable(false);
         mainFrame.addWindowListener(new WindowHandler() {
          public void windowClosing(WindowEvent windowEvent){
-            try{
+            /*try{
              WindowHandler.showExit();                             //akan memanggil method showExit yang throws InterruptedException, harus di catch
             }
             catch(InterruptedException e)
             {
              
-            }
+            }*/
+            exitting();
             System.exit(0);     //keluar dari program
         }        
         });  
@@ -99,10 +100,13 @@ public class CustomerGUI implements ActionListener
         makeFourthPanel();
         bottomPanel.add(fourthPanel);
         accTypeList = new java.awt.List(5,false);
-        for (int i=0; i <acc.length; i++) 
+        for (int i=0; i <acc.length-1; i++) 
         {
         accTypeList.add(acc[i]);
         }
+        accTypeList.add(acc[acc.length-1]);
+        accTypeList.select(5);
+        accTypeList.addActionListener(this);
         
         bottomPanel.add(accTypeList,BorderLayout.LINE_END);
         mainFrame.add(bottomPanel);
@@ -121,26 +125,14 @@ public class CustomerGUI implements ActionListener
         saveAndReturn.setActionCommand("save");
         saveAndReturn.addActionListener(this);
         
-        custIDField = new TextField("Cust ID");
+        custIDField = new JTextField("Cust ID");
         custIDField.setColumns(10);
-        custIDField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            custIDField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
+        custIDField.addFocusListener(new CustomFocusListener(custIDField,"Cust ID") );
         
         
-        lastNameField = new TextField("Last Name");
+        lastNameField = new JTextField("Last Name");
         lastNameField.setColumns(20);
-        lastNameField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            lastNameField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
+        lastNameField.addFocusListener(new CustomFocusListener(lastNameField,"Last Name") );
          
         firstPanel.add(cancel);
         firstPanel.add(saveAndReturn);
@@ -155,25 +147,13 @@ public class CustomerGUI implements ActionListener
      private void makeSecondPanel()
     {
         secondPanel = new Panel(new FlowLayout());
-        firstNameField = new TextField("First Name");
+        firstNameField = new JTextField("First Name");
         firstNameField.setColumns(20);
-        firstNameField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            firstNameField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
+        firstNameField.addFocusListener(new CustomFocusListener(firstNameField,"First Name") );
          
-        addressField = new TextField("Address");
+        addressField = new JTextField("Address");
         addressField.setColumns(30);
-        addressField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            addressField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
+        addressField.addFocusListener(new CustomFocusListener(addressField , "Address") );
          
          secondPanel.add(firstNameField);
          secondPanel.add(addressField);
@@ -186,45 +166,21 @@ public class CustomerGUI implements ActionListener
     {
     
         thirdPanel = new Panel(new FlowLayout());
-        cityField = new TextField("City");
+        cityField = new JTextField("City");
         cityField.setColumns(30);
-        cityField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            cityField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
+        cityField.addFocusListener(new CustomFocusListener(cityField , "City") );
          
-        stateField = new TextField("State");
+        stateField = new JTextField("State");
         stateField.setColumns(10);
-        stateField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            stateField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
+        stateField.addFocusListener(new CustomFocusListener(stateField , "State") );
          
-        zipField = new TextField("Zip Code");
+        zipField = new JTextField("Zip Code");
         zipField.setColumns(15);
-        zipField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            zipField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
+        zipField.addFocusListener(new CustomFocusListener(zipField, "Zip Code") );
         
-         }); 
-        
-        phoneField = new TextField("Phone");
+        phoneField = new JTextField("Phone");
         phoneField.setColumns(25);
-        phoneField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            phoneField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
+        phoneField.addFocusListener(new CustomFocusListener(phoneField , "Phone") );
          
         thirdPanel.add(cityField);
         thirdPanel.add(stateField);
@@ -244,25 +200,12 @@ public class CustomerGUI implements ActionListener
         emailField.addActionListener(this);
         
         emailField.setColumns(25);
-        emailField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            emailField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
-         
+        emailField.addFocusListener(new CustomFocusListener(emailField, "Email Address") );
         
         dobField = new JFormattedTextField(format);
         dobField.setText("DOB - yyyy/mm/dd");
         dobField.setColumns(20);
-        dobField.addFocusListener(new FocusListener() {
-            public void focusGained(FocusEvent e) {
-            dobField.setText("");
-            }
-            public void focusLost(FocusEvent e){}
-        
-         });
+        dobField.addFocusListener(new CustomFocusListener(dobField,"DOB - yyyy/mm/dd") );
         
         fourthPanel.add(emailField);
         fourthPanel.add(dobField);
@@ -275,18 +218,26 @@ public class CustomerGUI implements ActionListener
         
         if(command.equals("cancel"))
         {
-            exitting();
-            System.exit(0);
+            custIDField.setText("Cust ID");
+            lastNameField.setText("Last Name");
+            firstNameField.setText("First Name");
+            addressField.setText("Address");
+            cityField.setText("City");
+            stateField.setText("State");
+            zipField.setText("Zip Code");
+            phoneField.setText("Phone");
+            emailField.setText("Email Address");
+            dobField.setText("DOB - yyyy/mm/dd");
         }
         else if(command.equals("email"))
         {
             if(!emailValidator(emailField.getText()))
             {
-                JOptionPane.showMessageDialog(mainFrame, "Email tidak valid!!","Error",JOptionPane.ERROR_MESSAGE);
+                warning("Email tidak valid!!");
             }
         
         }
-        else
+        else if(command.equals("save"))
         {
           try{
           date = format.parse(dobField.getText());
@@ -322,4 +273,11 @@ public class CustomerGUI implements ActionListener
             return false;
             }
    }
+   
+   private void warning(String s)
+   {
+       JOptionPane.showMessageDialog(mainFrame, s,"Error",JOptionPane.ERROR_MESSAGE);
+    }
+    
+   
 }

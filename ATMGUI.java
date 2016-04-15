@@ -9,7 +9,7 @@ import java.awt.event.*;
  * @author steven susanto 
  * @version 7 April 2016
  */
-public class ATMGUI extends JPanel
+public class ATMGUI extends JFrame
 {
    private Frame mainFrame;
    private Panel topPanel;
