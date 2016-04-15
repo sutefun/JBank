@@ -30,27 +30,22 @@ public class ButtonHandler implements ActionListener
    public void actionPerformed(ActionEvent e)
     {
         String command = e.getActionCommand();
-        Customer cust = null;
-        int custID=0;
-        double amount=0;
-        String custName = null;
-        char accType = '\0';
+        Customer cust  = null;
+        int custID     = 0;
+        double amount  = 0;
+        String custName;
+        char accType;
+        
         if(command.equals("exit"))
             {
-                atmgui.getTextArea().setBackground(Color.WHITE);
+                atmgui.getTextArea().setBackground(Color.RED);
                 atmgui.getTextArea().setText("exit ");
                 exitting();
                 System.exit(0);
             } 
+          
+        custID      = Integer.parseInt( atmgui.getCustIDText() );    
             
-        try{
-            custID      = Integer.parseInt( atmgui.getCustIDText() );
-            amount      = Double.parseDouble(0 + atmgui.getAmountText());
-            custName    = cust.getCustName();
-            accType     = getSelectedButtonText(atmgui.getButtonGroup());
-        }
-        catch(Throwable t){}
-        
         try{
             cust   = Bank.getCustomer(custID);
         }
@@ -59,6 +54,10 @@ public class ButtonHandler implements ActionListener
            warning(cnf.getMessage());
         }
        
+        amount      = Double.parseDouble(0 + atmgui.getAmountText());
+        custName    = cust.getCustName();
+        accType     = getSelectedButtonText(atmgui.getButtonGroup());
+       
         
         if(cust != null)
         {
@@ -66,7 +65,7 @@ public class ButtonHandler implements ActionListener
             {
                 if(command.equals("deposit"))
                 {
-                    atmgui.getTextArea().setBackground(Color.WHITE);
+                    atmgui.getTextArea().setBackground(Color.GREEN);
                     try{
                         deposit(cust,accType,amount);
                         double bl = cust.getAccount(accType).getBalance();
@@ -82,7 +81,7 @@ public class ButtonHandler implements ActionListener
               
                 if(command.equals("withdraw"))
                 {
-                    atmgui.getTextArea().setBackground(Color.WHITE);
+                    atmgui.getTextArea().setBackground(Color.YELLOW);
                     
                     try{
                     withdraw(cust,accType,amount);

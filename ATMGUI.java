@@ -164,6 +164,8 @@ public class ATMGUI extends JFrame
         
         //-----------membuat textArea dan mengatur agar warnanya menjadi abu-abu------//
         infoTextArea = new JTextArea("Welcome");
+        infoTextArea.setEditable(false);
+        infoTextArea.setBorder(BorderFactory.createLoweredBevelBorder());
         infoTextArea.setBackground(Color.GRAY);
         
         //----------membuat bottomPanel dan memasukkan panel dan komponen bagian bawah-------//

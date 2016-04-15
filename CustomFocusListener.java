@@ -68,6 +68,16 @@ public class CustomFocusListener implements FocusListener {
                     txtField.setText(string);
                 }
             }
+            else if(txtField.getName().equals("Cust ID"))
+            {
+                try{
+                    CustomerGUI.fetchedCustData( Bank.getCustomer(Integer.parseInt( txtField.getText() ) ) );
+                }
+                catch(CustomerNotFound ee){
+                    CustomerGUI.warning("Customer dengan ID " + txtField.getText() +" tidak ada");
+                    CustomerGUI.resetField();
+                }
+            }
         }
         else
         {

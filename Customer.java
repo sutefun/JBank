@@ -8,15 +8,16 @@ public class Customer
 {
     private Account[] accounts = new Account[4];
     private String  cityAddress;
-    private int     CustID;
-    private Date    dateOfBirth;
+    private int     custID;
+    private Date    dateOfBirth = new Date();
     private String  email;
     private String  firstName;
     private String  lastName;
     private int     numOfAccounts;
     private String  streetAddress;
     private String  phoneNumber;
-    private String  zipOrPostalCode;
+    private String  state;
+    private String  zip;
     private static String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
     private static java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
     
@@ -32,21 +33,47 @@ public class Customer
     
    public Customer(String fname, String lname, Date dob)
    {
-       firstName=fname;
-       lastName=lname;
-       dateOfBirth=dob;
-       CustID=Bank.getNextID();
+       firstName    =fname;
+       lastName     =lname;
+       dateOfBirth  =dob;
+       custID       =Bank.getNextID();
    }
-    
-   public Customer(String firstName, String lastName, String dateOfBirth, int CustID)
+   
+   public Customer(String fname, String lname, String dob)
    {
-    }
-    
-    /**@return alamat jalan, nama kota, dan kode pos */
+       SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+       
+       firstName           =fname;
+       lastName            =lname;
+       
+       try{
+           dateOfBirth         =df.parse(dob);
+       }
+       catch(Exception e){}
+       
+       custID              =Bank.getNextID();
+   } 
+   
+    /**@return alamat jalan*/
    public String getAddress()
    {
-       return streetAddress+','+cityAddress+','+zipOrPostalCode;   
+       return streetAddress;   
     }
+    
+   public String getCity()
+   {
+       return cityAddress;
+   }
+   
+   public String getState()
+   {
+       return state;
+   }
+   
+   public String getZip()
+   {
+       return zip;
+   }
    /**@return accounts */
    public Account getAccount(char type)  throws AccountTypeNotFoundException
    {
@@ -117,7 +144,7 @@ public class Customer
     /**@return CustID , merupakan id kustomer*/
    public int getCustID()
    {
-       return CustID;
+       return custID;
     }
     
     /**@return email    ,merupakan email kustomer*/
@@ -145,11 +172,12 @@ public class Customer
     }
     
     /**@param String street, String city, String code   */
-  public void setAddress(String street, String city, String code)
+  public void setAddress(String street, String city, String st,String code)
   {
       streetAddress=street;
       cityAddress=city;
-      zipOrPostalCode=code;
+      state = st;
+      zip=code;
       
       
     }
@@ -261,10 +289,25 @@ public class Customer
     */ 
   public void setCustID(int id)
   {
-    CustID=id;
+    custID=id;
     
    }
   
+  /**
+   * @return String:lastName
+   */
+  public String getLastName()
+  {
+      return lastName;
+  }
+  
+  /**
+   * @return String:firstName
+   */
+  public String getFirstName()
+  {
+     return firstName;
+  }
   
   /**
    * @return dateOfBirth
@@ -273,9 +316,15 @@ public class Customer
   {
       return dateOfBirth;
    }
+   
+  public String getDateOfBirthInString()
+  {
+      DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+      return df.format(dateOfBirth);
+   }
   
   public String toString()
   {
-    return "hehe salah";
+    return ""+custID;
   }
 }

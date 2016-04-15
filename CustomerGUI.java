@@ -57,7 +57,7 @@ public class CustomerGUI implements ActionListener
      */
     private void buildGUI()
     {
-        mainFrame = new JFrame("Customer GUi");
+        mainFrame = new JFrame("Customer GUI");
         mainFrame.setLayout(new GridLayout(2,1));
         mainFrame.setSize(700,400);
         mainFrame.setResizable(false);
@@ -224,16 +224,7 @@ public class CustomerGUI implements ActionListener
         
         if(command.equals("cancel"))
         {
-            custIDField.setText("Cust ID");
-            lastNameField.setText("Last Name");
-            firstNameField.setText("First Name");
-            addressField.setText("Address");
-            cityField.setText("City");
-            stateField.setText("State");
-            zipField.setText("Zip Code");
-            phoneField.setText("Phone");
-            emailField.setText("Email Address");
-            dobField.setText("DOB - yyyy/mm/dd");
+            resetField();
         }
         else if(command.equals("email"))
         {
@@ -254,14 +245,14 @@ public class CustomerGUI implements ActionListener
               
               Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),date);
               c.setPhoneNumber(phoneField.getText());
-              c.setAddress(addressField.getText(),cityField.getText(),zipField.getText());
+              c.setAddress(addressField.getText(),cityField.getText(),stateField.getText(), zipField.getText());
               c.setEmail(emailField.getText());
               System.out.println("selected index "+acc[accTypeList.getSelectedIndex()]);
               Bank.addCustomer(c);
          }
          else
          {
-             System.out.println("default");
+             warning("data belum keisi semua !");
          }
         }
     }
@@ -273,7 +264,7 @@ public class CustomerGUI implements ActionListener
    
    private boolean cekDefaultField()
    {
-       if(custIDField.getText().equals("Cust ID") || lastNameField.getText().equals("Last Name") || firstNameField.getText().equals("First Name") || addressField.getText().equals("Address") || cityField.getText().equals("City") || stateField.getText().equals("State") || zipField.getText().equals("Zip Code") || phoneField.getText().equals("Phone") || emailField.getText().equals("Email Address") || dobField.getText().equals("DOB - yyyy/mm/dd") )
+       if(lastNameField.getText().equals("Last Name") || firstNameField.getText().equals("First Name") || addressField.getText().equals("Address") || cityField.getText().equals("City") || stateField.getText().equals("State") || zipField.getText().equals("Zip Code") || phoneField.getText().equals("Phone") || emailField.getText().equals("Email Address") || dobField.getText().equals("DOB - yyyy/mm/dd") )
        {
           return false;
        }
@@ -299,5 +290,32 @@ public class CustomerGUI implements ActionListener
        JOptionPane.showMessageDialog(mainFrame, s,"Error",JOptionPane.ERROR_MESSAGE);
     }
     
+   static public void fetchedCustData(Customer c)
+   {
+       lastNameField.setText( c.getLastName() );
+       firstNameField.setText( c.getFirstName() );
+       addressField.setText( c.getAddress() );
+       cityField.setText( c.getCity() );
+       stateField.setText( c.getState() );
+       zipField.setText( c.getZip() );
+       phoneField.setText( c.getPhoneNumber() );
+       emailField.setText( c.getEmail() );
+       dobField.setText( c.getDateOfBirthInString() );
+       
+   }
+   
+   static public void resetField()
+   {
+       custIDField.setText("Cust ID");
+       lastNameField.setText("Last Name");
+       firstNameField.setText("First Name");
+       addressField.setText("Address");
+       cityField.setText("City");
+       stateField.setText("State");
+       zipField.setText("Zip Code");
+       phoneField.setText("Phone");
+       emailField.setText("Email Address");
+       dobField.setText("DOB - yyyy/mm/dd");
+   }
    
 }

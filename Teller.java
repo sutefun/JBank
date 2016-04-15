@@ -15,12 +15,18 @@ public class Teller
         
         
         
-        Customer c = new Customer ("steven","susanto");
+        Customer c = new Customer ("steven","susanto","1995/2/8");
+        c.setEmail("steven.susanto31@ui.ac.id");
+        c.setPhoneNumber("082112688821");
+        c.setAddress("dimana yah","Jakarta Barat","DKI Jakarta","1234");
+        
+        
         buat4akun(c);
         System.out.println("nama\t" +c.getCustName());
         print4akun(c);
         Bank.addCustomer(c);
         ATMGUI atmgui = new ATMGUI();
+        CustomerGUI custgui = new CustomerGUI();
       
         /*  setStartTime(9,0);
        setCloseTime(17,0);
@@ -137,13 +143,13 @@ public class Teller
     
     static private void buat4akun(Customer c)
     {
-       /* try{
+        try{
             c.addAccount(500,'S');
         }
         catch(AccountTypeAlreadyExistsException e)
         {
             System.out.println(e.getMessage());
-        }*/
+        }
         
         try{
             c.addAccount(1000,'I');
