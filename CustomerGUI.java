@@ -372,6 +372,7 @@ public class CustomerGUI implements ActionListener
        phoneField.setText("Phone");
        emailField.setText("Email Address");
        dobField.setText("DOB - yyyy/mm/dd");
+       accTypeList.setSelectedIndex(4);
    }
    
 }
