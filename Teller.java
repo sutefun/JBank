@@ -24,7 +24,10 @@ public class Teller
         buat4akun(c);
         System.out.println("nama\t" +c.getCustName());
         print4akun(c);
-        Bank.addCustomer(c);
+        try{
+            Bank.addCustomer(c);
+        }
+        catch(Exception e){}
         ATMGUI atmgui = new ATMGUI();
         CustomerGUI custgui = new CustomerGUI();
       

@@ -9,7 +9,7 @@ public class Customer
     private Account[] accounts = new Account[4];
     private String  cityAddress;
     private int     custID;
-    private Date    dateOfBirth = new Date();
+    private Date    dateOfBirth;
     private String  email;
     private String  firstName;
     private String  lastName;
@@ -20,6 +20,7 @@ public class Customer
     private String  zip;
     private static String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
     private static java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
+    private static DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
     
     public Customer()
     {
@@ -203,7 +204,7 @@ public class Customer
     }
   
     /**@param String lname, String fname    */
-  public void setName(String lname, String fname)
+  public void setName(String fname, String lname)
   {
       lastName=lname;
       firstName=fname;
@@ -319,9 +320,24 @@ public class Customer
    
   public String getDateOfBirthInString()
   {
-      DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+      
       return df.format(dateOfBirth);
    }
+  
+  public void setDateOfBirth(Date d)
+  {
+      dateOfBirth = d;
+  }
+   
+  public void setDateOfBirthInString(String s)
+  {
+      try{
+          dateOfBirth = df.parse(s);
+        }
+        catch(Exception e){
+          dateOfBirth = new Date();
+        }
+  }
   
   public String toString()
   {

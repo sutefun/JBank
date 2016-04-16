@@ -33,7 +33,7 @@ public class Bank
       }
       
    */
-    private static final int    MAX_NUM_OF_CUSTOMERS=20;
+    private static final int    MAX_NUM_OF_CUSTOMERS=4;
     private static Customer customer[] = new Customer[MAX_NUM_OF_CUSTOMERS];
     
     
@@ -143,17 +143,19 @@ public class Bank
         }
         else
         {
-            numOfCurrentCustomers ++;
+            //numOfCurrentCustomers ++;
             if(nextCustID==0)
             {   
                 nextCustID=1000;
                 nextID=nextCustID;
             }
             else
-            {
+            {   
                 lastCustID=nextCustID;
                 nextCustID++;
                 nextID=nextCustID;
+                
+                
             }
             
         }
@@ -190,17 +192,17 @@ public class Bank
         return closeTime;
     }
     
-    public static boolean addCustomer(Customer customer)
+    public static void addCustomer(Customer customer) throws MaxCustReached
     {
-        if(numOfCurrentCustomers<MAX_NUM_OF_CUSTOMERS+1)
+        if(numOfCurrentCustomers<MAX_NUM_OF_CUSTOMERS)
         {
-            Bank.customer[numOfCurrentCustomers-1] = customer;
+            Bank.customer[numOfCurrentCustomers] = customer;
             System.out.println("-------BANK : customer ditambahkan----------");
-            return true;
+            numOfCurrentCustomers++;
         }
         else
         {
-            return false;
+            throw new MaxCustReached();
         }
     }
     

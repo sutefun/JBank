@@ -92,7 +92,32 @@ public class CustomerGUI implements ActionListener
         makeFourthPanel();
         bottomPanel.add(fourthPanel);
         accTypeList = new JList(acc);
-        
+        accTypeList.setSelectedIndex(4);
+        accTypeList.addMouseMotionListener(new MouseMotionAdapter() {
+       
+                public void mouseMoved(MouseEvent e)
+                {
+                    JList l = (JList)e.getSource();
+                    ListModel m = l.getModel();
+                    int index = l.locationToIndex(e.getPoint());
+                    if( index>-1 ) {
+                        l.setToolTipText(m.getElementAt(index).toString());
+                        switch(index)   
+                        {
+                            case 0: l.setToolTipText("<html>--" + m.getElementAt(index).toString() + "--<br> Untuk menyimpan uang dengan terhubung ke akun Saving <br> mengijinkan penarikan melebihi balance akun ini selama <br> penarikan tidak melebihi total balance pada akun <br> saving yang terhubung. <br>Penarikan melebihi balance overdraft akan kena fee sebesar 3." + "</html>");
+                                    break;
+                            case 1: l.setToolTipText("<html>--" + m.getElementAt(index).toString() + "--<br> Untuk menyimpan uang dengan mengijinkan balance negatif <br> selama tidak melebihi credit limit" + "</html>");
+                                    break;
+                            case 2: l.setToolTipText("<html>--" + m.getElementAt(index).toString() + "--<br> Untuk menyimpan uang standar dengan bunga dan balance non negatif" + "</html>");
+                                    break;
+                            case 3: l.setToolTipText("<html>--" + m.getElementAt(index).toString() + "--<br> Untuk menyimpan uang jangka panjang, minimal 6 bulan. <br>Penarikan prematur akan terkena penalti 20% dari jumlah yang ditarik." + "</html>");
+                                    break;
+                            case 4: l.setToolTipText("<html>--" + m.getElementAt(index).toString() + "--<br> Tidak buat akun" + "</html>");
+                                    break;
+                        }
+                    }
+                }
+        });
         bottomPanel.add(accTypeList,BorderLayout.LINE_END);
         mainFrame.add(bottomPanel);
     }
@@ -111,8 +136,8 @@ public class CustomerGUI implements ActionListener
         saveAndReturn.addActionListener(this);
         
         custIDField = new JTextField("Cust ID");
-        custIDField.setName("Cust ID");
-        custIDField.setToolTipText("Cust ID");
+        custIDField.setName("Cust ID"); 
+        custIDField.setToolTipText("<html>" + "Cust ID - masukkan ID untuk update data" + "<br>" + "DEFAULT untuk buat customer baru" + "</html>");
         custIDField.setColumns(10);
         custIDField.addFocusListener(new CustomFocusListener(custIDField,"Cust ID") );
         
@@ -221,7 +246,7 @@ public class CustomerGUI implements ActionListener
     {
         String command = e.getActionCommand();
         Date date = new Date();
-        
+        System.out.println("selected index "+accTypeList.getSelectedIndex());
         if(command.equals("cancel"))
         {
             resetField();
@@ -241,14 +266,37 @@ public class CustomerGUI implements ActionListener
               try{
               date = format.parse(dobField.getText());
               }
-              catch(ParseException pe){}
+              catch(ParseException pe){
+                warning("format tanggal salah");
+              }
               
-              Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),date);
-              c.setPhoneNumber(phoneField.getText());
-              c.setAddress(addressField.getText(),cityField.getText(),stateField.getText(), zipField.getText());
-              c.setEmail(emailField.getText());
-              System.out.println("selected index "+acc[accTypeList.getSelectedIndex()]);
-              Bank.addCustomer(c);
+              try{
+                  int custID =  Integer.parseInt(custIDField.getText() ) ;
+                  Customer c = Bank.getCustomer(custID);
+                  c.setName(firstNameField.getText(),lastNameField.getText());
+                  c.setAddress(addressField.getText(),cityField.getText(),stateField.getText(),zipField.getText());
+                  c.setPhoneNumber(phoneField.getText());
+                  c.setEmail(emailField.getText());
+                  c.setDateOfBirthInString(dobField.getText());
+                  info("Customer sudah diupdate datanya !");
+              }
+              catch(Exception cnf )
+              {
+                  Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),date);
+                  c.setPhoneNumber(phoneField.getText());
+                  c.setAddress(addressField.getText(),cityField.getText(),stateField.getText(), zipField.getText());
+                  c.setEmail(emailField.getText());
+                  try{
+                      Bank.addCustomer(c);
+                      info("Sudah membuat customer baru !!");
+                  }
+                  catch(MaxCustReached mcr)
+                  {
+                      System.out.println("!!!!! max cust reached !!!!!");
+                      warning( mcr.getMessage() );
+                  }
+              }
+              
          }
          else
          {
@@ -289,6 +337,11 @@ public class CustomerGUI implements ActionListener
    {
        JOptionPane.showMessageDialog(mainFrame, s,"Error",JOptionPane.ERROR_MESSAGE);
     }
+    
+   static public void info(String s)
+   {
+       JOptionPane.showMessageDialog(mainFrame, s);
+    } 
     
    static public void fetchedCustData(Customer c)
    {
