@@ -34,6 +34,9 @@ public class CustomerGUI implements ActionListener
    
    static private JPanel fourthPanel;
    static private JTextField emailField;
+   static private JTextField amountField;
+   static private JTextField timeField;
+   static private JTextField creditLimitField;
    static private DateFormat format = new SimpleDateFormat("yyyy/mm/dd");
    static private JFormattedTextField dobField;
    static private JList accTypeList;
