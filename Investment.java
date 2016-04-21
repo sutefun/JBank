@@ -1,7 +1,7 @@
 import java.util.*;
 import java.text.*;
 import java.math.*;
-
+import java.io.*;
 /**
  * Write a description of class Investment here.
  * 
@@ -9,7 +9,7 @@ import java.math.*;
  * @version 24 Maret 2016
  */
 
-public final class Investment extends Savings
+public final class Investment extends Savings implements Serializable
 {
     private Date   endDate;
     private double interestRate;
@@ -90,4 +90,8 @@ public final class Investment extends Savings
         }
     }
 
+    public void setTerm(int t)
+    {
+        term = t;
+    }
 }

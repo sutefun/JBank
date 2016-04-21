@@ -15,25 +15,20 @@ public class CustomFocusListener implements FocusListener {
     private JFormattedTextField fmtField = null;
     private String              string;
     private JFrame              frame;
-
-    public CustomFocusListener(JTextField txt, String s)
-    {
-        txtField = txt;
-        string     = s;
-    }
+    private CustomerGUI         cgui;
     
-    public CustomFocusListener(JFormattedTextField txt, String s)
-    {
-        fmtField = txt;
-        string     = s;
-        
-    }
-    
-    public CustomFocusListener(JFrame fr,JTextField txt, String s)
+    public CustomFocusListener(JTextField txt, String s,CustomerGUI g)
     {
         txtField = txt;
         string   = s;
-        frame    = fr;
+        cgui     = g;
+    }
+    
+    public CustomFocusListener(JFormattedTextField txt, String s,CustomerGUI g)
+    {
+        fmtField = txt;
+        string   = s;
+        cgui     = g;
     }
 
     public void focusGained(FocusEvent e)
@@ -62,27 +57,37 @@ public class CustomFocusListener implements FocusListener {
             }
             else if(txtField.getName().equals("Email Address"))
             {
-                if( !CustomerGUI.emailValidator(txtField.getText()) )
+                if( !cgui.emailValidator(txtField.getText()) )
                 {
-                    CustomerGUI.warning("format email salah !!");
+                    cgui.warning("Format email salah !!");
                     txtField.setText(string);
                 }
             }
             else if(txtField.getName().equals("Cust ID"))
             {
                 try{
-                    CustomerGUI.fetchedCustData( Bank.getCustomer(Integer.parseInt( txtField.getText() ) ) );
+                    int custID = Integer.parseInt( txtField.getText() );
+                    try{
+                        cgui.fetchedCustData( Bank.getCustomer(custID ) );
+                    }
+                    catch(CustomerNotFound ee){
+                        cgui.warning("Customer dengan ID " + txtField.getText() +" tidak ada");
+                        cgui.resetField();
+                    }
                 }
-                catch(CustomerNotFound ee){
-                    CustomerGUI.warning("Customer dengan ID " + txtField.getText() +" tidak ada");
-                    CustomerGUI.resetField();
+                catch(NumberFormatException nfe)
+                {
+                    cgui.warning("Cust ID tidak diisi dengan angka !!\nMereset ke DEFAULT");
+                    cgui.resetField();
                 }
+               
             }
         }
         else
         {
             if(fmtField.getText().equals(""))
             {
+                cgui.warning("Format tanggal salah !!\nMengisi tanggal hari ini");
                 fmtField.setText(getToday());
             }
         }

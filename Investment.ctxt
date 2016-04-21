@@ -8,4 +8,6 @@ comment1.text=\r\n\ @param\ int\:days\ ,\ untuk\ melakukan\ pembungaan\ dengan\ 
 comment2.params=amount
 comment2.target=void\ withdraw(double)
 comment2.text=\r\n\ @param\ double\:amount\ ,\ merupakan\ jumlah\ uang\ yang\ ditarik\r\n\ @return\ true/false\ ,\ true\ bila\ jumlah\ uang\ yang\ ditarik\ tidak\ melebihi\ balance\ bila\ sudah\ melewati\ batas\ investasi\r\n\ atau\ true\ bila\ jumlah\ uang\ yang\ ditarik\ dan\ penalti\ tidak\ melebihi\ balance\ bila\ kurang\ dari\ batas\ waktu\ investasi\r\n
-numComments=3
+comment3.params=t
+comment3.target=void\ setTerm(int)
+numComments=4

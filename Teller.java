@@ -6,111 +6,78 @@
 import java.util.*;
 import java.text.*;
 import java.math.*;
+import java.io.*;
 
 public class Teller
 {
+    public ArrayList customers ;//= new TreeSet<Customer>(Comparator.comparing(Customer::getCustID));;
+    
+    public Teller()
+    {
+        
+        try{
+            CustomerFileReader cfr = new CustomerFileReader();
+            customers = (ArrayList)cfr.readCustomer() ;
+            customers.forEach(System.out::println);
+            System.out.println("------hasil pembacaan customer.dat di atas, di bawah bukan----------");
+        }
+        catch(ClassNotFoundException e)
+        {
+            System.out.println("teller - class not found");
+            customers = new ArrayList();//TreeSet<Customer>(Comparator.comparing(Customer::getCustID));
+        }
+        catch(IOException ioe)
+        {
+            System.out.println("teller - io exception - konstruktor");
+            System.out.println(ioe.getMessage());
+            customers = new ArrayList();//TreeSet<Customer>(Comparator.comparing(Customer::getCustID));
+        }
+        catch(NullPointerException npe)
+        {
+            System.out.println("teller - null exception");
+            System.out.println(npe.getMessage());
+            customers = new ArrayList();//TreeSet<Customer>(Comparator.comparing(Customer::getCustID));
+        }
+    }
+    
     /**@param belum ada */
     public static void main(String[] args)
     {
+        Teller t = new Teller();
+        t.createNewCustomer(new Customer("susanto","steven"));
+        t.createNewCustomer(new Customer("susanto2","steven2"));
+        t.createNewCustomer(new Customer("susanto3","steven3"));
+        t.createNewCustomer(new Customer("susanto4","steven4"));
+        t.createNewCustomer(new Customer("susanto5","steven5"));
+        t.createNewCustomer(new Customer("susanto6","steven6"));
+        t.createNewCustomer(new Customer("susanto7","steven7"));
         
+        System.out.println("membuat susanto ..... susanto7");
+        //System.out.println("mencari kustomer dengan id 1000 : " +t.getCustomer(1000) );
+        //System.out.println("mencari kustomer dengan id 1001 : " +t.getCustomer(1001) );
         
+        //System.out.println("print semua isi treeSet");
+        //t.customers.forEach(System.out::println);
         
-        Customer c = new Customer ("steven","susanto","1995/2/8");
-        c.setEmail("steven.susanto31@ui.ac.id");
-        c.setPhoneNumber("082112688821");
-        c.setAddress("dimana yah","Jakarta Barat","DKI Jakarta","1234");
-        
-        
-        buat4akun(c);
-        System.out.println("nama\t" +c.getCustName());
-        print4akun(c);
+        CustomerFileWriter fileWriter = new CustomerFileWriter();
         try{
-            Bank.addCustomer(c);
+            fileWriter.saveCustomers(t.customers);
         }
-        catch(Exception e){}
-        ATMGUI atmgui = new ATMGUI();
-        CustomerGUI custgui = new CustomerGUI();
-      
-        /*  setStartTime(9,0);
-       setCloseTime(17,0);
-       String fname,lname,telpon,indikator;
-       char type;
-       double balance;
-       int i=0,j=0;
-       Date dob;
-       SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
-       Scanner in = new Scanner(System.in);
-       System.out.println(Bank.getHoursOfOperation());
-       System.out.println("apakah ingin membuat customer ? [y/n]");
-       indikator = in.nextLine(); 
-      if(indikator.equals("n"))
-      {
-          System.out.println("bye");
-          System.exit(0); 
-       }
-      do{
-         
-       System.out.println("First Name : ");
-       fname = in.nextLine();
-       System.out.println("Last Name : ");
-       lname = in.nextLine();
-       System.out.println("Year birth :");
-       int year=in.nextInt();
-       System.out.println("month birth :");
-       int month=in.nextInt()-1;
-       System.out.println("day birth :");
-       int day=in.nextInt();
-       Customer customer = new Customer(fname,lname,(new GregorianCalendar(year,month,day).getTime()));
-       System.out.println("No Telpon :");
-       telpon=in.nextLine();
-       customer.setPhoneNumber(telpon);
-       System.out.println("Jenis account saving? [S/O/I/L/n-tidak membuat]");
-       type=in.next().trim().charAt(0);
-       while(type!='S'&&type!='O'&&type!='I'&&type!='L'&&type!='n')
-       {
-        System.out.println("input salah");
-        type=in.next().trim().charAt(0);
-        }
-       if(type!='n')
+        catch(FileNotFoundException fnf)
         {
-            String id = String.valueOf(customer.getCustId()+""+type);
-            Account account=new Account();
-            account.setID(id);
-            customer.setAccount(account);
+            System.out.println("teller - file not found - writer");
+        }
+        catch(IOException fnf)
+        {
             
-            System.out.println("balance awal ?");
-            balance=in.nextDouble();
-            while(balance<10)
-            {
-                System.out.println("balance kurang, masukkan lagi");
-                balance=in.nextDouble();
-            }
-        
-            customer.getAccount().setBalance(balance);
-        }
-        else
-        {
-            customer.getAccount().setBalance(0);
+            System.out.println("teller - io exception - writer");
+            System.out.println(fnf.getMessage());
         }
         
-        System.out.println(customer);
-        System.out.println("apakah ingin membuat customer ? [y/n]");
-        indikator = in.nextLine(); 
-        indikator = in.nextLine(); 
-        }while(indikator.equals("y"));
-       
-        System.out.println("----------------------------------------");
-      in.close();   
-      
-      */
+        
+        
     }
     
-
-    public Teller()
-    {
-       
-    }
-
     /**
      * @param int:hour,int:minute , waktu mulai kerja bank dalam jam dan menit
      */
@@ -149,6 +116,10 @@ public class Teller
         try{
             c.addAccount(500,'S');
         }
+        catch(AccountTypeNotFoundException e)
+                  {
+                      
+                  }
         catch(AccountTypeAlreadyExistsException e)
         {
             System.out.println(e.getMessage());
@@ -157,6 +128,10 @@ public class Teller
         try{
             c.addAccount(1000,'I');
         }
+        catch(AccountTypeNotFoundException e)
+                  {
+                     
+                  }
         catch(AccountTypeAlreadyExistsException e)
         {
             System.out.println(e.getMessage());
@@ -165,6 +140,10 @@ public class Teller
         try{
             c.addAccount(1500,'L');
         }
+        catch(AccountTypeNotFoundException e)
+                  {
+                     
+                  }
         catch(AccountTypeAlreadyExistsException e)
         {
             System.out.println(e.getMessage());
@@ -173,6 +152,10 @@ public class Teller
         try{
             c.addAccount(2000,'O');
         }
+        catch(AccountTypeNotFoundException e)
+                  {
+                      
+                  }
         catch(Exception e)
         {
             System.out.println(e.getMessage());
@@ -217,5 +200,25 @@ public class Teller
         {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public void createNewCustomer(Customer c)
+    {
+        customers.add(c);
+    }
+    
+    public Customer getCustomer(int custID)
+    {
+        Customer c;
+        Iterator itr = customers.iterator();
+        while(itr.hasNext())
+        {
+            c = (Customer)itr.next();
+            if(c.getCustID() == custID)
+            {
+                return c;
+            }
+        }
+        return null;
     }
 }

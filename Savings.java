@@ -1,12 +1,13 @@
 import java.util.*;
 import java.text.*;
+import java.io.*;
 /**
  * Write a description of class Savings here.
  * 
  * @author steven susanto 
  * @version 24 Maret 2016
  */
-public class Savings extends Account
+public class Savings extends Account implements Serializable
 {
   protected double interestEarned;  
     

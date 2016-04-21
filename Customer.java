@@ -1,14 +1,16 @@
 import java.util.*;
 import java.text.*;
+import java.io.*;
+
 /**
  * @author (steven susanto) 
  * @version (5/3/16)
  */
-public class Customer
+public class Customer implements Comparable<Customer>,Serializable
 {
     private Account[] accounts = new Account[4];
     private String  cityAddress;
-    private int     custID;
+    private Integer     custID;
     private Date    dateOfBirth;
     private String  email;
     private String  firstName;
@@ -217,7 +219,7 @@ public class Customer
     }
     
     /**@param Account account   */
-  public boolean addAccount(double balance, char type) throws AccountTypeAlreadyExistsException
+  public boolean addAccount(double balance, char type) throws AccountTypeAlreadyExistsException,AccountTypeNotFoundException
   {
     boolean accountAdded=false;
     int notUsed = -1;
@@ -265,16 +267,12 @@ public class Customer
             {
                 accounts[notUsed] = new LineOfCredit(this,balance,1000);
             }
-            try{
+            
                 if(type=='O')
                 {
                     accounts[notUsed] = new OverDraftProtection(this,balance,(Savings)getAccount('S'));
                 }
-            }
-            catch(AccountTypeNotFoundException e)
-            {
-                System.out.println(e.getMessage() + ", can't create OverDraft Protect !!");
-            }
+            
             numOfAccounts++;
             accountAdded=true;
         }
@@ -341,6 +339,11 @@ public class Customer
   
   public String toString()
   {
-    return ""+custID;
+    return firstName +" "+lastName+" "+custID;
+  }
+  
+  public int compareTo(Customer c)
+  {
+    return custID.compareTo(c.getCustID());
   }
 }

@@ -1,14 +1,12 @@
 #BlueJ class context
-comment0.params=txt\ s
-comment0.target=CustomFocusListener(javax.swing.JTextField,\ java.lang.String)
-comment1.params=txt\ s
-comment1.target=CustomFocusListener(javax.swing.JFormattedTextField,\ java.lang.String)
-comment2.params=fr\ txt\ s
-comment2.target=CustomFocusListener(javax.swing.JFrame,\ javax.swing.JTextField,\ java.lang.String)
+comment0.params=txt\ s\ g
+comment0.target=CustomFocusListener(javax.swing.JTextField,\ java.lang.String,\ CustomerGUI)
+comment1.params=txt\ s\ g
+comment1.target=CustomFocusListener(javax.swing.JFormattedTextField,\ java.lang.String,\ CustomerGUI)
+comment2.params=e
+comment2.target=void\ focusGained(java.awt.event.FocusEvent)
 comment3.params=e
-comment3.target=void\ focusGained(java.awt.event.FocusEvent)
-comment4.params=e
-comment4.target=void\ focusLost(java.awt.event.FocusEvent)
-comment5.params=
-comment5.target=java.lang.String\ getToday()
-numComments=6
+comment3.target=void\ focusLost(java.awt.event.FocusEvent)
+comment4.params=
+comment4.target=java.lang.String\ getToday()
+numComments=5

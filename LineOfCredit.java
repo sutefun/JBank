@@ -1,12 +1,12 @@
 import java.util.*;
-
+import java.io.*;
 /**
  * Write a description of class LineOfCredit here.
  * 
  * @author steven susanto
  * @version 26 Maret 2016
  */
-public class LineOfCredit extends Checking
+public class LineOfCredit extends Checking implements Serializable
 {
     private double creditBalance;
     private double creditLimit;

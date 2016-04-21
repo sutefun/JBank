@@ -9,9 +9,8 @@ import java.awt.event.*;
  * @author steven susanto 
  * @version 7 April 2016
  */
-public class ATMGUI extends JFrame
+public class ATMGUI extends JFrame implements FocusListener
 {
-   private JFrame mainFrame;
    private JPanel topPanel;
    private JPanel bottomPanel;
    private JPanel buttonPanel;
@@ -42,7 +41,7 @@ public class ATMGUI extends JFrame
      */
     public ATMGUI()
     {
-       
+       super("ATMGUI Layout");
        buildGUI();
     }
 
@@ -53,31 +52,20 @@ public class ATMGUI extends JFrame
     private void buildGUI()
     {
         //-------------membuat frame baru dan mengaturnya dengan ukuran sekian-------//
-        mainFrame = new JFrame("ATMGUI Layout");
-        mainFrame.setSize(700,300);
-        mainFrame.setResizable(false);
-        mainFrame.setLayout(new GridLayout(2,1));
         
-        
-        mainFrame.addWindowListener(new WindowHandler() {
-         public void windowClosing(WindowEvent windowEvent){
-            try{
-             WindowHandler.showExit();                             //akan memanggil method showExit yang throws InterruptedException, harus di catch
-            }
-            catch(InterruptedException e)
-            {
-             
-            }
-            System.exit(0);     //keluar dari program
-        }        
-        });  
+        setSize(700,300);
+        setResizable(false);
+        setLayout(new GridLayout(2,1));
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowHandler(this) );  
         
         makeTopPanel();         //membuat panel bagian atas
         makeBottomPanel();      //membuat panel bagian bawah
       
-        mainFrame.add(topPanel);    //memasukkan panel ke mainFrame
-        mainFrame.add(bottomPanel);
-        mainFrame.setVisible(true);  //menampilkan frame keseluruhan
+        add(topPanel);    //memasukkan panel ke mainFrame
+        add(bottomPanel);
+        setVisible(true);  //menampilkan frame keseluruhan
+        
     }
     
    /**
@@ -89,17 +77,21 @@ public class ATMGUI extends JFrame
         JRadioButtonPanel = new JPanel(new GridLayout(4,1));
         
         savingsButton = new JRadioButton("Savings");
+        savingsButton.setToolTipText("<html>--" + "Savings" + "--<br> Untuk menyimpan uang standar dengan bunga dan balance non negatif" + "</html>");
         savingsButton.setBackground(Color.WHITE);
         
         InvestmentButton = new JRadioButton("Investment");
+        InvestmentButton.setToolTipText("<html>--" + "Investment" + "--<br> Untuk menyimpan uang jangka panjang, minimal 6 bulan. <br>Penarikan prematur akan terkena penalti 20% dari jumlah yang ditarik." + "</html>");
         InvestmentButton.setBackground(Color.WHITE);
         
         
         LOCButton     = new JRadioButton("Line Of Credit");
+        LOCButton.setToolTipText("<html>--" + "Line Of Credit" + "--<br> Untuk menyimpan uang dengan mengijinkan balance negatif <br> selama tidak melebihi credit limit" + "</html>");
         LOCButton.setBackground(Color.WHITE);
         
         
         OverdraftButton = new JRadioButton("Overdraft");
+        OverdraftButton.setToolTipText("<html>--" + "Overdraft" + "--<br> Untuk menyimpan uang dengan terhubung ke akun Saving <br> mengijinkan penarikan melebihi balance akun ini selama <br> penarikan tidak melebihi total balance pada akun <br> saving yang terhubung. <br>Penarikan melebihi balance overdraft akan kena fee sebesar 3." + "</html>");
         OverdraftButton.setBackground(Color.WHITE);
         
         
@@ -112,8 +104,11 @@ public class ATMGUI extends JFrame
         enterCustIDLabel      = new JLabel("Enter Customer ID");
         enterCustIDTextField  = new JTextField("",10);
         enterCustIDTextField.setToolTipText("Enter Customer ID");
+        enterCustIDTextField.addFocusListener(this);
+        
+        //------------membuat label "enter amount"" dan textfieldnya----------//
         enterAmountHereLabel    = new JLabel("Enter amount here");
-        enterAmountHereTextField = new JTextField("",10);
+        enterAmountHereTextField = new JTextField("0",10);
         enterAmountHereTextField.setToolTipText("Enter amount here");
         
         //-------menambahkan setiap radio button ke buttonPanel------//
@@ -175,14 +170,7 @@ public class ATMGUI extends JFrame
         bottomPanel.add(buttonPanel,BorderLayout.LINE_END);
     
     }
-    
-   /**
-    * @return TextArea - aksesor text area informasi
-    */
-   public JTextArea getTextArea()
-   {
-       return infoTextArea;
-   }
+  
    
    /**
     * @param String:s - untuk set teks area
@@ -192,12 +180,9 @@ public class ATMGUI extends JFrame
        infoTextArea.setText(s);
    }
    
-   /**
-    * @return TextField:custIDtextField - aksesor text field cust ID
-    */
-   public JTextField getCustIDTextField()
+   public void setTextAreaColor(Color c)
    {
-       return enterCustIDTextField;
+       infoTextArea.setBackground(c);
    }
    
    public String getCustIDText()
@@ -205,17 +190,47 @@ public class ATMGUI extends JFrame
        return enterCustIDTextField.getText();
    }
    
-   /**
-    * @return TextField:amountTextField - aksesor text field amount
-    */
-   public JTextField getAmountTextField()
-   {
-       return enterAmountHereTextField;
-   }
-   
    public String getAmountText()
    {
        return enterAmountHereTextField.getText();
+    }
+    
+   public int getCustID() throws NumberFormatException
+   {
+       try{
+           return Integer.parseInt( enterCustIDTextField.getText() );
+       }
+       catch(NumberFormatException e)
+       {
+           if(enterCustIDTextField.getText().equals(""))
+           {
+               throw new NumberFormatException("Enter Customer ID masih kosong !!");
+           }
+           else
+           {
+               throw new NumberFormatException("Enter Customer ID tidak diisi dengan angka !!\n\nIsinya : " + enterCustIDTextField.getText());
+           }
+       }
+       
+   }
+   
+   public Double getAmount() throws NumberFormatException
+   {
+       
+       try{
+           return Double.parseDouble( enterAmountHereTextField.getText() );
+       }
+       catch(NumberFormatException e)
+       {
+           if(enterAmountHereTextField.getText().equals(""))
+           {
+               throw new NumberFormatException("Enter Amount masih kosong !!");
+           }
+           else
+           {
+               throw new NumberFormatException("Enter Amount tidak diisi dengan angka !!\n\nIsinya : " + enterAmountHereTextField.getText());
+           }
+       }
     }
    
    /**
@@ -226,11 +241,35 @@ public class ATMGUI extends JFrame
        return group;
    }
    
-   /**
-    * @return Frame:mainFrame - aksesor untuk mainFrame
-    */
-   public Frame getMainFrame()
+   public void focusGained(FocusEvent e)
    {
-       return mainFrame;
+       
    }
+   
+   public void focusLost(FocusEvent e)
+   {
+       if(!getCustIDText().equals(""))
+       {
+           try{
+               setTextArea("Nama customer " + Bank.getCustomer(Integer.parseInt(getCustIDText())).getCustName());
+               setTextAreaColor(Color.WHITE);
+            }
+           catch(CustomerNotFound cnf)
+           {
+               setTextArea("Customer tidak ketemu");
+               setTextAreaColor(Color.WHITE);
+               warning("Customer tidak ketemu");
+           }
+       }
+   }
+   
+   /**
+    * menampilkan dialog warning dengan pesan s
+    * @param String:s - passing string yang ingin ditampilkan
+    */
+   private void warning(String s)
+   {
+       JOptionPane.showMessageDialog(this,s,"Error !!",JOptionPane.ERROR_MESSAGE);
+   }
+   
 }

@@ -1,11 +1,11 @@
-
+import java.io.*;
 /**
  * Write a description of class OverDraftProtection here.
  * 
  * @author steven susanto
  * @version 26 Maret 2016
  */
-public class OverDraftProtection extends Checking
+public class OverDraftProtection extends Checking implements Serializable
 {
     private Savings savingsAccount;
     

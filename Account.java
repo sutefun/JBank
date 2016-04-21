@@ -1,9 +1,9 @@
-
+import java.io.*;
 /**
  * @author (steven susanto) 
  * @version (24 Maret 2016)
  */
-public  abstract class Account
+public  abstract class Account  implements Serializable
 {
     protected double balance;
     protected String ID;

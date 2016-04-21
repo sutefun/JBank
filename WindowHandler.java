@@ -9,15 +9,18 @@ import javax.swing.*;
  * @version 7 April 2016
  */
 public class WindowHandler extends  WindowAdapter
+
 {
+    private JFrame frame;
     
     /**
      * Constructor for objects of class WindowHandler
      */
-    public WindowHandler()
+    public WindowHandler(JFrame fr)
     {
-        
+        frame = fr;
     }
+    
     
     /**
      * menampilkan pesan exit lalu tidur 1/2 detik
@@ -34,5 +37,14 @@ public class WindowHandler extends  WindowAdapter
           closingMessageFrame.add(msgLabel);
           closingMessageFrame.setVisible(true);
           Thread.sleep(500);
+    }
+    
+    public void windowClosing(WindowEvent windowEvent){
+           
+          int result = JOptionPane.showConfirmDialog(frame, "Anda mau keluar ?", "alert", JOptionPane.OK_CANCEL_OPTION);
+          if(result == JOptionPane.OK_OPTION)
+          {
+             frame.dispose();
+          }
     }
 }
