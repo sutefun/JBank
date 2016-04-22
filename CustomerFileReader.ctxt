@@ -1,6 +1,8 @@
 #BlueJ class context
 comment0.params=
 comment0.target=CustomerFileReader()
+comment0.text=\r\n\ konstruktor\ CustomerFileReader\r\n
 comment1.params=
-comment1.target=java.util.ArrayList\ readCustomer()
+comment1.target=java.lang.Object\ readCustomer()
+comment1.text=\r\n\ -untuk\ membaca\ customer.dat\r\n\ @throws\ IOException,\ ClassNotFoundException,\ NullPointerException\r\n\ \r\n
 numComments=2

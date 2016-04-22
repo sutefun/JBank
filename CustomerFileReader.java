@@ -13,14 +13,21 @@ public class CustomerFileReader implements Serializable
     private File            objectFile;
     private ObjectInputStream objectInputStream;
     
-    
+    /**
+     * konstruktor CustomerFileReader
+     */
     public CustomerFileReader()
     {
         
         
     }
-
-    public ArrayList readCustomer() throws IOException,ClassNotFoundException,NullPointerException
+    
+    /**
+     * -untuk membaca customer.dat
+     * @throws IOException, ClassNotFoundException, NullPointerException
+     * 
+     */
+    public Object readCustomer() throws IOException,ClassNotFoundException,NullPointerException
     {
         Object customers = null;
         
@@ -29,8 +36,8 @@ public class CustomerFileReader implements Serializable
             customers = objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
-        
-        return (ArrayList)customers;
+        System.out.println("CFR - berhasil import");
+        return customers;
         
     }
     

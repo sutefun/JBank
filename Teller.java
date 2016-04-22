@@ -10,39 +10,27 @@ import java.io.*;
 
 public class Teller
 {
-    public ArrayList customers ;//= new TreeSet<Customer>(Comparator.comparing(Customer::getCustID));;
+    public TreeSet<Customer> customers = new TreeSet<Customer>();
     
     public Teller()
     {
         
         try{
             CustomerFileReader cfr = new CustomerFileReader();
-            customers = (ArrayList)cfr.readCustomer() ;
+            customers = (TreeSet)cfr.readCustomer() ;
             customers.forEach(System.out::println);
             System.out.println("------hasil pembacaan customer.dat di atas, di bawah bukan----------");
         }
-        catch(ClassNotFoundException e)
+        catch(Exception e)
         {
-            System.out.println("teller - class not found");
-            customers = new ArrayList();//TreeSet<Customer>(Comparator.comparing(Customer::getCustID));
-        }
-        catch(IOException ioe)
-        {
-            System.out.println("teller - io exception - konstruktor");
-            System.out.println(ioe.getMessage());
-            customers = new ArrayList();//TreeSet<Customer>(Comparator.comparing(Customer::getCustID));
-        }
-        catch(NullPointerException npe)
-        {
-            System.out.println("teller - null exception");
-            System.out.println(npe.getMessage());
-            customers = new ArrayList();//TreeSet<Customer>(Comparator.comparing(Customer::getCustID));
+            customers = new TreeSet<Customer>();
         }
     }
     
     /**@param belum ada */
     public static void main(String[] args)
     {
+        /*
         Teller t = new Teller();
         t.createNewCustomer(new Customer("susanto","steven"));
         t.createNewCustomer(new Customer("susanto2","steven2"));
@@ -59,23 +47,29 @@ public class Teller
         //System.out.println("print semua isi treeSet");
         //t.customers.forEach(System.out::println);
         
-        CustomerFileWriter fileWriter = new CustomerFileWriter();
+        
         try{
+            CustomerFileWriter fileWriter = new CustomerFileWriter();
             fileWriter.saveCustomers(t.customers);
         }
-        catch(FileNotFoundException fnf)
-        {
-            System.out.println("teller - file not found - writer");
-        }
-        catch(IOException fnf)
+        catch(IOException e)
         {
             
-            System.out.println("teller - io exception - writer");
-            System.out.println(fnf.getMessage());
+            System.out.println("teller - writer - " +e.getMessage());
         }
-        
-        
-        
+        */
+       
+        /*
+       for(char i='a';i<='z';i++)
+       {
+           
+           buatCustDummy(String.valueOf(i));
+       }
+       Bank.exportCustomer();
+        */
+       Bank.importCustomer();
+       new ATMGUI();
+       new CustomerGUI();
     }
     
     /**
@@ -159,6 +153,24 @@ public class Teller
         catch(Exception e)
         {
             System.out.println(e.getMessage());
+        }
+    }
+    
+    private static void buatCustDummy(String s)
+    {
+       
+        Customer c = new Customer(s,s);
+        buat4akun(c);
+        byte a[] = s.getBytes();
+        String ascii = new String(a);
+        c.setAddress("street "+s, "city "+s, "state "+s, ascii);
+        c.setEmail(s+"@"+s+".com");
+        c.setPhoneNumber(ascii);
+        try{
+           Bank.addCustomer(c);
+        }
+        catch(Exception e)
+        {
         }
     }
     

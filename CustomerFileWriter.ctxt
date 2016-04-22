@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.params=
 comment0.target=CustomerFileWriter()
+comment0.text=\r\n\ konstruktor\ CustomerFileWriter\r\n
 comment1.params=l
-comment1.target=void\ saveCustomers(java.util.ArrayList)
-comment2.params=l
-comment2.target=void\ saveCustomers(java.util.SortedSet)
-numComments=3
+comment1.target=void\ saveCustomers(java.lang.Object)
+comment1.text=\r\n\ -untuk\ menyimpan\ file\ customers\ menjadi\ .dat\r\n\ @param\ Object\r\n\ @throws\ IOException\r\n\ \r\n
+numComments=2

@@ -14,32 +14,40 @@ public class CustomerFileWriter implements Serializable
     private File             objectFile;
     private ObjectOutputStream objectOutputStream;
     
-    
+    /**
+     * konstruktor CustomerFileWriter
+     */
     public CustomerFileWriter()
     {
-        
+        objectFile = new File("customer.dat");
     }
 
-    public void saveCustomers(ArrayList l) throws IOException
+    /**
+     * -untuk menyimpan file customers menjadi .dat
+     * @param Object
+     * @throws IOException
+     * 
+     */
+    public void saveCustomers(Object l) throws IOException
     {
        fileOutputStream = new FileOutputStream("customer.dat");
        objectOutputStream = new ObjectOutputStream(fileOutputStream);
-       objectOutputStream.writeObject(l);
-       objectOutputStream.close();
-       fileOutputStream.close();
-       System.out.println("Writer - <arrayList> save berhasil");
+       try{
+        objectFile.delete();
+       }
+       catch(SecurityException e)
+       {
+        System.out.println("CFW - " + e.getMessage()); 
+       }
+       finally
+       {
+        objectOutputStream.writeObject(l);
+        objectOutputStream.close();
+        fileOutputStream.close();
+        System.out.println("CFW - berhasil export");
+       }
         
     }
     
-    public void saveCustomers(SortedSet l) throws IOException
-    {
-       fileOutputStream = new FileOutputStream("customer.dat");
-       objectOutputStream = new ObjectOutputStream(fileOutputStream);
-       objectOutputStream.writeObject(l);
-       objectOutputStream.close();
-       fileOutputStream.close();
-       System.out.println("Writer - <sortedSet> save berhasil");
-        
-    }
     
 }

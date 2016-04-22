@@ -33,9 +33,9 @@ public class Bank
       }
       
    */
-    private static final int    MAX_NUM_OF_CUSTOMERS=4;
-    private static Customer customer[] = new Customer[MAX_NUM_OF_CUSTOMERS];
-    
+    private static final int    MAX_NUM_OF_CUSTOMERS=30;
+    //private static Customer customer[] = new Customer[MAX_NUM_OF_CUSTOMERS];
+    private static ArrayList<Customer> customer = new ArrayList<Customer>();
     
     private Bank()
     {
@@ -192,11 +192,16 @@ public class Bank
         return closeTime;
     }
     
+    /**
+     * @param Customer:customer
+     * @throws MaxCustReached
+     * 
+     */
     public static void addCustomer(Customer customer) throws MaxCustReached
     {
         if(numOfCurrentCustomers<MAX_NUM_OF_CUSTOMERS)
         {
-            Bank.customer[numOfCurrentCustomers] = customer;
+            Bank.customer.add ( customer );
             System.out.println("-------BANK : customer ditambahkan----------");
             numOfCurrentCustomers++;
         }
@@ -206,16 +211,78 @@ public class Bank
         }
     }
     
+    /*
     public static Customer getCustomer(int custID) throws CustomerNotFound
     {
         for(int i=0;i<numOfCurrentCustomers;i++)
         {
-            if(Bank.customer[i].getCustID()== custID)
+            if(customer.get(i).getCustID()== custID)
             {
-                return Bank.customer[i];
+                return Bank.customer.get(i);
             }
         }
         
         throw new CustomerNotFound(custID);
     }
+    */
+   
+   /**
+    * @param int:custID
+    * @return Customer:customer
+    * @throws CustomerNotFound
+    */
+   public static Customer getCustomer(int custID) throws CustomerNotFound
+    {
+        Customer c;
+        Iterator itr = customer.iterator();
+        while(itr.hasNext())
+        {
+            c = (Customer)itr.next();
+            if(c.getCustID() == custID)
+            {
+                return c;
+            }
+        }
+        throw new CustomerNotFound(custID);
+    }
+   
+   /**
+    * untuk mengambil data dari customer.dat
+    * @return boolean
+    */
+   public static boolean importCustomer()
+   {
+    try
+    {
+        CustomerFileReader cfr = new CustomerFileReader();
+        customer = (ArrayList)cfr.readCustomer() ;
+        customer.forEach(System.out::println);
+        return true;
+    }
+    catch(Exception e)
+    {
+        System.out.println(e.getMessage());
+        return false;
+    }
+   }
+   
+   /**
+    * untuk menyimpan menjadi customer.dat
+    * @return boolean
+    */
+   public static boolean exportCustomer()
+   {
+    try{
+            CustomerFileWriter fileWriter = new CustomerFileWriter();
+            fileWriter.saveCustomers(customer);
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.out.println("Writer - " + e.getMessage());
+            return false;
+        }
+    
+   }
+   
 }

@@ -361,7 +361,7 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
        }
        catch(NumberFormatException e)
        {
-           System.out.println("update customer - number format exception - Cust ID");
+           System.out.println("update customer - number format exception - Cust ID\t" + e.getMessage());
        }
        Customer c = Bank.getCustomer(custID);
        c.setName(firstNameField.getText(),lastNameField.getText());

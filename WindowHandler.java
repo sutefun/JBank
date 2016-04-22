@@ -44,6 +44,7 @@ public class WindowHandler extends  WindowAdapter
           int result = JOptionPane.showConfirmDialog(frame, "Anda mau keluar ?", "alert", JOptionPane.OK_CANCEL_OPTION);
           if(result == JOptionPane.OK_OPTION)
           {
+             Bank.exportCustomer();
              frame.dispose();
           }
     }
