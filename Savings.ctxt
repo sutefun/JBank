@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.params=cust\ amount
 comment0.target=Savings(Customer,\ double)
+comment0.text=\r\n\ konstruktor\ Savings\r\n\ @param\ Customer,\ double\ amount\r\n
 comment1.params=amount
 comment1.target=void\ withdraw(double)
 comment1.text=\r\n\ @param\ double\:amount\ ,\ merupakan\ jumlah\ uang\ yang\ akan\ ditarik\r\n\ @return\ true/false\ ,\ true\ bila\ jumlah\ amount\ tidak\ melebihi\ balance\r\n

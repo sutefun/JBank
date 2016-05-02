@@ -7,7 +7,7 @@ import java.io.*;
  * @author steven susanto
  * @version 26 Maret 2016
  */
-public abstract class Checking extends Account implements Serializable
+public abstract class Checking extends Account
 {
     protected double monthlyFee;
     

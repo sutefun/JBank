@@ -7,7 +7,7 @@ import java.io.*;
  * @author steven susanto
  * @version 21 April 2016
  */
-public class CustomerFileReader implements Serializable
+public class CustomerFileReader
 {
     private FileInputStream fileInputStream;
     private File            objectFile;
@@ -36,7 +36,25 @@ public class CustomerFileReader implements Serializable
             customers = objectInputStream.readObject();
             objectInputStream.close();
             fileInputStream.close();
-        System.out.println("CFR - berhasil import");
+        return customers;
+        
+    }
+    
+    /**
+     * -untuk membaca customer file dari yang dipilih
+     * @param File
+     * @throws IOException, ClassNotFoundException, NullPointerException
+     * 
+     */
+    public Object readCustomerFile(File file) throws IOException,ClassNotFoundException,NullPointerException
+    {
+        Object customers = null;
+        
+            fileInputStream = new FileInputStream(file);
+            objectInputStream = new ObjectInputStream(fileInputStream);
+            customers = objectInputStream.readObject();
+            objectInputStream.close();
+            fileInputStream.close();
         return customers;
         
     }

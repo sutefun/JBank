@@ -1,9 +1,11 @@
 import javax.swing.*;
+import javax.swing.filechooser.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.text.*;
+import java.io.*;
 
 /**
  * Write a description of class CustomerGUI here.
@@ -11,12 +13,14 @@ import java.text.*;
  * @author steven susanto
  * @version 10 April 2016
  */
-public class CustomerGUI extends JFrame implements ActionListener,MouseMotionListener,ListSelectionListener
+public class CustomerGUI extends JFrame implements Runnable,ActionListener,MouseMotionListener,ListSelectionListener
 {
    private JPanel topPanel;
    private JPanel bottomPanel;
    private JPanel firstPanel;
    private JButton cancel;
+   private JButton saveFile;
+   private JButton openFile;
    private JButton saveAndReturn;
    private JTextField custIDField;
    private JTextField lastNameField;
@@ -46,6 +50,9 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
    static private String cek = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
    static private java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
     
+   public void run(){
+    }
+   
     
     /**
      * Constructor for objects of class CustomerGUI
@@ -61,27 +68,21 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
      */
     private void buildGUI()
     {
-        setLayout(new GridLayout(2,1));
-        setSize(700,400);
+        setLayout(new BorderLayout());
+        setSize(700,300);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowHandler(this) );  
         
         makeTopPanel();
         makeBottomPanel();
+        
+        add(topPanel,BorderLayout.NORTH);
+        add(bottomPanel,BorderLayout.CENTER);
+        
+        add(new StatusBar(),BorderLayout.SOUTH);
         setVisible(true);
         
-     /* mainFrame = new JFrame("Customer GUI");
-        mainFrame.setLayout(new GridLayout(2,1));
-        mainFrame.setSize(700,400);
-        mainFrame.setResizable(false);
-        mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        mainFrame.addWindowListener(new WindowHandler(mainFrame) );  
-        
-        makeTopPanel();
-        makeBottomPanel();
-        mainFrame.setVisible(true);
-     */
     }
     
     private void makeTopPanel()
@@ -93,24 +94,23 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
         topPanel.add(firstPanel);
         topPanel.add(secondPanel);
         topPanel.add(thirdPanel);
-        add(topPanel,BorderLayout.PAGE_START);
+       
     }
     
     private void makeBottomPanel()
     {
         bottomPanel = new JPanel(new BorderLayout());
         makeFourthPanel();
-        bottomPanel.add(fourthPanel);
+        bottomPanel.add(fourthPanel,BorderLayout.NORTH);
         accTypeList = new JList(acc);
         accTypeList.setSelectedIndex(4);
         accTypeList.addMouseMotionListener(this);
-        
         accTypeList.addListSelectionListener(this);
         
         makeAccountPanel();
-        bottomPanel.add(accountPanel,BorderLayout.SOUTH);
-        bottomPanel.add(accTypeList,BorderLayout.LINE_END);
-        add(bottomPanel);
+        bottomPanel.add(accountPanel,BorderLayout.CENTER);
+        bottomPanel.add(accTypeList,BorderLayout.EAST);
+       
     }
     /**
      * membuat panel pertama
@@ -126,6 +126,15 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
         saveAndReturn.setActionCommand("save");
         saveAndReturn.addActionListener(this);
         
+        saveFile = new JButton("Save File");
+        saveFile.setActionCommand("saveFile");
+        saveFile.addActionListener(this);
+        
+        openFile = new JButton("Open File");
+        openFile.setActionCommand("openFile");
+        openFile.addActionListener(this);
+        
+        
         custIDField = new JTextField("Cust ID");
         custIDField.setName("Cust ID"); 
         custIDField.setToolTipText("<html>" + "Cust ID - masukkan ID untuk update data" + "<br>" + "DEFAULT untuk buat customer baru" + "</html>");
@@ -136,11 +145,14 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
         lastNameField = new JTextField("Last Name");
         lastNameField.setName("Last Name");
         lastNameField.setToolTipText("Last Name");
-        lastNameField.setColumns(20);
+        lastNameField.setColumns(15);
         lastNameField.addFocusListener(new CustomFocusListener(lastNameField,"Last Name",this) );
          
         firstPanel.add(cancel);
         firstPanel.add(saveAndReturn);
+        firstPanel.add(saveFile);
+        firstPanel.add(openFile);
+        
         firstPanel.add(custIDField);
         firstPanel.add(lastNameField);
         
@@ -161,7 +173,7 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
         addressField = new JTextField("Address");
         addressField.setName("Address");
         addressField.setToolTipText("Address");
-        addressField.setColumns(30);
+        addressField.setColumns(20);
         addressField.addFocusListener(new CustomFocusListener(addressField , "Address",this) );
          
         secondPanel.add(firstNameField);
@@ -179,7 +191,7 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
         cityField = new JTextField("City");
         cityField.setName("City");
         cityField.setToolTipText("City");
-        cityField.setColumns(30);
+        cityField.setColumns(10);
         cityField.addFocusListener(new CustomFocusListener(cityField , "City",this) );
          
         stateField = new JTextField("State");
@@ -197,7 +209,7 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
         phoneField = new JTextField("Phone");
         phoneField.setName("Phone");
         phoneField.setToolTipText("Phone");
-        phoneField.setColumns(25);
+        phoneField.setColumns(15);
         phoneField.addFocusListener(new CustomFocusListener(phoneField , "Phone",this) );
          
         thirdPanel.add(cityField);
@@ -219,14 +231,14 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
         emailField.setActionCommand("email");
         emailField.addActionListener(this);
         
-        emailField.setColumns(25);
+        emailField.setColumns(15);
         emailField.addFocusListener(new CustomFocusListener(emailField, "Email Address",this) );
         
         dobField = new JFormattedTextField(format);
         dobField.setText("DOB - yyyy/mm/dd");
         dobField.setName("DOB");
         dobField.setToolTipText("DOB - yyyy/mm/dd");
-        dobField.setColumns(20);
+        dobField.setColumns(15);
         dobField.addFocusListener(new CustomFocusListener(dobField,"DOB - yyyy/mm/dd",this) );
         
         fourthPanel.add(emailField);
@@ -268,11 +280,29 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
     
     }
     
+    /**
+     * untuk mengetahui aksi dari button yang dipencet atau aksi lainnya
+     */
     public void actionPerformed(ActionEvent e)
     {
         String command = e.getActionCommand();
         Customer c;
-        if(command.equals("cancel"))
+        
+        if(command.equals("openFile")){
+            try{
+                fetchedCustData( openFile() );
+            }
+            catch(Exception ee){}
+        }
+        else if(command.equals("saveFile")){
+            if(cekDefaultField() ){
+                saveFile();
+            }
+            else{
+                warning("data belum keisi semua !");
+            }
+        }
+        else if(command.equals("cancel"))
         {
             resetField();
         }
@@ -307,6 +337,11 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
         }
     }
   
+   /**
+    * fungsi internal untuk membuat akun baru bila tidak ada kustomer sebelumnya
+    * @param Customer
+    * @throws AccountTypeAlreadyExistsException, NumberFormatException, AccountTypeNotFoundException
+    */
    private void buatAccount(Customer c) throws AccountTypeAlreadyExistsException,NumberFormatException,AccountTypeNotFoundException
    {
        double amount = 0;
@@ -353,6 +388,11 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
        
    }
     
+   /**
+    * untuk mengupdate data customer sesuai dengan field-field yang diisi
+    * @return Customer
+    * @throws CustomerNotFound
+    */
    private Customer updateDataCustomer() throws CustomerNotFound
    {
        int custID =  0;
@@ -389,6 +429,8 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
        return c;
    }
    
+   
+   
    private Customer buatCustomerBaru()
    {
        Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),dobField.getText());
@@ -421,11 +463,19 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
        return null;
    }
     
+   /**
+     * untuk menampilkan dialog konfirmasi mau exit
+     * @param WindowEvent
+     */
    private void exitting()
    {
        JOptionPane.showMessageDialog(this, "You're exitting, goodbye !!","goodbye",JOptionPane.WARNING_MESSAGE);
    }
    
+   /**
+    * untuk memeriksa kalau field-field terkait sudah diedit atau belum
+    * @return boolean: true - bila sudah diedit semuanya
+    */
    private boolean cekDefaultField()
    {
        if(lastNameField.getText().equals("Last Name") || firstNameField.getText().equals("First Name") || addressField.getText().equals("Address") || cityField.getText().equals("City") || stateField.getText().equals("State") || zipField.getText().equals("Zip Code") || phoneField.getText().equals("Phone") || emailField.getText().equals("Email Address") || dobField.getText().equals("DOB - yyyy/mm/dd") )
@@ -435,6 +485,11 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
        return true;
    }
    
+   /**
+    * fungsi untuk validasi email apakah sesuai format
+    * @param String : email
+    * @return boolean : true - bila email valid
+    */
    static public boolean emailValidator(String email)
    {
        java.util.regex.Matcher m = p.matcher(email);
@@ -449,16 +504,28 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
             }
    }
    
+   /**
+    * untuk menampilkan dialog dengan pesan error tertentu
+    * @param String : pesan
+    */
    public void warning(String s)
    {
        JOptionPane.showMessageDialog(this, s,"Error",JOptionPane.ERROR_MESSAGE);
     }
     
+   /**
+    * untuk menampilkan dialog dengan pesan tertentu
+    * @param String : pesan
+    */
    public void info(String s)
    {
        JOptionPane.showMessageDialog(this, s);
     } 
     
+   /**
+    * untuk menset field-field sesuai dengan data customer
+    * @param Customer
+    */
    public void fetchedCustData(Customer c)
    {
        lastNameField.setText( c.getLastName() );
@@ -473,6 +540,9 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
        
    }
    
+   /**
+    * untuk mereset semua field-field ke kondisi default
+    */
    public void resetField()
    {
        custIDField.setText("Cust ID");
@@ -488,6 +558,11 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
        accTypeList.setSelectedIndex(4);
    }
    
+   /**
+    * untuk mengkonversi string pada field amount ke bentuk angka
+    * @return double
+    * @throws NumberFormatException - bila input bukan angka
+    */
    private double getAmount() throws NumberFormatException
    {
      try{
@@ -506,6 +581,11 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
      }
    }
    
+   /**
+    * digunakan untuk mendapatkan term waktu untuk tipe investment
+    * @return int
+    * @throws NumberFormatException
+    */
    private int getTerm() throws NumberFormatException
    {
      try{
@@ -524,6 +604,11 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
      }
    }
    
+   /**
+    * digunakan untuk mendapatkan limit kredit untuk tipe LOC
+    * @return double
+    * @throws NumberFormatException
+    */
    private double getCreditLimit() throws NumberFormatException
    {
     try{
@@ -543,7 +628,10 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
    
    }
    
-   
+   /**
+    * untuk melihat mouse dimana, bila berada diatas choice, akan menampilkan toolTipText
+    * @param MouseEvent
+    */
    public void mouseMoved(MouseEvent e)
    {
       JList l = (JList)e.getSource();
@@ -570,6 +658,10 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
    public void mouseDragged(MouseEvent e)
    {}
    
+   /**
+    * untuk mengetahui dari List bila sudah diganti pilihannya
+    * @param ListSelectionEvent
+    */
    public void valueChanged(ListSelectionEvent e)
    {
       JList jl = (JList)e.getSource();
@@ -614,6 +706,66 @@ public class CustomerGUI extends JFrame implements ActionListener,MouseMotionLis
                     
                     this.invalidate();
                     this.validate();
+   }
+   
+   /**
+    * fungsi internal untuk menload  file .cust pada lokasi yang dipilih teller
+    * 
+    */
+   private Customer openFile(){
+       try{
+           JFileChooser fileChooser = new JFileChooser();
+           javax.swing.filechooser.FileFilter filter = new FileNameExtensionFilter("cust","cust");
+           fileChooser.setFileFilter(filter);
+           fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
+           int result = fileChooser.showOpenDialog(this);
+           
+           if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile() ;
+                try{
+                    Customer c = (Customer)(new CustomerFileReader()).readCustomerFile(selectedFile);
+                    info("Berhasil open file " +selectedFile.getAbsolutePath()) ;
+                    return c;
+                }
+                catch(Exception e){
+                    warning("Tipe file bukan cust !!");
+                }
+            }
+        }
+        catch(Exception e){}
+    
+        return null;
+   }
+   
+   /**
+    * fungsi internal untuk mensave customer menjadi file .cust pada lokasi yang dipilih teller
+    * 
+    */
+   private void saveFile(){
+       try{
+           Customer c = new Customer(firstNameField.getText(),lastNameField.getText(),dobField.getText());
+           c.setPhoneNumber(phoneField.getText());
+           c.setAddress(addressField.getText(),cityField.getText(),stateField.getText(), zipField.getText());
+           c.setEmail(emailField.getText());
+           CustomerFileWriter cfw = new CustomerFileWriter();
+           
+           JFileChooser fileChooser = new JFileChooser();
+           javax.swing.filechooser.FileFilter filter = new FileNameExtensionFilter("cust","cust");
+           fileChooser.setFileFilter(filter);
+           fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
+           int result = fileChooser.showSaveDialog(this);
+           if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = new File(fileChooser.getSelectedFile() + ".cust" );
+                try{
+                   (new CustomerFileWriter()).saveCustomersFile(c , selectedFile) ;
+                   info("Berhasil save file ke " +selectedFile.getAbsolutePath()) ;
+                }
+                catch(Exception e){
+                   
+                }
+            }
+        }
+       catch(Exception e){}
    }
    
 }

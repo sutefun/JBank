@@ -1,18 +1,26 @@
 #BlueJ class context
 comment0.params=cust\ amount\ limit
 comment0.target=LineOfCredit(Customer,\ double,\ double)
+comment0.text=\r\n\ konstruktor\ LOC\r\n\ @param\ Customer,\ double\ amount,\ double\ limit\r\n
 comment1.params=
 comment1.target=double\ getCreditBalance()
+comment1.text=\r\n\ aksesor\ creditBalance\r\n\ @return\ double\ credit\ balance\r\n
 comment2.params=
 comment2.target=double\ getCreditLimit()
+comment2.text=\r\n\ aksesor\ creditLimit\r\n\ @return\ double\ credit\ limit\r\n
 comment3.params=
 comment3.target=double\ getCreditLeft()
+comment3.text=\r\n\ aksesor\ credit\ untuk\ mengetahui\ sisa\ kredit\ yang\ dapat\ digunakan\r\n\ @return\ double\ credit\r\n
 comment4.params=amount
 comment4.target=void\ setCreditBalance(double)
+comment4.text=\r\n\ untuk\ menset\ creditBalance\r\n\ @param\ double\ \:\ amount\r\n
 comment5.params=amount
 comment5.target=void\ setCreditLimit(double)
+comment5.text=\r\n\ untuk\ menset\ creditLimit\r\n\ @param\ double\ \:\ amount\r\n
 comment6.params=
 comment6.target=void\ feeAssessment()
+comment6.text=\r\n\ untuk\ melakukan\ fee\ assessment\r\n
 comment7.params=amount
 comment7.target=void\ withdraw(double)
+comment7.text=\r\n\ penarikan\ dana\r\n\ @param\ double\ \:\ amount\r\n\ @throws\ AmountOverDrawnException\r\n
 numComments=8

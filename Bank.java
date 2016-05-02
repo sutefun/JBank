@@ -1,5 +1,6 @@
 import java.util.*;
 import java.text.*;
+
 /**
  * Write a description of class Bank here.
  * 
@@ -233,6 +234,7 @@ public class Bank
     */
    public static Customer getCustomer(int custID) throws CustomerNotFound
     {
+        
         Customer c;
         Iterator itr = customer.iterator();
         while(itr.hasNext())
@@ -284,5 +286,10 @@ public class Bank
         }
     
    }
+   
+   public static ArrayList getArray()
+   {
+       return customer;
+    }
    
 }

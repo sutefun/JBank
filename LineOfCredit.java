@@ -6,12 +6,15 @@ import java.io.*;
  * @author steven susanto
  * @version 26 Maret 2016
  */
-public class LineOfCredit extends Checking implements Serializable
+public class LineOfCredit extends Checking
 {
     private double creditBalance;
     private double creditLimit;
     
-    
+    /**
+     * konstruktor LOC
+     * @param Customer, double amount, double limit
+     */
     public LineOfCredit(Customer cust, double amount, double limit)
     {
        super();
@@ -20,31 +23,54 @@ public class LineOfCredit extends Checking implements Serializable
        ID          = Integer.toString(cust.getCustID());
     }
 
+    /**
+     * aksesor creditBalance
+     * @return double credit balance
+     */
     public double getCreditBalance()
     {
         return creditBalance;
     }
     
+    /**
+     * aksesor creditLimit
+     * @return double credit limit
+     */
     public double getCreditLimit()
     {
         return creditLimit;
     }
     
+    /**
+     * aksesor credit untuk mengetahui sisa kredit yang dapat digunakan
+     * @return double credit
+     */
     public double getCreditLeft()
     {
         return creditBalance + creditLimit;
     }
     
+    /**
+     * untuk menset creditBalance
+     * @param double : amount
+     */
     public void setCreditBalance(double amount)
     {
         creditBalance = amount;
     }
     
+    /**
+     * untuk menset creditLimit
+     * @param double : amount
+     */
     public void setCreditLimit(double amount)
     {
         creditLimit = amount;
     }
     
+    /**
+     * untuk melakukan fee assessment
+     */
     public void feeAssessment()
     {
         int days       = new GregorianCalendar().get(Calendar.DAY_OF_MONTH);
@@ -54,6 +80,11 @@ public class LineOfCredit extends Checking implements Serializable
         monthlyFee     = amt - deficit;
     }
     
+    /**
+     * penarikan dana
+     * @param double : amount
+     * @throws AmountOverDrawnException
+     */
     public void withdraw(double amount) throws AmountOverDrawnException
     {
         if(amount <= balance) //bila amount di bawah balance, langsung tarik

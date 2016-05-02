@@ -10,66 +10,38 @@ import java.io.*;
 
 public class Teller
 {
-    public TreeSet<Customer> customers = new TreeSet<Customer>();
+    public SortedSet customers;
     
     public Teller()
     {
         
-        try{
-            CustomerFileReader cfr = new CustomerFileReader();
-            customers = (TreeSet)cfr.readCustomer() ;
-            customers.forEach(System.out::println);
-            System.out.println("------hasil pembacaan customer.dat di atas, di bawah bukan----------");
-        }
-        catch(Exception e)
-        {
-            customers = new TreeSet<Customer>();
-        }
     }
     
     /**@param belum ada */
     public static void main(String[] args)
     {
-        /*
-        Teller t = new Teller();
-        t.createNewCustomer(new Customer("susanto","steven"));
-        t.createNewCustomer(new Customer("susanto2","steven2"));
-        t.createNewCustomer(new Customer("susanto3","steven3"));
-        t.createNewCustomer(new Customer("susanto4","steven4"));
-        t.createNewCustomer(new Customer("susanto5","steven5"));
-        t.createNewCustomer(new Customer("susanto6","steven6"));
-        t.createNewCustomer(new Customer("susanto7","steven7"));
-        
-        System.out.println("membuat susanto ..... susanto7");
-        //System.out.println("mencari kustomer dengan id 1000 : " +t.getCustomer(1000) );
-        //System.out.println("mencari kustomer dengan id 1001 : " +t.getCustomer(1001) );
-        
-        //System.out.println("print semua isi treeSet");
-        //t.customers.forEach(System.out::println);
-        
-        
-        try{
-            CustomerFileWriter fileWriter = new CustomerFileWriter();
-            fileWriter.saveCustomers(t.customers);
-        }
-        catch(IOException e)
-        {
-            
-            System.out.println("teller - writer - " +e.getMessage());
-        }
-        */
        
-        /*
-       for(char i='a';i<='z';i++)
+       
+       buatDummy();
+       
+       
+       Bank.importCustomer();
+       (new Thread( new ATMGUI() ) ).start();
+       (new Thread( new CustomerGUI() ) ).start();
+    }
+    
+    /**
+     * untuk buat dummy customer
+     */
+    private static void buatDummy(){
+        for(char i='a';i<='z';i++)
        {
            
            buatCustDummy(String.valueOf(i));
        }
        Bank.exportCustomer();
-        */
-       Bank.importCustomer();
-       new ATMGUI();
-       new CustomerGUI();
+       
+    
     }
     
     /**
@@ -105,6 +77,9 @@ public class Teller
         return Bank.getCloseTime();
     }
     
+    /**
+     * buat 4 akun dari customer dummy
+     */
     static private void buat4akun(Customer c)
     {
         try{
@@ -156,6 +131,9 @@ public class Teller
         }
     }
     
+    /**
+     * buat objek customer dummy
+     */
     private static void buatCustDummy(String s)
     {
        
@@ -174,6 +152,10 @@ public class Teller
         }
     }
     
+    /**
+     * 
+     * untuk cek masing2 akun kustomer
+     */
     static private void print4akun(Customer c)
     {
         
@@ -214,11 +196,19 @@ public class Teller
         }
     }
     
+    /**
+     * menambahkan customer ke arrayList/set customers
+     */
     public void createNewCustomer(Customer c)
     {
         customers.add(c);
     }
     
+    /**
+     * untuk mendapatkan reference customer
+     * @param int custID
+     * @return Customer
+     */
     public Customer getCustomer(int custID)
     {
         Customer c;

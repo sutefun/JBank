@@ -8,7 +8,7 @@ import java.nio.file.*;
  * @author steven susanto
  * @version 21 April 2016
  */
-public class CustomerFileWriter implements Serializable
+public class CustomerFileWriter
 {
     private FileOutputStream fileOutputStream;
     private File             objectFile;
@@ -46,6 +46,34 @@ public class CustomerFileWriter implements Serializable
         fileOutputStream.close();
         System.out.println("CFW - berhasil export");
        }
+       
+        
+    }
+    
+    /**
+     * -untuk menyimpan file customers menjadi file
+     * @param Object , File
+     * @throws IOException
+     * 
+     */
+    public void saveCustomersFile(Object l,File file) throws IOException
+    {
+       fileOutputStream = new FileOutputStream(file);
+       objectOutputStream = new ObjectOutputStream(fileOutputStream);
+       try{
+        objectFile.delete();
+       }
+       catch(SecurityException e)
+       {
+        System.out.println("CFW - " + e.getMessage()); 
+       }
+       finally
+       {
+        objectOutputStream.writeObject(l);
+        objectOutputStream.close();
+        fileOutputStream.close();
+       }
+       
         
     }
     

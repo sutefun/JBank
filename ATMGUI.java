@@ -9,7 +9,7 @@ import java.awt.event.*;
  * @author steven susanto 
  * @version 7 April 2016
  */
-public class ATMGUI extends JFrame implements FocusListener
+public class ATMGUI extends JFrame implements Runnable,FocusListener
 {
    private JPanel topPanel;
    private JPanel bottomPanel;
@@ -36,6 +36,9 @@ public class ATMGUI extends JFrame implements FocusListener
    private JScrollPane hScroll;
    private ButtonHandler buttonHandler;
    
+   public void run(){
+    }
+   
     /**
      * Constructor for objects of class ATMGUI
      */
@@ -55,15 +58,16 @@ public class ATMGUI extends JFrame implements FocusListener
         
         setSize(700,300);
         setResizable(false);
-        setLayout(new GridLayout(2,1));
+        setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowHandler(this) );  
         
         makeTopPanel();         //membuat panel bagian atas
         makeBottomPanel();      //membuat panel bagian bawah
       
-        add(topPanel);    //memasukkan panel ke mainFrame
-        add(bottomPanel);
+        add(topPanel,BorderLayout.NORTH);    //memasukkan panel ke mainFrame
+        add(bottomPanel,BorderLayout.CENTER);
+        add(new StatusBar(),BorderLayout.SOUTH);
         setVisible(true);  //menampilkan frame keseluruhan
         
     }
@@ -173,6 +177,7 @@ public class ATMGUI extends JFrame implements FocusListener
   
    
    /**
+    * untuk menset text area
     * @param String:s - untuk set teks area
     */
    public void setTextArea(String s)
@@ -180,21 +185,38 @@ public class ATMGUI extends JFrame implements FocusListener
        infoTextArea.setText(s);
    }
    
+   /**
+    * untuk menset warna text area
+    * @param Color
+    */
    public void setTextAreaColor(Color c)
    {
        infoTextArea.setBackground(c);
    }
    
+   /**
+    * untuk mendapatkan cust ID
+    * @return String
+    */
    public String getCustIDText()
    {
        return enterCustIDTextField.getText();
    }
    
+   /**
+    * untuk mendapatkan amount
+    * @return String
+    */
    public String getAmountText()
    {
        return enterAmountHereTextField.getText();
     }
     
+   /**
+    * untuk mendapatkan cust ID dalam format angka
+    * @return int
+    * @throws NumberFormatException
+    */
    public int getCustID() throws NumberFormatException
    {
        try{
@@ -214,6 +236,11 @@ public class ATMGUI extends JFrame implements FocusListener
        
    }
    
+   /**
+    * untuk mendapatkan amount dalam format angka
+    * @return double
+    * @throws NumberFormatException
+    */
    public Double getAmount() throws NumberFormatException
    {
        
@@ -242,10 +269,12 @@ public class ATMGUI extends JFrame implements FocusListener
    }
    
    public void focusGained(FocusEvent e)
-   {
-       
+   {  
    }
    
+   /**
+    * untuk melakukan fungsi tertentu bila focus hilang
+    */
    public void focusLost(FocusEvent e)
    {
        if(!getCustIDText().equals(""))
@@ -259,6 +288,11 @@ public class ATMGUI extends JFrame implements FocusListener
                setTextArea("Customer tidak ketemu");
                setTextAreaColor(Color.WHITE);
                warning("Customer tidak ketemu");
+           }
+           catch(NumberFormatException pe)
+           {
+               warning("Enter Customer ID tidak diisi dengan angka !!\n\nIsinya : " + enterCustIDTextField.getText() );
+               enterCustIDTextField.setText("");
            }
        }
    }

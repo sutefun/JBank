@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=StatusBar()
+comment0.text=\r\n\ konstruktor\ untuk\ class\ ini\ sebagai\ panel\r\n
+comment1.params=
+comment1.target=void\ run()
+comment1.text=\r\n\ \r\n\ runnable\ yang\ akan\ selalu\ loop\ untuk\ mengupdate\ label\ waktu\r\n
+numComments=2

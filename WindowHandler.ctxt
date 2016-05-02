@@ -1,10 +1,8 @@
 #BlueJ class context
 comment0.params=fr
 comment0.target=WindowHandler(javax.swing.JFrame)
-comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ WindowHandler\r\n
-comment1.params=
-comment1.target=void\ showExit()
-comment1.text=\r\n\ menampilkan\ pesan\ exit\ lalu\ tidur\ 1/2\ detik\r\n
-comment2.params=windowEvent
-comment2.target=void\ windowClosing(java.awt.event.WindowEvent)
-numComments=3
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ WindowHandler\r\n\ @param\ JFrame\ -\ untuk\ mengaitkan\ dialog\ dengan\ frame\r\n
+comment1.params=windowEvent
+comment1.target=void\ windowClosing(java.awt.event.WindowEvent)
+comment1.text=\r\n\ untuk\ menampilkan\ dialog\ konfirmasi\ mau\ exit\r\n\ @param\ WindowEvent\r\n
+numComments=2

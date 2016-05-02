@@ -31,6 +31,10 @@ public class CustomFocusListener implements FocusListener {
         cgui     = g;
     }
 
+    
+    /**
+     * focus event bila suatu field tertentu dipilih
+     */
     public void focusGained(FocusEvent e)
     {
         if(fmtField == null){
@@ -47,7 +51,11 @@ public class CustomFocusListener implements FocusListener {
             }
         }
     }
+    
 
+    /**
+     * focus event bila suatu field tertentu dipilih lalu tidak dipilih
+     */
     public void focusLost(FocusEvent e)
     {
         if(fmtField == null){
@@ -93,6 +101,10 @@ public class CustomFocusListener implements FocusListener {
         }
     }
     
+    /**
+     * untuk mendapatkan waktu hari ini
+     * @return String : date
+     */
     private String getToday()
     {
         SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");

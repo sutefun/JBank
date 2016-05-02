@@ -7,10 +7,14 @@ import java.io.*;
  * @author steven susanto 
  * @version 24 Maret 2016
  */
-public class Savings extends Account implements Serializable
+public class Savings extends Account
 {
   protected double interestEarned;  
     
+  /**
+   * konstruktor Savings
+   * @param Customer, double amount
+   */
   public Savings(Customer cust, double amount)
   {
     super();

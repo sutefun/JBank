@@ -9,7 +9,7 @@ import java.io.*;
  * @version 24 Maret 2016
  */
 
-public final class Investment extends Savings implements Serializable
+public final class Investment extends Savings
 {
     private Date   endDate;
     private double interestRate;

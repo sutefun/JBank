@@ -6,7 +6,7 @@ import java.io.*;
  * @author (steven susanto) 
  * @version (5/3/16)
  */
-public class Customer implements Comparable<Customer>,Serializable
+public class Customer implements Comparator<Customer>,Serializable
 {
     private Account[] accounts = new Account[4];
     private String  cityAddress;
@@ -24,7 +24,7 @@ public class Customer implements Comparable<Customer>,Serializable
     private static java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
     private static DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
     
-    public Customer()
+   public Customer()
     {
         
     }
@@ -344,6 +344,33 @@ public class Customer implements Comparable<Customer>,Serializable
   
   public int compareTo(Customer c)
   {
-    return custID.compareTo(c.getCustID());
-  }
+    if(custID > c.getCustID()){
+        return 1;
+    }
+    if(custID < c.getCustID()){
+        return -1;
+    }if(custID == c.getCustID()){
+        return 0;
+    }
+    else {
+        return 0;
+  
+    }
+   }
+   
+   public int compare(Customer a, Customer c)
+  {
+    if(a.getCustID() > c.getCustID()){
+        return 1;
+    }
+    if(a.getCustID() < c.getCustID()){
+        return -1;
+    }if(a.getCustID() == c.getCustID()){
+        return 0;
+    }
+    else {
+        return 0;
+  
+    }
+   } 
 }

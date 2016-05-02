@@ -5,7 +5,7 @@ import java.io.*;
  * @author steven susanto
  * @version 26 Maret 2016
  */
-public class OverDraftProtection extends Checking implements Serializable
+public class OverDraftProtection extends Checking
 {
     private Savings savingsAccount;
     
@@ -18,12 +18,20 @@ public class OverDraftProtection extends Checking implements Serializable
         
     }
 
+    /**
+     * untuk menambah biaya fee
+     */
     public void feeAssessment()
     {
         monthlyFee += 3;
         
     }
     
+    /**
+     * penarikan dana
+     * @param double : amount
+     * @throws AmountOverDrawnException
+     */
     public void withdraw(double amount)  throws AmountOverDrawnException
     {
         if(amount > balance + savingsAccount.getBalance() - 10)
