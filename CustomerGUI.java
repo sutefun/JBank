@@ -51,6 +51,7 @@ public class CustomerGUI extends JFrame implements Runnable,ActionListener,Mouse
    static private java.util.regex.Pattern p = java.util.regex.Pattern.compile(cek);
     
    public void run(){
+       
     }
    
     
@@ -715,7 +716,7 @@ public class CustomerGUI extends JFrame implements Runnable,ActionListener,Mouse
    private Customer openFile(){
        try{
            JFileChooser fileChooser = new JFileChooser();
-           javax.swing.filechooser.FileFilter filter = new FileNameExtensionFilter("cust","cust");
+           javax.swing.filechooser.FileFilter filter = new FileNameExtensionFilter("custCrypto","custCrypto");
            fileChooser.setFileFilter(filter);
            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
            int result = fileChooser.showOpenDialog(this);
@@ -723,7 +724,7 @@ public class CustomerGUI extends JFrame implements Runnable,ActionListener,Mouse
            if (result == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile() ;
                 try{
-                    Customer c = (Customer)(new CustomerFileReader()).readCustomerFile(selectedFile);
+                    Customer c = (Customer)(CustomerFileReader.readCustomerFile(selectedFile , "steven_susanto_1306412035") );
                     info("Berhasil open file " +selectedFile.getAbsolutePath()) ;
                     return c;
                 }
@@ -747,17 +748,16 @@ public class CustomerGUI extends JFrame implements Runnable,ActionListener,Mouse
            c.setPhoneNumber(phoneField.getText());
            c.setAddress(addressField.getText(),cityField.getText(),stateField.getText(), zipField.getText());
            c.setEmail(emailField.getText());
-           CustomerFileWriter cfw = new CustomerFileWriter();
            
            JFileChooser fileChooser = new JFileChooser();
-           javax.swing.filechooser.FileFilter filter = new FileNameExtensionFilter("cust","cust");
+           javax.swing.filechooser.FileFilter filter = new FileNameExtensionFilter("custCrypto","custCrypto");
            fileChooser.setFileFilter(filter);
            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
            int result = fileChooser.showSaveDialog(this);
            if (result == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = new File(fileChooser.getSelectedFile() + ".cust" );
+                File selectedFile = new File(fileChooser.getSelectedFile() + ".custCrypto" );
                 try{
-                   (new CustomerFileWriter()).saveCustomersFile(c , selectedFile) ;
+                   CustomerFileWriter.saveCustomersFile(c , selectedFile, "steven_susanto_1306412035") ;
                    info("Berhasil save file ke " +selectedFile.getAbsolutePath()) ;
                 }
                 catch(Exception e){

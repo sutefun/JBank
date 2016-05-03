@@ -1,11 +1,11 @@
 #BlueJ class context
 comment0.params=
-comment0.target=CustomerFileReader()
-comment0.text=\r\n\ konstruktor\ CustomerFileReader\r\n
-comment1.params=
-comment1.target=java.lang.Object\ readCustomer()
-comment1.text=\r\n\ -untuk\ membaca\ customer.dat\r\n\ @throws\ IOException,\ ClassNotFoundException,\ NullPointerException\r\n\ \r\n
-comment2.params=file
-comment2.target=java.lang.Object\ readCustomerFile(java.io.File)
-comment2.text=\r\n\ -untuk\ membaca\ customer\ file\ dari\ yang\ dipilih\r\n\ @param\ File\r\n\ @throws\ IOException,\ ClassNotFoundException,\ NullPointerException\r\n\ \r\n
+comment0.target=java.lang.Object\ readCustomer()
+comment0.text=\r\n\ -untuk\ membaca\ customer.dat\r\n\ @throws\ IOException,\ ClassNotFoundException,\ NullPointerException\r\n\ \r\n
+comment1.params=file
+comment1.target=java.lang.Object\ readCustomerFile(java.io.File)
+comment1.text=\r\n\ -untuk\ membaca\ customer\ file\ dari\ yang\ dipilih\r\n\ @param\ File\r\n\ @throws\ IOException,\ ClassNotFoundException,\ NullPointerException\r\n\ \r\n
+comment2.params=file\ password
+comment2.target=java.io.Serializable\ readCustomerFile(java.io.File,\ java.lang.String)
+comment2.text=\r\n\ -untuk\ membaca\ customer\ file\ dari\ yang\ dipilih\ dengan\ password\ enkripsi\r\n\ @param\ File\r\n\ \r\n
 numComments=3

@@ -22,7 +22,7 @@ public class Teller
     {
        
        
-       buatDummy();
+       //buatDummy();
        
        
        Bank.importCustomer();
