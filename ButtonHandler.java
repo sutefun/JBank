@@ -41,6 +41,7 @@ public class ButtonHandler implements ActionListener
                 atmgui.setTextAreaColor(Color.RED);
                 atmgui.setTextArea("exit ");
                 Bank.exportCustomer();
+                Bank.exportCustomerSQL();
                 exitting();
                 System.exit(0);
             } 

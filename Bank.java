@@ -252,12 +252,11 @@ public class Bank
     * untuk mengambil data dari customer.dat
     * @return boolean
     */
-   public static boolean importCustomer()
+   synchronized public static boolean importCustomer()
    {
     try
     {
-        CustomerFileReader cfr = new CustomerFileReader();
-        customer = (ArrayList)cfr.readCustomer() ;
+        customer = (ArrayList)CustomerFileReader.readCustomer() ;
         customer.forEach(System.out::println);
         return true;
     }
@@ -272,11 +271,14 @@ public class Bank
     * untuk menyimpan menjadi customer.dat
     * @return boolean
     */
-   public static boolean exportCustomer()
+   synchronized public static boolean exportCustomer()
    {
+    if(customer == null){
+        return false;
+    }
+    
     try{
-            CustomerFileWriter fileWriter = new CustomerFileWriter();
-            fileWriter.saveCustomers(customer);
+            CustomerFileWriter.saveCustomers(customer);
             return true;
         }
         catch(Exception e)
@@ -286,6 +288,32 @@ public class Bank
         }
     
    }
+   
+   /**
+    * untuk mengambil data dari MySQL
+    * @return boolean
+    */
+   synchronized public static boolean importCustomerSQL(){
+       customer = CustomerSQL.importSQL();
+       if(customer != null){
+           return true;
+       }
+       else{
+           return false;
+       }
+   }
+   
+   /**
+    * untuk menyimpan data ke MySQL
+    * @return boolean
+    */
+   synchronized public static boolean exportCustomerSQL(){
+       if(customer != null){
+           return CustomerSQL.exportSQL(customer);
+       }
+       return false;
+   }
+   
    
    public static ArrayList getArray()
    {

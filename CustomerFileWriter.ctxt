@@ -2,10 +2,7 @@
 comment0.params=l
 comment0.target=void\ saveCustomers(java.lang.Object)
 comment0.text=\r\n\ -untuk\ menyimpan\ file\ customers\ menjadi\ .dat\r\n\ @param\ Object\r\n\ @throws\ IOException\r\n\ \r\n
-comment1.params=l\ file
-comment1.target=void\ saveCustomersFile(java.lang.Object,\ java.io.File)
-comment1.text=\r\n\ -untuk\ menyimpan\ file\ customers\ menjadi\ file\r\n\ @param\ Object\ ,\ File\r\n\ @throws\ IOException\r\n\ \r\n
-comment2.params=object\ file\ password
-comment2.target=void\ saveCustomersFile(java.io.Serializable,\ java.io.File,\ java.lang.String)
-comment2.text=\r\n\ -untuk\ menyimpan\ file\ customers\ menjadi\ file\ dengan\ enkripsi\r\n\ @param\ Object\ ,\ File\r\n\ \r\n
-numComments=3
+comment1.params=object\ file\ password
+comment1.target=void\ saveCustomersFile(java.io.Serializable,\ java.io.File,\ java.lang.String)
+comment1.text=\r\n\ -untuk\ menyimpan\ file\ customers\ menjadi\ file\ dengan\ enkripsi\r\n\ @param\ Object\ ,\ File\r\n\ \r\n
+numComments=2

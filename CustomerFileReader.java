@@ -28,26 +28,6 @@ public class CustomerFileReader
     static synchronized public Object readCustomer() throws IOException,ClassNotFoundException,NullPointerException
     {
         Object customers = readCustomerFile(objectFile, "steven_susanto_1306412035") ;
-        
-        return customers;
-        
-    }
-    
-    /**
-     * -untuk membaca customer file dari yang dipilih
-     * @param File
-     * @throws IOException, ClassNotFoundException, NullPointerException
-     * 
-     */
-    synchronized static public Object readCustomerFile(File file) throws IOException,ClassNotFoundException,NullPointerException
-    {
-        Object customers ;
-        
-            fileInputStream = new FileInputStream(file);
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            customers = objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();
         return customers;
         
     }
@@ -59,32 +39,52 @@ public class CustomerFileReader
      * 
      */
     synchronized public static Serializable readCustomerFile(File file, String password) {
+        if(file == null || password == null){
+            return null;
+        }
+        
+        CipherInputStream cipherInputStream = null;
+        ObjectInputStream inputStream = null;
+        SealedObject sealedObject = null;
+        Serializable userList = null;
+        Cipher cipher = null;
+        
         try{
-            Serializable userList = null;
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-    
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(password.getBytes());
-            SecretKey secret = new SecretKeySpec( md.digest() ,"AES" );
             
-            cipher.init(Cipher.DECRYPT_MODE, secret , new IvParameterSpec(md.digest()));
-            CipherInputStream cipherInputStream = null;
+            cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    
+            MessageDigest md  = MessageDigest.getInstance("MD5");
+            MessageDigest md2 = MessageDigest.getInstance("MD5");
+            
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            
+            SecretKey secret = new SecretKeySpec( bytes ,"AES" );
+            
+            md2.update(bytes);
+            
+            cipher.init(Cipher.DECRYPT_MODE, secret , new IvParameterSpec(md2.digest()));
+            
             cipherInputStream = new CipherInputStream(new BufferedInputStream(new FileInputStream(file)), cipher);
     
-            ObjectInputStream inputStream = null;
+            
             inputStream = new ObjectInputStream(cipherInputStream);
-            SealedObject sealedObject = null;
+            
             sealedObject = (SealedObject) inputStream.readObject();
             userList = (Serializable) sealedObject.getObject(cipher);  
             cipherInputStream.close();
             inputStream.close();
-            return userList;
         }
         catch(Exception e){
             System.out.println("CFR - crypto warning ! " +e.getMessage());
         }
+        finally{
+            
+            
+            return userList;
         
-        return null;
+        }
+        
     }
     
 }

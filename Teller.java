@@ -23,9 +23,12 @@ public class Teller
        
        
        //buatDummy();
+       //Bank.exportCustomerSQL();
+       //Bank.exportCustomer();
        
+       Bank.importCustomerSQL();
+       //Bank.importCustomer();
        
-       Bank.importCustomer();
        (new Thread( new ATMGUI() ) ).start();
        (new Thread( new CustomerGUI() ) ).start();
     }
@@ -39,7 +42,7 @@ public class Teller
            
            buatCustDummy(String.valueOf(i));
        }
-       Bank.exportCustomer();
+       
        
     
     }

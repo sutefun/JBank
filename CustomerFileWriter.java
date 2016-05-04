@@ -27,35 +27,11 @@ public class CustomerFileWriter
      */
     static synchronized public void saveCustomers(Object l) throws IOException
     {
+       if(l == null){
+           return;
+       }
        saveCustomersFile((Serializable)l, objectFile, "steven_susanto_1306412035") ;
        
-    }
-    
-    /**
-     * -untuk menyimpan file customers menjadi file
-     * @param Object , File
-     * @throws IOException
-     * 
-     */
-    static synchronized public void saveCustomersFile(Object l,File file) throws IOException
-    {
-       fileOutputStream = new FileOutputStream(file);
-       objectOutputStream = new ObjectOutputStream(fileOutputStream);
-       try{
-        objectFile.delete();
-       }
-       catch(SecurityException e)
-       {
-        System.out.println("CFW - " + e.getMessage()); 
-       }
-       finally
-       {
-        objectOutputStream.writeObject(l);
-        objectOutputStream.close();
-        fileOutputStream.close();
-       }
-       
-        
     }
     
     
@@ -65,14 +41,22 @@ public class CustomerFileWriter
      * 
      */
     static synchronized public void saveCustomersFile(Serializable object,  File file, String password) {
+        if(object == null || file == null || password == null){
+            return;
+        }
+        
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md  = MessageDigest.getInstance("MD5");
+            MessageDigest md2 = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
-            SecretKey secret = new SecretKeySpec( md.digest() ,"AES" );
+            byte[] bytes = md.digest();
+            SecretKey secret = new SecretKeySpec( bytes ,"AES" );
             
-            cipher.init(Cipher.ENCRYPT_MODE, secret , new IvParameterSpec(md.digest()));
+            md2.update(bytes);
+            
+            cipher.init(Cipher.ENCRYPT_MODE, secret , new IvParameterSpec(md2.digest()));
             SealedObject sealedObject = new SealedObject(object, cipher);
             CipherOutputStream cipherOutputStream = new CipherOutputStream(new BufferedOutputStream(new FileOutputStream(file)), cipher);
             

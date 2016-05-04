@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=java.util.ArrayList\ importSQL()
+comment0.text=\r\n\ digunakan\ untuk\ mengambil\ data\ customer\ dari\ MySQL\ BLOB\ ke\ ArrayList\ pada\ Bank\r\n\ @return\ ArrayList\ al;\r\n
+comment1.params=al
+comment1.target=boolean\ exportSQL(java.util.ArrayList)
+comment1.text=\r\n\ digunakan\ untuk\ menyimpan\ data\ customer\ arrayList\ ke\ MySQL\ dalam\ bentuk\ BLOB\r\n\ @param\ ArrayList\ al\r\n\ @return\ boolean\ -\ true\ bila\ simpan\ berhasil\r\n
+numComments=2
